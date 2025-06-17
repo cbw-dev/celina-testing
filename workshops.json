@@ -1,0 +1,115 @@
+[
+    {
+        "url": "#",
+        "title": "Intro to R",
+        "tags": [
+            "development",
+            "tools",
+            "code"
+        ],
+        "regions": [
+            "Ontario"
+        ],
+        "year": 2023,
+        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800",
+        "dates": "July 10-14, 2023",
+        "location": "Guelph, ON"
+    },
+    {
+        "url": "#",
+        "title": "Data Visualization",
+        "tags": [
+            "visualization",
+            "r"
+        ],
+        "regions": [
+            "Ontario"
+        ],
+        "year": 2023,
+        "image": "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?q=80&w=800",
+        "dates": "August 21-25, 2023",
+        "location": "Toronto, ON"
+    },
+    {
+        "url": "#",
+        "title": "RNA-Seq Analysis",
+        "tags": [
+            "genomics",
+            "bioinformatics"
+        ],
+        "regions": [
+            "Online"
+        ],
+        "year": 2023,
+        "image": "https://images.unsplash.com/photo-1579566346927-c68383817a25?q=80&w=800",
+        "dates": "September 5-9, 2023",
+        "location": "Online"
+    },
+    {
+        "url": "#",
+        "title": "Machine Learning",
+        "tags": [
+            "ai",
+            "statistics"
+        ],
+        "regions": [
+            "BC"
+        ],
+        "year": 2022,
+        "image": "https://images.unsplash.com/photo-1599658880436-c61792e70672?q=80&w=800",
+        "dates": "May 15-19, 2022",
+        "location": "Vancouver, BC"
+    },
+    {
+        "url": "#",
+        "title": "Genomics & Proteomics",
+        "tags": [
+            "genomics",
+            "proteomics"
+        ],
+        "regions": [
+            "Alberta",
+            "Prairies"
+        ],
+        "year": 2022,
+        "image": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=800",
+        "dates": "June 1-5, 2022",
+        "location": "Calgary, AB"
+    },
+    {
+        "url": "#",
+        "title": "Metagenomics",
+        "tags": [],
+        "regions": [
+            "Quebec"
+        ],
+        "year": 2021,
+        "image": "https://images.unsplash.com/photo-1576444434609-ac744b934185?q=80&w=800",
+        "dates": "October 18-22, 2021",
+        "location": "Montreal, QC"
+    },
+    {
+        "url": "#",
+        "title": "Proteomics",
+        "tags": [],
+        "regions": [
+            "Prairies"
+        ],
+        "year": 2021,
+        "image": "https://images.unsplash.com/photo-1627993092497-84174a7a529e?q=80&w=800",
+        "dates": "November 1-5, 2021",
+        "location": "Saskatoon, SK"
+    },
+    {
+        "url": "#",
+        "title": "Single Cell Analysis",
+        "tags": [],
+        "regions": [
+            "Atlantic"
+        ],
+        "year": 2021,
+        "image": "https://images.unsplash.com/photo-1554474052-51c35a24250d?q=80&w=800",
+        "dates": "December 6-10, 2021",
+        "location": "Halifax, NS"
+    }
+]

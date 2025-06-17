@@ -14,7 +14,14 @@
                         sans: ['Manrope', 'sans-serif'],
                     },
                     colors: {
-                        'brand-purple': '#582a7b', // A color inspired by the logo
+                        'brand-purple': '#5A1F65',
+                        'region-bc': '#3C9048',
+                        'region-alberta': '#86264E',
+                        'region-prairies': '#BD8528',
+                        'region-ontario': '#BB682C',
+                        'region-quebec': '#427FA4',
+                        'region-atlantic': '#208A99',
+                        'region-online': '#5A1F65', 
                     }
                 }
             }
@@ -85,6 +92,34 @@
                 </div>
             </div>
 
+            <!-- Region Dropdown -->
+            <div class="relative" data-dropdown="region">
+                <button data-dropdown-button class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200">
+                    <span>Region</span>
+                    <span id="region-filter-count" class="ml-2 bg-brand-purple text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                    <svg class="dropdown-arrow w-4 h-4 ml-2 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div data-dropdown-panel id="region-filter-options" class="dropdown-panel hidden absolute z-10 mt-2 w-48 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0">
+                    <div class="p-2 space-y-1">
+                        <!-- Region checkboxes will be generated here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Title Dropdown -->
+            <div class="relative" data-dropdown="title">
+                <button data-dropdown-button class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200">
+                    <span>Workshop</span>
+                    <span id="title-filter-count" class="ml-2 bg-brand-purple text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                    <svg class="dropdown-arrow w-4 h-4 ml-2 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div data-dropdown-panel id="title-filter-options" class="dropdown-panel hidden absolute z-10 mt-2 w-56 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0 max-h-60 overflow-y-auto">
+                    <div class="p-2 space-y-1">
+                        <!-- Title checkboxes will be generated here -->
+                    </div>
+                </div>
+            </div>
+
             <!-- Topics Dropdown -->
             <div class="relative" data-dropdown="topics">
                 <button data-dropdown-button class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200">
@@ -92,12 +127,20 @@
                     <span id="topic-filter-count" class="ml-2 bg-brand-purple text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
                     <svg class="dropdown-arrow w-4 h-4 ml-2 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div data-dropdown-panel id="topic-filter-options" class="dropdown-panel hidden absolute z-10 mt-2 w-48 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0">
+                <div data-dropdown-panel id="topic-filter-options" class="dropdown-panel hidden absolute z-10 mt-2 w-56 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0">
                     <div class="p-2 space-y-1">
                         <!-- Topic checkboxes will be generated here -->
                     </div>
                 </div>
             </div>
+
+            <!-- Reset Button -->
+             <button id="reset-filters-button" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2.5 px-5 rounded-lg shadow-sm flex items-center transition-all duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a9 9 0 0114.12-5.12M20 15a9 9 0 01-14.12 5.12" />
+                </svg>
+                Reset
+            </button>
         </div>
 
         <main id="link-container" class="space-y-16">
@@ -106,205 +149,238 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Data for Links ---
-            const linksData = [
-                { url: "https://github.com", title: "GitHub", tags: ["development", "tools", "code"], year: 2023, image: "https://placehold.co/800x600/1e293b/ffffff?text=GitHub", dates: "July 10-14, 2023", location: "Guelph, ON" },
-                { url: "https://developer.mozilla.org/en-US/", title: "MDN Web Docs", tags: ["documentation", "web", "reference"], year: 2023, image: "https://placehold.co/800x600/334155/ffffff?text=MDN", dates: "August 21-25, 2023", location: "Toronto, ON" },
-                { url: "https://react.dev/", title: "React", tags: ["javascript", "library", "frontend", "development"], year: 2023, image: "https://placehold.co/800x600/0891b2/ffffff?text=React", dates: "September 5-9, 2023", location: "Online" },
-                { url: "https://tailwindcss.com", title: "Tailwind CSS", tags: ["css", "framework", "frontend", "development"], year: 2022, image: "https://placehold.co/800x600/3b82f6/ffffff?text=Tailwind", dates: "May 15-19, 2022", location: "Vancouver, BC" },
-                { url: "https://figma.com", title: "Figma", tags: ["design", "tools", "ui/ux"], year: 2022, image: "https://placehold.co/800x600/9333ea/ffffff?text=Figma", dates: "June 1-5, 2022", location: "Online" },
-                { url: "https://unsplash.com", title: "Unsplash", tags: ["resources", "images", "creative"], year: 2021, image: "https://placehold.co/800x600/475569/ffffff?text=Unsplash", dates: "October 18-22, 2021", location: "Montreal, QC" },
-                { url: "https://threejs.org/", title: "Three.js", tags: ["3d", "webgl", "graphics", "development"], year: 2021, image: "https://placehold.co/800x600/047857/ffffff?text=Three.js", dates: "November 1-5, 2021", location: "Online" }
-            ];
-
-            // --- DOM Elements ---
-            const linkContainer = document.getElementById('link-container');
-            const yearFilterContainer = document.getElementById('year-filter-options').firstElementChild;
-            const topicFilterContainer = document.getElementById('topic-filter-options').firstElementChild;
+        document.addEventListener('DOMContentLoaded', async () => {
             
-            // --- State ---
-            let activeYears = new Set();
-            let activeTopics = new Set();
-
-            /**
-             * Generates the link cards, grouped by year.
-             */
-            function generateLinkCardsByYear() {
-                linkContainer.innerHTML = ''; // Clear existing content
-                const linksByYear = linksData.reduce((acc, link) => {
-                    (acc[link.year] = acc[link.year] || []).push(link);
-                    return acc;
-                }, {});
-
-                const sortedYears = Object.keys(linksByYear).sort((a, b) => b - a);
-
-                sortedYears.forEach(year => {
-                    const yearSection = document.createElement('section');
-                    yearSection.className = 'year-section';
-                    yearSection.dataset.year = year;
-
-                    const yearTitle = document.createElement('h2');
-                    yearTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-brand-purple';
-                    yearTitle.textContent = year;
-
-                    const cardGrid = document.createElement('div');
-                    cardGrid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8';
-
-                    linksByYear[year].forEach(link => {
-                        const card = document.createElement('article');
-                        card.className = 'card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl border border-transparent hover:border-brand-purple/50';
-                        card.dataset.tags = JSON.stringify(link.tags);
-
-                        card.innerHTML = `
-                            <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block">
-                                <img class="w-full h-48 object-cover" src="${link.image}" alt="${link.title} screenshot" onerror="this.onerror=null;this.src='https://placehold.co/800x600/f3f4f6/9ca3af?text=Image+Not+Found';">
-                            </a>
-                            <div class="p-5 flex flex-col flex-grow">
-                                <div class="mb-4">
-                                    <h3 class="text-lg font-bold text-gray-800 mb-3">
-                                        <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}</a>
-                                    </h3>
-                                    <div class="space-y-2">
-                                        <div class="flex items-center text-sm text-gray-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                            </svg>
-                                            <span class="font-medium">${link.dates}</span>
-                                        </div>
-                                        <div class="flex items-center text-sm text-gray-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            </svg>
-                                            <span class="font-medium">${link.location}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-auto pt-4 border-t border-slate-100">
-                                     <div class="flex flex-wrap gap-2">
-                                        ${link.tags.map(tag => `<span class="inline-block bg-slate-100 text-slate-700 rounded-full px-3 py-1 text-xs font-semibold">${tag}</span>`).join('')}
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        cardGrid.appendChild(card);
-                    });
-
-                    yearSection.appendChild(yearTitle);
-                    yearSection.appendChild(cardGrid);
-                    linkContainer.appendChild(yearSection);
-                });
-            }
-
-            /**
-             * Creates a checkbox element for filtering.
-             */
-            function createCheckbox(value, type) {
-                const label = document.createElement('label');
-                label.className = 'flex items-center space-x-3 p-2 hover:bg-slate-100 rounded-md cursor-pointer';
-                label.innerHTML = `
-                    <input type="checkbox" data-type="${type}" value="${value}" class="h-4 w-4 rounded border-gray-300 text-brand-purple focus:ring-brand-purple/50">
-                    <span class="text-sm text-gray-700 font-medium">${value}</span>`;
-                return label;
-            }
-            
-            /**
-             * Generates checkboxes for unique years and topics.
-             */
-            function generateFilterOptions() {
-                const years = [...new Set(linksData.map(link => link.year))].sort((a, b) => b - a);
-                const topics = [...new Set(linksData.flatMap(link => link.tags))].sort();
-
-                years.forEach(year => yearFilterContainer.appendChild(createCheckbox(year, 'year')));
-                topics.forEach(topic => topicFilterContainer.appendChild(createCheckbox(topic, 'topic')));
-            }
-
-            /**
-             * Updates the badge count on filter buttons.
-             */
-            function updateFilterCounts() {
-                 const yearCount = activeYears.size;
-                 const topicCount = activeTopics.size;
-                 const yearBadge = document.getElementById('year-filter-count');
-                 const topicBadge = document.getElementById('topic-filter-count');
-                 
-                 yearBadge.textContent = yearCount;
-                 topicBadge.textContent = topicCount;
-
-                 yearBadge.classList.toggle('hidden', yearCount === 0);
-                 topicBadge.classList.toggle('hidden', topicCount === 0);
-            }
-
-            /**
-             * Handles filter logic based on active years and topics.
-             */
-            function applyFilters() {
-                activeYears = new Set([...yearFilterContainer.querySelectorAll('input:checked')].map(cb => cb.value));
-                activeTopics = new Set([...topicFilterContainer.querySelectorAll('input:checked')].map(cb => cb.value));
-
-                document.querySelectorAll('.year-section').forEach(section => {
-                    const sectionYear = section.dataset.year;
-                    const yearMatch = activeYears.size === 0 || activeYears.has(sectionYear);
-                    let visibleCardsInSection = 0;
-
-                    section.querySelectorAll('.card').forEach(card => {
-                        const cardTags = new Set(JSON.parse(card.dataset.tags));
-                        // EXCLUSIVE "AND" LOGIC FOR TOPICS
-                        const topicMatch = activeTopics.size === 0 || [...activeTopics].every(topic => cardTags.has(topic));
-                        
-                        if (topicMatch) {
-                            card.classList.remove('hidden');
-                            visibleCardsInSection++;
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    });
-                    
-                    if (yearMatch && visibleCardsInSection > 0) {
-                        section.classList.remove('hidden');
-                    } else {
-                        section.classList.add('hidden');
+            // --- Fetch data and initialize the application ---
+            async function initializeApp() {
+                try {
+                    // Fetch data from the external JSON file
+                    const response = await fetch('workshops.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
                     }
-                });
-                
-                updateFilterCounts();
-            }
-            
-            /**
-             * Sets up event listeners for dropdowns and checkboxes.
-             */
-            function setupInteraction() {
-                document.querySelectorAll('[data-dropdown]').forEach(dropdown => {
-                    const button = dropdown.querySelector('[data-dropdown-button]');
-                    const panel = dropdown.querySelector('[data-dropdown-panel]');
+                    const linksData = await response.json();
+
+                    // --- DOM Elements ---
+                    const linkContainer = document.getElementById('link-container');
+                    const yearFilterContainer = document.getElementById('year-filter-options').firstElementChild;
+                    const topicFilterContainer = document.getElementById('topic-filter-options').firstElementChild;
+                    const regionFilterContainer = document.getElementById('region-filter-options').firstElementChild;
+                    const titleFilterContainer = document.getElementById('title-filter-options').firstElementChild;
+                    const resetButton = document.getElementById('reset-filters-button');
+
+                    // --- State ---
+                    let activeYears = new Set();
+                    let activeTopics = new Set();
+                    let activeRegions = new Set();
+                    let activeTitles = new Set();
+
+                    // --- All functions are now defined inside initializeApp ---
                     
-                    button.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        document.querySelectorAll('[data-dropdown-panel]').forEach(p => {
-                            if (p !== panel) p.classList.add('hidden');
+                    /**
+                     * Generates the link cards, grouped by year.
+                     */
+                    function generateLinkCardsByYear() {
+                        linkContainer.innerHTML = '';
+                        const linksByYear = linksData.reduce((acc, link) => {
+                            (acc[link.year] = acc[link.year] || []).push(link);
+                            return acc;
+                        }, {});
+
+                        const sortedYears = Object.keys(linksByYear).sort((a, b) => b - a);
+
+                        sortedYears.forEach(year => {
+                            const yearSection = document.createElement('section');
+                            yearSection.className = 'year-section';
+                            yearSection.dataset.year = year;
+                            const yearTitle = document.createElement('h2');
+                            yearTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-brand-purple';
+                            yearTitle.textContent = year;
+                            const cardGrid = document.createElement('div');
+                            cardGrid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8';
+
+                            linksByYear[year].forEach(link => {
+                                const card = document.createElement('article');
+                                const firstRegion = link.regions[0] || 'online';
+                                const regionColorClass = `border-t-4 border-region-${firstRegion.toLowerCase().replace(' ', '-')}`;
+                                card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl ${regionColorClass}`;
+                                card.dataset.tags = JSON.stringify(link.tags);
+                                card.dataset.regions = JSON.stringify(link.regions);
+                                card.dataset.title = link.title;
+                                card.innerHTML = `
+                                    <div class="relative">
+                                        <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block">
+                                            <img class="w-full h-48 object-cover" src="${link.image}" alt="${link.title} workshop image" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
+                                        </a>
+                                        <div class="absolute top-2 right-2 flex flex-wrap gap-2 justify-end">
+                                            ${link.regions.map(region => {
+                                                const regionColor = `bg-region-${region.toLowerCase().replace(' ', '-')}`;
+                                                return `<span class="inline-block ${regionColor} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm">${region}</span>`
+                                            }).join('')}
+                                        </div>
+                                    </div>
+                                    <div class="p-5 flex flex-col flex-grow">
+                                        <div class="mb-4">
+                                            <h3 class="text-lg font-bold text-gray-800 mb-3">
+                                                <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}</a>
+                                            </h3>
+                                            <div class="space-y-2">
+                                                <div class="flex items-center text-sm text-gray-500">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                                    <span class="font-medium">${link.dates}</span>
+                                                </div>
+                                                <div class="flex items-center text-sm text-gray-500">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                                    <span class="font-medium">${link.location}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                                cardGrid.appendChild(card);
+                            });
+                            yearSection.appendChild(yearTitle);
+                            yearSection.appendChild(cardGrid);
+                            linkContainer.appendChild(yearSection);
                         });
-                        panel.classList.toggle('hidden');
-                    });
-                });
+                    }
 
-                window.addEventListener('click', () => {
-                    document.querySelectorAll('[data-dropdown-panel]').forEach(p => p.classList.add('hidden'));
-                });
+                    /**
+                     * Creates a checkbox element for filtering.
+                     */
+                    function createCheckbox(value, type) {
+                        const label = document.createElement('label');
+                        label.className = 'flex items-center space-x-3 p-2 hover:bg-slate-100 rounded-md cursor-pointer';
+                        label.innerHTML = `<input type="checkbox" data-type="${type}" value="${value}" class="h-4 w-4 rounded border-gray-300 text-brand-purple focus:ring-brand-purple/50"><span class="text-sm text-gray-700 font-medium">${value}</span>`;
+                        return label;
+                    }
+                    
+                    /**
+                     * Generates checkboxes for all filter categories.
+                     */
+                    function generateFilterOptions() {
+                        const years = [...new Set(linksData.map(link => link.year))].sort((a, b) => b - a);
+                        const topics = [...new Set(linksData.flatMap(link => link.tags))].sort();
+                        const regions = ['BC', 'Alberta', 'Prairies', 'Ontario', 'Quebec', 'Atlantic', 'Online'];
+                        const titles = [...new Set(linksData.map(link => link.title))].sort();
 
-                document.querySelectorAll('[data-dropdown-panel]').forEach(panel => {
-                    panel.addEventListener('click', e => e.stopPropagation());
-                });
+                        years.forEach(year => yearFilterContainer.appendChild(createCheckbox(year, 'year')));
+                        regions.forEach(region => regionFilterContainer.appendChild(createCheckbox(region, 'region')));
+                        titles.forEach(title => titleFilterContainer.appendChild(createCheckbox(title, 'title')));
 
-                yearFilterContainer.addEventListener('change', applyFilters);
-                topicFilterContainer.addEventListener('change', applyFilters);
+                        if (topics.length > 0) {
+                            topics.forEach(topic => topicFilterContainer.appendChild(createCheckbox(topic, 'topic')));
+                        } else {
+                            document.querySelector('[data-dropdown="topics"]').classList.add('hidden');
+                        }
+                    }
+
+                    /**
+                     * Updates the badge count on filter buttons.
+                     */
+                    function updateFilterCounts() {
+                         const yearCount = activeYears.size;
+                         const topicCount = activeTopics.size;
+                         const regionCount = activeRegions.size;
+                         const titleCount = activeTitles.size;
+
+                         document.getElementById('year-filter-count').textContent = yearCount;
+                         document.getElementById('topic-filter-count').textContent = topicCount;
+                         document.getElementById('region-filter-count').textContent = regionCount;
+                         document.getElementById('title-filter-count').textContent = titleCount;
+
+                         document.getElementById('year-filter-count').classList.toggle('hidden', yearCount === 0);
+                         document.getElementById('topic-filter-count').classList.toggle('hidden', topicCount === 0);
+                         document.getElementById('region-filter-count').classList.toggle('hidden', regionCount === 0);
+                         document.getElementById('title-filter-count').classList.toggle('hidden', titleCount === 0);
+                    }
+
+                    /**
+                     * Handles filter logic based on active filters.
+                     */
+                    function applyFilters() {
+                        activeYears = new Set([...yearFilterContainer.querySelectorAll('input:checked')].map(cb => cb.value));
+                        activeTopics = new Set([...topicFilterContainer.querySelectorAll('input:checked')].map(cb => cb.value));
+                        activeRegions = new Set([...regionFilterContainer.querySelectorAll('input:checked')].map(cb => cb.value));
+                        activeTitles = new Set([...titleFilterContainer.querySelectorAll('input:checked')].map(cb => cb.value));
+
+                        document.querySelectorAll('.year-section').forEach(section => {
+                            const sectionYear = section.dataset.year;
+                            const yearMatch = activeYears.size === 0 || activeYears.has(sectionYear);
+                            let visibleCardsInSection = 0;
+
+                            section.querySelectorAll('.card').forEach(card => {
+                                const cardTags = new Set(JSON.parse(card.dataset.tags));
+                                const cardRegions = new Set(JSON.parse(card.dataset.regions));
+                                const cardTitle = card.dataset.title;
+
+                                const topicMatch = activeTopics.size === 0 || [...activeTopics].every(topic => cardTags.has(topic));
+                                const regionMatch = activeRegions.size === 0 || [...activeRegions].some(region => cardRegions.has(region));
+                                const titleMatch = activeTitles.size === 0 || activeTitles.has(cardTitle);
+                                
+                                if (topicMatch && regionMatch && titleMatch) {
+                                    card.classList.remove('hidden');
+                                    visibleCardsInSection++;
+                                } else {
+                                    card.classList.add('hidden');
+                                }
+                            });
+                            
+                            if (yearMatch && visibleCardsInSection > 0) {
+                                section.classList.remove('hidden');
+                            } else {
+                                section.classList.add('hidden');
+                            }
+                        });
+                        
+                        updateFilterCounts();
+                    }
+
+                    /**
+                     * Resets all filters to their default state.
+                     */
+                    function resetAllFilters() {
+                        document.querySelectorAll('[data-dropdown-panel] input[type="checkbox"]').forEach(checkbox => {
+                            checkbox.checked = false;
+                        });
+                        applyFilters();
+                    }
+                    
+                    /**
+                     * Sets up event listeners for dropdowns and checkboxes.
+                     */
+                    function setupInteraction() {
+                        document.querySelectorAll('[data-dropdown]').forEach(dropdown => {
+                            const button = dropdown.querySelector('[data-dropdown-button]');
+                            const panel = dropdown.querySelector('[data-dropdown-panel]');
+                            button.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                document.querySelectorAll('[data-dropdown-panel]').forEach(p => { if (p !== panel) p.classList.add('hidden'); });
+                                panel.classList.toggle('hidden');
+                            });
+                        });
+                        window.addEventListener('click', () => { document.querySelectorAll('[data-dropdown-panel]').forEach(p => p.classList.add('hidden')); });
+                        document.querySelectorAll('[data-dropdown-panel]').forEach(panel => { panel.addEventListener('click', e => e.stopPropagation()); });
+
+                        yearFilterContainer.addEventListener('change', applyFilters);
+                        topicFilterContainer.addEventListener('change', applyFilters);
+                        regionFilterContainer.addEventListener('change', applyFilters);
+                        titleFilterContainer.addEventListener('change', applyFilters);
+                        resetButton.addEventListener('click', resetAllFilters);
+                    }
+
+                    // --- Initialization ---
+                    generateLinkCardsByYear();
+                    generateFilterOptions();
+                    setupInteraction();
+                    updateFilterCounts(); // Initial check
+
+                } catch (error) {
+                    console.error("Could not initialize the app:", error);
+                    document.getElementById('link-container').innerHTML = `<p class="text-center text-red-500">Error: Could not load workshop data. Please check the console for details.</p>`;
+                }
             }
 
-            // --- Initialization ---
-            generateLinkCardsByYear();
-            generateFilterOptions();
-            setupInteraction();
-            updateFilterCounts(); // Initial check
+            initializeApp();
         });
     </script>
 
