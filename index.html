@@ -76,6 +76,14 @@
             <p class="text-lg text-gray-500 mt-3 max-w-2xl mx-auto">A curated collection of resources, grouped by year and topic.</p>
         </header>
 
+        <!-- Apply Now Button -->
+        <div class="text-center mb-8">
+            <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-purple hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg" style="background-color: #5A1F65;">
+                Apply Now
+            </a>
+        </div>
+
+
         <!-- Filter Dropdowns -->
         <div class="mb-12 flex justify-center items-center flex-wrap gap-4 p-4 bg-slate-100/70 rounded-xl">
             <!-- Year Dropdown -->
@@ -207,11 +215,22 @@
                                 card.dataset.tags = JSON.stringify(link.tags);
                                 card.dataset.regions = JSON.stringify(link.regions);
                                 card.dataset.title = link.title;
+
+                                // Check for upcoming tag
+                                const today = new Date();
+                                today.setHours(0, 0, 0, 0); // Normalize to the start of the day
+                                const workshopStartDate = new Date(link.startDate + 'T00:00:00'); // Ensure proper parsing as local time
+                                let upcomingTagHTML = '';
+                                if (workshopStartDate >= today) {
+                                    upcomingTagHTML = `<div class="absolute top-2 left-2 bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
+                                }
+
                                 card.innerHTML = `
                                     <div class="relative">
                                         <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block">
                                             <img class="w-full h-48 object-cover" src="${link.image}" alt="${link.title} workshop image" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
                                         </a>
+                                        ${upcomingTagHTML}
                                         <div class="absolute top-2 right-2 flex flex-wrap gap-2 justify-end">
                                             ${link.regions.map(region => {
                                                 const regionColor = `bg-region-${region.toLowerCase().replace(' ', '-')}`;

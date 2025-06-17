@@ -1,6 +1,22 @@
 [
     {
         "url": "#",
+        "title": "Future AI Workshop",
+        "tags": [
+            "ai",
+            "new"
+        ],
+        "regions": [
+            "Online"
+        ],
+        "year": 2025,
+        "startDate": "2025-08-20",
+        "image": "https://images.unsplash.com/photo-1677756119517-756a188d2d94?q=80&w=800",
+        "dates": "August 20-25, 2025",
+        "location": "Online"
+    },
+    {
+        "url": "#",
         "title": "Intro to R",
         "tags": [
             "development",
@@ -11,6 +27,7 @@
             "Ontario"
         ],
         "year": 2023,
+        "startDate": "2023-07-10",
         "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800",
         "dates": "July 10-14, 2023",
         "location": "Guelph, ON"
@@ -26,6 +43,7 @@
             "Ontario"
         ],
         "year": 2023,
+        "startDate": "2023-08-21",
         "image": "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?q=80&w=800",
         "dates": "August 21-25, 2023",
         "location": "Toronto, ON"
@@ -41,6 +59,7 @@
             "Online"
         ],
         "year": 2023,
+        "startDate": "2023-09-05",
         "image": "https://images.unsplash.com/photo-1579566346927-c68383817a25?q=80&w=800",
         "dates": "September 5-9, 2023",
         "location": "Online"
@@ -56,6 +75,7 @@
             "BC"
         ],
         "year": 2022,
+        "startDate": "2022-05-15",
         "image": "https://images.unsplash.com/photo-1599658880436-c61792e70672?q=80&w=800",
         "dates": "May 15-19, 2022",
         "location": "Vancouver, BC"
@@ -72,6 +92,7 @@
             "Prairies"
         ],
         "year": 2022,
+        "startDate": "2022-06-01",
         "image": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=800",
         "dates": "June 1-5, 2022",
         "location": "Calgary, AB"
@@ -84,6 +105,7 @@
             "Quebec"
         ],
         "year": 2021,
+        "startDate": "2021-10-18",
         "image": "https://images.unsplash.com/photo-1576444434609-ac744b934185?q=80&w=800",
         "dates": "October 18-22, 2021",
         "location": "Montreal, QC"
@@ -96,6 +118,7 @@
             "Prairies"
         ],
         "year": 2021,
+        "startDate": "2021-11-01",
         "image": "https://images.unsplash.com/photo-1627993092497-84174a7a529e?q=80&w=800",
         "dates": "November 1-5, 2021",
         "location": "Saskatoon, SK"
@@ -108,6 +131,7 @@
             "Atlantic"
         ],
         "year": 2021,
+        "startDate": "2021-12-06",
         "image": "https://images.unsplash.com/photo-1554474052-51c35a24250d?q=80&w=800",
         "dates": "December 6-10, 2021",
         "location": "Halifax, NS"
