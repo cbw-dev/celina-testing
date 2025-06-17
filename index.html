@@ -233,14 +233,19 @@
                                 // Create and style the color bar
                                 const colorBar = document.createElement('div');
                                 colorBar.className = 'h-1.5';
-                                if (link.regions.length > 1) {
-                                    const regionColors = link.regions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]);
+                                const regionColors = link.regions
+                                    .map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`])
+                                    .filter(Boolean); // Filter out any undefined colors from typos in JSON
+
+                                if (regionColors.length > 1) {
+                                    // If multiple valid regions, create a gradient
                                     colorBar.style.backgroundImage = `linear-gradient(to right, ${regionColors.join(', ')})`;
-                                } else if (link.regions.length === 1) {
-                                    const regionColorClass = `bg-region-${link.regions[0].toLowerCase()}`;
-                                    colorBar.classList.add(regionColorClass);
+                                } else if (regionColors.length === 1) {
+                                    // If one valid region, use a solid color
+                                    colorBar.style.backgroundColor = regionColors[0];
                                 } else {
-                                     colorBar.classList.add('bg-gray-300'); // Fallback color
+                                    // Fallback for workshops with no valid regions
+                                    colorBar.classList.add('bg-gray-300');
                                 }
                                 card.appendChild(colorBar);
 
