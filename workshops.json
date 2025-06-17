@@ -72,7 +72,9 @@
             "statistics"
         ],
         "regions": [
-            "BC"
+            "BC",
+            "Ontario",
+            "Aberta"
         ],
         "year": 2022,
         "startDate": "2022-05-15",

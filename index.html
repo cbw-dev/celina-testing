@@ -224,24 +224,38 @@
 
                             linksByYear[year].forEach(link => {
                                 const card = document.createElement('article');
-                                const firstRegion = link.regions[0] || 'online';
-                                const regionColorClass = `border-t-4 border-region-${firstRegion.toLowerCase().replace(' ', '-')}`;
-                                card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl ${regionColorClass}`;
+                                card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl`;
                                 card.dataset.tags = JSON.stringify(link.tags);
                                 card.dataset.regions = JSON.stringify(link.regions);
                                 card.dataset.title = link.title;
                                 card.dataset.startDate = link.startDate;
 
+                                // Create and style the color bar
+                                const colorBar = document.createElement('div');
+                                colorBar.className = 'h-1.5';
+                                if (link.regions.length > 1) {
+                                    const regionColors = link.regions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]);
+                                    colorBar.style.backgroundImage = `linear-gradient(to right, ${regionColors.join(', ')})`;
+                                } else if (link.regions.length === 1) {
+                                    const regionColorClass = `bg-region-${link.regions[0].toLowerCase()}`;
+                                    colorBar.classList.add(regionColorClass);
+                                } else {
+                                     colorBar.classList.add('bg-gray-300'); // Fallback color
+                                }
+                                card.appendChild(colorBar);
+
                                 // Check for upcoming tag
                                 const today = new Date();
-                                today.setHours(0, 0, 0, 0); // Normalize to the start of the day
-                                const workshopStartDate = new Date(link.startDate + 'T00:00:00'); // Ensure proper parsing as local time
+                                today.setHours(0, 0, 0, 0); 
+                                const workshopStartDate = new Date(link.startDate + 'T00:00:00');
                                 let upcomingTagHTML = '';
                                 if (workshopStartDate >= today) {
                                     upcomingTagHTML = `<div class="absolute top-2 left-2 bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
                                 }
-
-                                card.innerHTML = `
+                                
+                                const cardContent = document.createElement('div');
+                                cardContent.className = 'flex-grow flex flex-col';
+                                cardContent.innerHTML = `
                                     <div class="relative">
                                         <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block">
                                             <img class="w-full h-48 object-cover" src="${link.image}" alt="${link.title} workshop image" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
@@ -271,6 +285,7 @@
                                             </div>
                                         </div>
                                     </div>`;
+                                card.appendChild(cardContent);
                                 cardGrid.appendChild(card);
                             });
                             yearSection.appendChild(yearTitle);
