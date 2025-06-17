@@ -142,6 +142,20 @@
                 </div>
             </div>
 
+             <!-- Status Dropdown -->
+            <div class="relative" data-dropdown="status">
+                <button data-dropdown-button class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200">
+                    <span>Status</span>
+                    <span id="status-filter-count" class="ml-2 bg-brand-purple text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                    <svg class="dropdown-arrow w-4 h-4 ml-2 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div data-dropdown-panel id="status-filter-options" class="dropdown-panel hidden absolute z-10 mt-2 w-48 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0">
+                    <div class="p-2 space-y-1">
+                        <!-- Status checkbox will be generated here -->
+                    </div>
+                </div>
+            </div>
+
             <!-- Reset Button -->
              <button id="reset-filters-button" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2.5 px-5 rounded-lg shadow-sm flex items-center transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -175,6 +189,7 @@
                     const topicFilterContainer = document.getElementById('topic-filter-options').firstElementChild;
                     const regionFilterContainer = document.getElementById('region-filter-options').firstElementChild;
                     const titleFilterContainer = document.getElementById('title-filter-options').firstElementChild;
+                    const statusFilterContainer = document.getElementById('status-filter-options').firstElementChild;
                     const resetButton = document.getElementById('reset-filters-button');
 
                     // --- State ---
@@ -215,6 +230,7 @@
                                 card.dataset.tags = JSON.stringify(link.tags);
                                 card.dataset.regions = JSON.stringify(link.regions);
                                 card.dataset.title = link.title;
+                                card.dataset.startDate = link.startDate;
 
                                 // Check for upcoming tag
                                 const today = new Date();
@@ -285,6 +301,9 @@
                         years.forEach(year => yearFilterContainer.appendChild(createCheckbox(year, 'year')));
                         regions.forEach(region => regionFilterContainer.appendChild(createCheckbox(region, 'region')));
                         titles.forEach(title => titleFilterContainer.appendChild(createCheckbox(title, 'title')));
+                        
+                        statusFilterContainer.appendChild(createCheckbox('Upcoming', 'status'));
+                        statusFilterContainer.appendChild(createCheckbox('Past', 'status'));
 
                         if (topics.length > 0) {
                             topics.forEach(topic => topicFilterContainer.appendChild(createCheckbox(topic, 'topic')));
@@ -301,16 +320,19 @@
                          const topicCount = activeTopics.size;
                          const regionCount = activeRegions.size;
                          const titleCount = activeTitles.size;
+                         const statusCount = statusFilterContainer.querySelectorAll('input:checked').length;
 
                          document.getElementById('year-filter-count').textContent = yearCount;
                          document.getElementById('topic-filter-count').textContent = topicCount;
                          document.getElementById('region-filter-count').textContent = regionCount;
                          document.getElementById('title-filter-count').textContent = titleCount;
+                         document.getElementById('status-filter-count').textContent = statusCount;
 
                          document.getElementById('year-filter-count').classList.toggle('hidden', yearCount === 0);
                          document.getElementById('topic-filter-count').classList.toggle('hidden', topicCount === 0);
                          document.getElementById('region-filter-count').classList.toggle('hidden', regionCount === 0);
                          document.getElementById('title-filter-count').classList.toggle('hidden', titleCount === 0);
+                         document.getElementById('status-filter-count').classList.toggle('hidden', statusCount === 0);
                     }
 
                     /**
@@ -321,6 +343,8 @@
                         activeTopics = new Set([...topicFilterContainer.querySelectorAll('input:checked')].map(cb => cb.value));
                         activeRegions = new Set([...regionFilterContainer.querySelectorAll('input:checked')].map(cb => cb.value));
                         activeTitles = new Set([...titleFilterContainer.querySelectorAll('input:checked')].map(cb => cb.value));
+                        const upcomingChecked = statusFilterContainer.querySelector('input[value="Upcoming"]').checked;
+                        const pastChecked = statusFilterContainer.querySelector('input[value="Past"]').checked;
 
                         document.querySelectorAll('.year-section').forEach(section => {
                             const sectionYear = section.dataset.year;
@@ -331,12 +355,22 @@
                                 const cardTags = new Set(JSON.parse(card.dataset.tags));
                                 const cardRegions = new Set(JSON.parse(card.dataset.regions));
                                 const cardTitle = card.dataset.title;
+                                const cardStartDate = new Date(card.dataset.startDate + 'T00:00:00');
+                                const today = new Date();
+                                today.setHours(0,0,0,0);
 
                                 const topicMatch = activeTopics.size === 0 || [...activeTopics].every(topic => cardTags.has(topic));
                                 const regionMatch = activeRegions.size === 0 || [...activeRegions].some(region => cardRegions.has(region));
                                 const titleMatch = activeTitles.size === 0 || activeTitles.has(cardTitle);
                                 
-                                if (topicMatch && regionMatch && titleMatch) {
+                                let statusMatch = true; // Default to true (show all)
+                                if (upcomingChecked && !pastChecked) {
+                                    statusMatch = cardStartDate >= today;
+                                } else if (!upcomingChecked && pastChecked) {
+                                    statusMatch = cardStartDate < today;
+                                }
+                                
+                                if (topicMatch && regionMatch && titleMatch && statusMatch) {
                                     card.classList.remove('hidden');
                                     visibleCardsInSection++;
                                 } else {
@@ -384,6 +418,7 @@
                         topicFilterContainer.addEventListener('change', applyFilters);
                         regionFilterContainer.addEventListener('change', applyFilters);
                         titleFilterContainer.addEventListener('change', applyFilters);
+                        statusFilterContainer.addEventListener('change', applyFilters);
                         resetButton.addEventListener('click', resetAllFilters);
                     }
 
