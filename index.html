@@ -51,6 +51,7 @@
             }
         }
         
+        /* FIX: Changed line clamp from 3 to 2 */
         .truncate-2-lines {
             overflow: hidden;
             display: -webkit-box;
@@ -59,6 +60,7 @@
         }
     </style>
 </head>
+
 <body class="antialiased">
     <div class="container mx-auto my-8 md:my-12">
         <header class="text-center mb-12">
@@ -150,12 +152,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             let statusFlagHTML = '';
             let statusTags = [];
-            
+
             if (workshopStartDate <= today && today <= workshopEndDate) {
-                statusFlagHTML = `<div class="inline-flex items-center justify-center bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Happening Now</div>`;
+                statusFlagHTML = `<div class="flex items-center justify-center bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Happening Now</div>`;
                 statusTags = ["Happening Now", "Past"];
             } else if (workshopStartDate > today) {
-                statusFlagHTML = `<div class="inline-flex items-center justify-center bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
+                statusFlagHTML = `<div class="flex items-center justify-center bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
                 statusTags = ["Upcoming"];
             } else {
                  statusTags = ["Past"];
@@ -163,7 +165,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             card.dataset.status = JSON.stringify(statusTags);
             
             const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
-            const regionTagsHTML = sortedRegions.map(region => `<span class="inline-flex items-center justify-center bg-region-${region.toLowerCase().replace(' ', '-')} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm">${region}</span>`).join('');
+            const regionTagsHTML = sortedRegions.map(region => `<span class="flex items-center justify-center bg-region-${region.toLowerCase().replace(' ', '-')} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm">${region}</span>`).join('');
 
             const regionColors = sortedRegions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]).filter(Boolean);
             let colorBarHTML = '<div class="h-1.5 bg-gray-300"></div>';
@@ -186,8 +188,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block">
                         <img loading="lazy" class="w-full h-48 object-cover" src="${link.image}" alt="${link.title} workshop image" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
                     </a>
-                    <div class="absolute top-0 left-0 right-0 p-2 flex justify-between items-start gap-2">
-                        <div>
+                    <div class="absolute top-0 left-0 right-0 p-3 flex justify-between items-start gap-2">
+                        <div class="flex-shrink-0">
                             ${statusFlagHTML}
                         </div>
                         <div class="flex flex-wrap justify-end gap-2">
@@ -196,13 +198,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
-                    <div>
-                        <h3 class="text-lg font-bold text-gray-800 mb-4 truncate-2-lines">
+                    <div class="min-h-16">
+                        <h3 class="text-lg font-bold text-gray-800 truncate-2-lines">
                             <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}</a>
                         </h3>
                     </div>
-                    <div class="flex-grow"></div>
-                    <div class="space-y-2">
+                    <div class="space-y-2 mt-3">
                         <div class="flex items-center text-sm text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg><span class="font-medium">${formatDateRange(link.startDate, link.endDate)}</span></div>
                         ${locationsHTML}
                     </div>
