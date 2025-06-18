@@ -375,7 +375,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     checkboxContainer.className = 'p-2 space-y-1';
                     
                     options[type].forEach(value => {
-                        const optionId = `filter-${type}-${value.replace(/\s+/g, '-')}`; // Unique ID for each option
+                        // FIX APPLIED HERE: Convert value to string before .replace()
+                        const optionId = `filter-${type}-${String(value).replace(/\s+/g, '-')}`; 
                         const label = document.createElement('label');
                         label.className = 'flex items-center space-x-3 p-2 hover:bg-slate-100 rounded-md cursor-pointer';
                         label.setAttribute('for', optionId); // Link label to input
