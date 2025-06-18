@@ -47,7 +47,7 @@
         "year": 2025,
         "startDate": "2025-08-18",
         "endDate": "2025-08-22",
-        "image": "https://images.unsplash.com/photo-1653850406219-e6be4f1e9fa2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjMyfHxzdGFyJTIwd2Fyc3xlbnwwfHwwfHx8MA%3D%3D",
+        "image": "https://assetsio.gnwcdn.com/Anakin_younglings.jpg?width=690&quality=70&format=jpg&dpr=2&auto=webp",
         "locations": ["Jedi Temple, Coruscant", "Jedi Enclave, Dantooine"],
         "format": "Distributed"
     },
@@ -255,7 +255,7 @@
         "year": 1999,
         "startDate": "1999-06-01",
         "endDate": "1999-06-03",
-        "image": "https://images.unsplash.com/photo-1533613220915-609f661a6fe1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3RhciUyMHdhcnN8ZW58MHx8MHx8fDA%3D",
+        "image": "https://images.unsplash.com/photo-1653850406219-e6be4f1e9fa2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjMyfHxzdGFyJTIwd2Fyc3xlbnwwfHwwfHx8MA%3D%3D",
         "locations": ["Ottawa, ON"],
         "format": "In-person"
     }
