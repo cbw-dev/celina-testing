@@ -144,19 +144,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             let statusFlagHTML = '';
             let statusTags = [];
 
+            // MODIFICATION: Added flex classes for centering text in the status flag
             if (workshopStartDate <= today && today <= workshopEndDate) {
-                statusFlagHTML = `<div class="bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Happening Now</div>`;
+                statusFlagHTML = `<div class="flex items-center justify-center bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Happening Now</div>`;
                 statusTags = ["Happening Now", "Past"];
             } else if (workshopStartDate > today) {
-                statusFlagHTML = `<div class="bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
+                statusFlagHTML = `<div class="flex items-center justify-center bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
                 statusTags = ["Upcoming"];
             } else {
                  statusTags = ["Past"];
             }
             card.dataset.status = JSON.stringify(statusTags);
             
+            // MODIFICATION: Added inline-flex and items-center for centering text in region tags
             const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
-            const regionTagsHTML = sortedRegions.map(region => `<span class="inline-block bg-region-${region.toLowerCase().replace(' ', '-')} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm">${region}</span>`).join('');
+            const regionTagsHTML = sortedRegions.map(region => `<span class="inline-flex items-center bg-region-${region.toLowerCase().replace(' ', '-')} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm">${region}</span>`).join('');
 
             const regionColors = sortedRegions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]).filter(Boolean);
             let colorBarHTML = '<div class="h-1.5 bg-gray-300"></div>';
@@ -172,20 +174,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block">
                         <img loading="lazy" class="w-full h-48 object-cover" src="${link.image}" alt="${link.title} workshop image" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
                     </a>
-                    
-                    <!-- MODIFICATION START: Single container for all top overlay content -->
                     <div class="absolute top-0 left-0 right-0 p-2 flex justify-between items-start gap-2">
-                        <!-- Left side: Status Flag -->
                         <div>
                             ${statusFlagHTML}
                         </div>
-                        <!-- Right side: Region Tags -->
                         <div class="flex flex-wrap justify-end gap-2">
                             ${regionTagsHTML}
                         </div>
                     </div>
-                    <!-- MODIFICATION END -->
-
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
                     <h3 class="text-lg font-bold text-gray-800 mb-3"><a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}</a></h3>
@@ -262,7 +258,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 let filtersMatch = true;
                 for (const type in allFilters) {
                     if (allFilters[type].active.size === 0) continue;
-                    const cardValues = new Set(JSON.parse(card.dataset[type] || '[]'));
+                    
+                    // MODIFICATION: Convert card data values to strings for reliable comparison
+                    const cardValues = new Set(JSON.parse(card.dataset[type] || '[]').map(String));
+
                     if (![...allFilters[type].active].some(filterValue => cardValues.has(filterValue))) {
                         filtersMatch = false;
                         break;
