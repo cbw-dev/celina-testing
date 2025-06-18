@@ -30,6 +30,12 @@
         .card.hidden, .year-section.hidden { opacity: 0; transform: scale(0.95); max-height: 0; overflow: hidden; margin: 0 !important; padding: 0 !important; border: none; pointer-events: none; }
         .filter-button:hover .dropdown-arrow { transform: translateY(2px); }
 
+        /* Focus styles for keyboard navigation */
+        a:focus, button:focus, input:focus, .card:focus-within {
+            outline: 2px solid #5A1F65; /* Brand purple outline */
+            outline-offset: 3px;
+        }
+
         @media (max-width: 639px) {
             .carousel-on-mobile {
                 display: flex;
@@ -63,28 +69,36 @@
 <body class="antialiased">
     <div class="container mx-auto my-8 md:my-12">
         <header class="text-center mb-12">
-            <a href="https://bioinformatics.ca" target="_blank" rel="noopener noreferrer"><img src="img/CBW_logo.png" alt="Canadian Bioinformatics Workshops Logo" class="mx-auto mb-6 h-40 w-auto"></a>
+            <a href="https://bioinformatics.ca" target="_blank" rel="noopener noreferrer">
+                <img src="img/CBW_logo.png" alt="Canadian Bioinformatics Workshops Logo - Link to Bioinformatics.ca homepage" class="mx-auto mb-6 h-40 w-auto">
+            </a>
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight">Canadian Bioinformatics Workshops</h1>
             <p class="text-lg text-gray-500 mt-3 max-w-2xl mx-auto">Every year, the CBW offers hands-on workshops in bioinformatics. These pages contain the materials for those workshops. You can apply for upcoming workshops here:</p>
         </header>
-        <div class="text-center mb-12 flex justify-center items-center gap-4 md:gap-6 flex-wrap border-t border-b border-gray-200 py-4">
+
+        <nav aria-label="Main Navigation" class="text-center mb-12 flex justify-center items-center gap-4 md:gap-6 flex-wrap border-t border-b border-gray-200 py-4">
             <a href="#about-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">About</a>
             <a href="#current-workshops-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">Upcoming Workshops</a>
             <a href="#past-workshops-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">Past Workshops</a>
-            <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-purple hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg" style="background-color: #5A1F65;">Apply Now</a>
-        </div>
+            <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-purple hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg" style="background-color: #5A1F65;">Apply Now<span class="sr-only"> (opens in new tab)</span></a>
+        </nav>
         
-        <div id="filter-bar" class="mb-12 flex justify-center items-center flex-wrap gap-4 p-4 bg-slate-100/70 rounded-xl">
+        <div id="filter-bar" role="region" aria-label="Workshop Filters" class="mb-12 flex justify-center items-center flex-wrap gap-4 p-4 bg-slate-100/70 rounded-xl">
             <div class="relative w-full sm:w-auto">
-                <input type="search" id="text-search-input" placeholder="Search..." class="w-full sm:w-48 px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-purple focus:border-brand-purple transition">
+                <label for="text-search-input" class="sr-only">Search workshops by keyword</label>
+                <input type="search" id="text-search-input" placeholder="Search workshops..." class="w-full sm:w-48 px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-purple focus:border-brand-purple transition">
             </div>
-        </div>
+            </div>
 
         <main id="link-container" class="space-y-16">
-            <div id="no-results-message" class="hidden">
-                <div class="text-center py-12 px-6 bg-slate-50 rounded-lg"><h3 class="mt-2 text-xl font-semibold text-gray-900">No workshops found</h3><p class="mt-1 text-base text-gray-500">Try adjusting your search or filter criteria.</p></div>
+            <div id="no-results-message" class="hidden" role="status" aria-live="polite">
+                <div class="text-center py-12 px-6 bg-slate-50 rounded-lg">
+                    <h3 class="mt-2 text-xl font-semibold text-gray-900">No workshops found</h3>
+                    <p class="mt-1 text-base text-gray-500">Try adjusting your search or filter criteria.</p>
+                </div>
             </div>
         </main>
+
         <section id="about-section" class="mt-20 pt-16 border-t border-gray-200">
              <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 tracking-tight text-center">About The Canadian Bioinformatics Workshops</h2>
              <div class="max-w-4xl mx-auto mt-8 text-lg text-gray-600 space-y-6 text-left"><p>The Canadian Bioinformatics Workshops (CBW) series was initiated in 1999 by the Canadian Genetic Diseases Network as a forum for graduate students and other researchers to learn about new tools and techniques in bioinformatics. The series has been a great success, with over 5,000 trainees attending workshops since its inception.</p></div>
@@ -131,9 +145,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         function createCardElement(link) {
+            // Use <article> for independent content blocks
             const card = document.createElement('article');
             card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl`;
-            
+            // Add tabindex for keyboard navigation if cards are interactive beyond links
+            card.setAttribute('tabindex', '0'); 
+            card.setAttribute('role', 'group'); // Indicate it's a group of related elements
+
             card.dataset.year = JSON.stringify([link.year]);
             card.dataset.title = JSON.stringify([link.title]);
             card.dataset.tags = JSON.stringify(link.tags);
@@ -152,12 +170,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             let statusFlagHTML = '';
             let statusTags = [];
 
+            // Add `aria-live="polite"` to dynamically updated status flags if they change frequently and are important for screen readers.
+            // For static flags, a simple visually hidden span might be enough to provide context.
             if (workshopStartDate <= today && today <= workshopEndDate) {
-                statusFlagHTML = `<div class="flex items-center justify-center bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Happening Now</div>`;
-                // FIX: A workshop that is "Happening Now" is no longer also considered "Past" for filtering purposes.
+                statusFlagHTML = `<div class="flex items-center justify-center bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Happening Now</div>`;
                 statusTags = ["Happening Now"];
             } else if (workshopStartDate > today) {
-                statusFlagHTML = `<div class="flex items-center justify-center bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
+                statusFlagHTML = `<div class="flex items-center justify-center bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Upcoming</div>`;
                 statusTags = ["Upcoming"];
             } else {
                  statusTags = ["Past"];
@@ -165,19 +184,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             card.dataset.status = JSON.stringify(statusTags);
             
             const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
-            const regionTagsHTML = sortedRegions.map(region => `<span class="flex items-center justify-center bg-region-${region.toLowerCase().replace(' ', '-')} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm">${region}</span>`).join('');
+            // Add `aria-label` or `title` to region tags if the visual color isn't enough context
+            const regionTagsHTML = sortedRegions.map(region => `<span class="flex items-center justify-center bg-region-${region.toLowerCase().replace(' ', '-')} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm" title="Region: ${region}">${region}</span>`).join('');
 
             const regionColors = sortedRegions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]).filter(Boolean);
-            let colorBarHTML = '<div class="h-1.5 bg-gray-300"></div>';
+            let colorBarHTML = '<div class="h-1.5 bg-gray-300"><span class="sr-only">Workshop regions color bar</span></div>'; // Added sr-only
             if (regionColors.length > 1) {
-                colorBarHTML = `<div class="h-1.5" style="background-image: linear-gradient(to right, ${regionColors.join(', ')})"></div>`;
+                colorBarHTML = `<div class="h-1.5" style="background-image: linear-gradient(to right, ${regionColors.join(', ')})"><span class="sr-only">Workshop regions color bar</span></div>`; // Added sr-only
             } else if (regionColors.length === 1) {
-                colorBarHTML = `<div class="h-1.5" style="background-color: ${regionColors[0]}"></div>`;
+                colorBarHTML = `<div class="h-1.5" style="background-color: ${regionColors[0]}"><span class="sr-only">Workshop region: ${sortedRegions[0]}</span></div>`; // Added sr-only
             }
             
             const locationsHTML = (link.locations || []).map(loc => `
                 <div class="flex items-center text-sm text-gray-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                     <span class="font-medium">${loc}</span>
                 </div>
             `).join('');
@@ -185,8 +205,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             card.innerHTML = `
                 ${colorBarHTML}
                 <div class="relative">
-                    <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block">
-                        <img loading="lazy" class="w-full h-48 object-cover" src="${link.image}" alt="${link.title} workshop image" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
+                    <a href="${link.url}" target="_blank" rel="noopener noreferrer">
+                        <img loading="lazy" class="w-full h-48 object-cover" src="${link.image}" alt="Image for ${link.title} workshop" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
                     </a>
                     <div class="absolute top-0 left-0 right-0 p-3 flex justify-between items-start gap-2">
                         <div class="flex-shrink-0">
@@ -200,11 +220,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="p-5 flex flex-col flex-grow">
                     <div class="min-h-16">
                         <h3 class="text-lg font-bold text-gray-800 truncate-2-lines">
-                            <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}</a>
+                            <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}<span class="sr-only"> (opens in new tab)</span></a>
                         </h3>
                     </div>
                     <div class="space-y-2 mt-3">
-                        <div class="flex items-center text-sm text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg><span class="font-medium">${formatDateRange(link.startDate, link.endDate)}</span></div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                            <span class="font-medium">Date: ${formatDateRange(link.startDate, link.endDate)}</span>
+                        </div>
                         ${locationsHTML}
                     </div>
                 </div>`;
@@ -224,11 +247,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const currentSection = document.createElement('section');
                 currentSection.className = 'year-section';
                 currentSection.id = 'current-workshops-section';
+                // Use a meaningful heading for the section
                 const currentTitle = document.createElement('h2');
                 currentTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-green-500';
-                currentTitle.textContent = 'Upcoming & Happening Now';
+                currentTitle.textContent = 'Upcoming & Happening Now Workshops';
+                // Add aria-live region to the grid container if cards within it can change dynamically
                 const gridContainer = document.createElement('div');
                 gridContainer.className = 'carousel-on-mobile sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-8';
+                gridContainer.setAttribute('role', 'region');
+                gridContainer.setAttribute('aria-label', 'List of Upcoming and Happening Now Workshops');
                 currentAndUpcomingLinks.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
                 currentAndUpcomingLinks.forEach(link => gridContainer.appendChild(createCardElement(link)));
                 currentSection.appendChild(currentTitle);
@@ -245,9 +272,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (!firstPastSectionAssigned) { yearSection.id = 'past-workshops-section'; firstPastSectionAssigned = true; }
                 const yearTitle = document.createElement('h2');
                 yearTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-brand-purple';
-                yearTitle.textContent = year;
+                yearTitle.textContent = `Workshops from ${year}`; // More descriptive title
                 const gridContainer = document.createElement('div');
                 gridContainer.className = 'carousel-on-mobile sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-8';
+                gridContainer.setAttribute('role', 'region');
+                gridContainer.setAttribute('aria-label', `List of Past Workshops from ${year}`);
                 pastLinksByYear[year].forEach(link => gridContainer.appendChild(createCardElement(link)));
                 yearSection.appendChild(yearTitle);
                 yearSection.appendChild(gridContainer);
@@ -262,6 +291,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if(countEl) {
                     countEl.textContent = count;
                     countEl.classList.toggle('hidden', count === 0);
+                    // Update aria-label for screen reader users
+                    const button = countEl.closest('.filter-button');
+                    if (button) {
+                        if (count > 0) {
+                            button.setAttribute('aria-label', `${allFilters[type].label} filter active, ${count} selected`);
+                        } else {
+                            button.setAttribute('aria-label', `${allFilters[type].label} filter`);
+                        }
+                    }
                 }
             }
         }
@@ -270,7 +308,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             const searchTerm = searchInput.value.toLowerCase().trim();
             let totalVisibleCards = 0;
             noResultsMessage.classList.add('hidden');
-
+            // Announce changes to screen readers when filters are applied
+            noResultsMessage.setAttribute('aria-live', 'off'); // Temporarily turn off for filtering
+            
             document.querySelectorAll('.card').forEach(card => {
                 const searchMatch = !searchTerm || card.dataset.search.includes(searchTerm);
                 let filtersMatch = true;
@@ -295,9 +335,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.querySelectorAll('.year-section').forEach(section => {
                 const visibleCards = section.querySelectorAll('.card:not(.hidden)').length;
                 section.classList.toggle('hidden', visibleCards === 0);
+                // Adjust section heading level if it becomes empty or regains content (less common but good for dynamic views)
             });
 
-            if (totalVisibleCards === 0) noResultsMessage.classList.remove('hidden');
+            if (totalVisibleCards === 0) {
+                noResultsMessage.classList.remove('hidden');
+                noResultsMessage.setAttribute('aria-live', 'polite'); // Announce no results
+            } else {
+                noResultsMessage.setAttribute('aria-live', 'off'); // Turn off if results are back
+            }
             updateFilterCounts();
         }
 
@@ -315,20 +361,42 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (options[type] && options[type].length > 0) {
                     const dropdown = document.createElement('div');
                     dropdown.className = 'relative';
+                    // Use ARIA attributes for dropdowns: role="combobox", aria-haspopup, aria-expanded, aria-controls
+                    const dropdownButtonId = `filter-button-${type}`;
+                    const dropdownPanelId = `filter-panel-${type}`;
+
                     const dropdownPanel = document.createElement('div');
                     dropdownPanel.className = 'dropdown-panel hidden absolute z-10 mt-2 w-56 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0 max-h-60 overflow-y-auto';
+                    dropdownPanel.setAttribute('role', 'listbox'); // Indicate it's a list of options
+                    dropdownPanel.setAttribute('id', dropdownPanelId);
+                    dropdownPanel.setAttribute('aria-labelledby', dropdownButtonId);
+
                     const checkboxContainer = document.createElement('div');
                     checkboxContainer.className = 'p-2 space-y-1';
                     
                     options[type].forEach(value => {
+                        const optionId = `filter-${type}-${value.replace(/\s+/g, '-')}`; // Unique ID for each option
                         const label = document.createElement('label');
                         label.className = 'flex items-center space-x-3 p-2 hover:bg-slate-100 rounded-md cursor-pointer';
-                        label.innerHTML = `<input type="checkbox" data-type="${type}" value="${value}" class="h-4 w-4 rounded border-gray-300 text-brand-purple focus:ring-brand-purple/50"><span class="text-sm text-gray-700 font-medium">${value}</span>`;
+                        label.setAttribute('for', optionId); // Link label to input
+                        
+                        // Add aria-checked for checkboxes
+                        label.innerHTML = `
+                            <input type="checkbox" id="${optionId}" data-type="${type}" value="${value}" 
+                                class="h-4 w-4 rounded border-gray-300 text-brand-purple focus:ring-brand-purple/50">
+                            <span class="text-sm text-gray-700 font-medium">${value}</span>
+                        `;
                         checkboxContainer.appendChild(label);
                     });
                     
                     dropdownPanel.appendChild(checkboxContainer);
-                    dropdown.innerHTML = `<button class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200"><span>${allFilters[type].label}</span><span id="${type}-filter-count" class="ml-2 bg-brand-purple text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span><svg class="dropdown-arrow w-4 h-4 ml-2 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>`;
+                    dropdown.innerHTML = `
+                        <button id="${dropdownButtonId}" class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200"
+                            aria-haspopup="listbox" aria-expanded="false" aria-controls="${dropdownPanelId}">
+                            <span>${allFilters[type].label}</span>
+                            <span id="${type}-filter-count" class="ml-2 bg-brand-purple text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                            <svg class="dropdown-arrow w-4 h-4 ml-2 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>`;
                     dropdown.appendChild(dropdownPanel);
                     filterBar.appendChild(dropdown);
                     allFilters[type].container = checkboxContainer;
@@ -337,7 +405,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const resetButton = document.createElement('button');
             resetButton.id = 'reset-filters-button';
             resetButton.className = 'bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2.5 px-5 rounded-lg shadow-sm flex items-center transition-all duration-200';
-            resetButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a9 9 0 0114.12-5.12M20 15a9 9 0 01-14.12 5.12" /></svg>Reset`;
+            resetButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a9 9 0 0114.12-5.12M20 15a9 9 0 01-14.12 5.12" /></svg>Reset Filters`; // More descriptive
             filterBar.appendChild(resetButton);
         }
 
@@ -346,9 +414,22 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const button = e.target.closest('.filter-button');
                 if (button) {
                     const panel = button.nextElementSibling;
-                    const wasHidden = panel.classList.contains('hidden');
-                    document.querySelectorAll('.dropdown-panel').forEach(p => p.classList.add('hidden'));
-                    if(wasHidden) panel.classList.remove('hidden');
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                    // Close all other dropdowns
+                    document.querySelectorAll('.dropdown-panel').forEach(p => {
+                        p.classList.add('hidden');
+                        p.previousElementSibling.setAttribute('aria-expanded', 'false');
+                    });
+                    
+                    // Toggle current dropdown
+                    if (!isExpanded) {
+                        panel.classList.remove('hidden');
+                        button.setAttribute('aria-expanded', 'true');
+                    } else {
+                        panel.classList.add('hidden');
+                        button.setAttribute('aria-expanded', 'false');
+                    }
                     return; 
                 }
                 
@@ -366,13 +447,36 @@ document.addEventListener('DOMContentLoaded', async () => {
                     document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
                     for (const type in allFilters) allFilters[type].active.clear();
                     applyFilters();
+                    // Announce reset action
+                    const liveRegion = document.createElement('div');
+                    liveRegion.setAttribute('aria-live', 'polite');
+                    liveRegion.classList.add('sr-only');
+                    liveRegion.textContent = 'All filters reset.';
+                    document.body.appendChild(liveRegion);
+                    setTimeout(() => liveRegion.remove(), 1000);
                 }
             });
+
+            // Close dropdowns when clicking outside
             document.addEventListener('click', e => {
-                if (!e.target.closest('.relative')) {
-                    document.querySelectorAll('.dropdown-panel').forEach(p => p.classList.add('hidden'));
+                if (!e.target.closest('.relative') && !e.target.closest('.dropdown-panel')) {
+                    document.querySelectorAll('.dropdown-panel').forEach(p => {
+                        p.classList.add('hidden');
+                        p.previousElementSibling.setAttribute('aria-expanded', 'false');
+                    });
                 }
             });
+
+            // Keyboard navigation for dropdowns (Escape to close)
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.dropdown-panel').forEach(p => {
+                        p.classList.add('hidden');
+                        p.previousElementSibling.setAttribute('aria-expanded', 'false');
+                    });
+                }
+            });
+
             searchInput.addEventListener('input', applyFilters);
         }
 
@@ -388,5 +492,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 </script>
 
+<style>
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+</style>
 </body>
 </html>
