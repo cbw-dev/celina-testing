@@ -227,7 +227,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <a href="${link.url}" target="_blank" rel="noopener noreferrer">
                         <img loading="lazy" class="w-full h-48 object-cover" src="${link.image}" alt="Image for ${link.title} workshop" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
                     </a>
-                    <div class="absolute top-0 left-0 right-0 p-3 flex items-start"> <div class="flex-shrink-0 mr-2"> ${statusFlagHTML}
+                    <div class="absolute top-0 left-0 right-0 p-3 flex items-start max-h-full overflow-hidden"> <div class="flex-shrink-0 mr-2"> 
+                            ${statusFlagHTML}
                         </div>
                         <div class="flex flex-wrap justify-end gap-2 flex-grow min-w-0"> 
                             ${regionTagsHTML}
