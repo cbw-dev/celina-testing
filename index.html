@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filterable Link Cards</title>
+    <title>Canadian Bioinformatics Workshops</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -47,8 +47,8 @@
         <div class="mb-6 max-w-2xl mx-auto">
              <input type="search" id="text-search-input" placeholder="Search by title, topic, etc..." class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-purple focus:border-brand-purple transition">
         </div>
-        <div class="mb-12 flex justify-center items-center flex-wrap gap-4 p-4 bg-slate-100/70 rounded-xl">
-             </div>
+        <div id="filter-bar" class="mb-12 flex justify-center items-center flex-wrap gap-4 p-4 bg-slate-100/70 rounded-xl">
+        </div>
         <main id="link-container" class="space-y-16">
             <div id="no-results-message" class="hidden">
                 <div class="text-center py-12 px-6 bg-slate-50 rounded-lg">
@@ -80,9 +80,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         const linkContainer = document.getElementById('link-container');
         const noResultsMessage = document.getElementById('no-results-message');
         const searchInput = document.getElementById('text-search-input');
-        const filterBar = document.querySelector('.mb-12.flex.justify-center');
-
-        let activeFilters = {};
+        const filterBar = document.getElementById('filter-bar');
+        
+        const allFilters = {
+            year: { container: null, active: new Set(), label: "Year" },
+            regions: { container: null, active: new Set(), label: "Region" },
+            title: { container: null, active: new Set(), label: "Workshop" },
+            tags: { container: null, active: new Set(), label: "Topics" },
+            format: { container: null, active: new Set(), label: "Format" },
+            status: { container: null, active: new Set(), label: "Status" }
+        };
 
         function formatDateRange(startDateStr, endDateStr) {
             const start = new Date(startDateStr + 'T00:00:00');
@@ -101,30 +108,101 @@ document.addEventListener('DOMContentLoaded', async () => {
             const card = document.createElement('article');
             card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl`;
             
-            const searchableText = (link.title + ' ' + link.tags.join(' ') + ' ' + link.location).toLowerCase();
-            
+            card.dataset.year = link.year;
+            card.dataset.title = link.title;
             card.dataset.tags = JSON.stringify(link.tags);
             card.dataset.regions = JSON.stringify(link.regions);
-            card.dataset.title = link.title;
+            card.dataset.format = link.format;
             card.dataset.startDate = link.startDate;
             card.dataset.endDate = link.endDate;
-            card.dataset.format = link.format;
-            card.dataset.search = searchableText; // Store all searchable text
+            card.dataset.search = (link.title + ' ' + link.tags.join(' ') + ' ' + link.location).toLowerCase();
 
             const workshopStartDate = new Date(link.startDate + 'T00:00:00');
             const workshopEndDate = new Date(link.endDate + 'T00:00:00');
             let statusFlagHTML = '';
             if (workshopStartDate <= today && today <= workshopEndDate) {
                 statusFlagHTML = `<div class="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Happening Now</div>`;
+                card.dataset.status = JSON.stringify(["Happening Now", "Past"]);
             } else if (workshopStartDate > today) {
                 statusFlagHTML = `<div class="absolute top-2 left-2 bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
+                card.dataset.status = JSON.stringify(["Upcoming"]);
+            } else {
+                 card.dataset.status = JSON.stringify(["Past"]);
+            }
+            
+            const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
+            const regionColors = sortedRegions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]).filter(Boolean);
+            let colorBarHTML = '<div class="h-1.5 bg-gray-300"></div>';
+            if (regionColors.length > 1) {
+                colorBarHTML = `<div class="h-1.5" style="background-image: linear-gradient(to right, ${regionColors.join(', ')})"></div>`;
+            } else if (regionColors.length === 1) {
+                colorBarHTML = `<div class="h-1.5" style="background-color: ${regionColors[0]}"></div>`;
             }
 
-            // The rest of the card HTML generation
-            const cardContent = document.createElement('div');
-            cardContent.innerHTML = `...`; // Full card content as before
-            card.innerHTML = `...`; // Construct the full card innerHTML here as previously designed
+            card.innerHTML = `
+                ${colorBarHTML}
+                <div class="relative">
+                    <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block">
+                        <img loading="lazy" class="w-full h-48 object-cover" src="${link.image}" alt="${link.title} workshop image" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
+                    </a>
+                    ${statusFlagHTML}
+                    <div class="absolute top-2 right-2 flex flex-wrap gap-2 justify-end">
+                        ${sortedRegions.map(region => `<span class="inline-block bg-region-${region.toLowerCase().replace(' ', '-')} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm">${region}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3"><a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}</a></h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg><span class="font-medium">${formatDateRange(link.startDate, link.endDate)}</span></div>
+                        <div class="flex items-center text-sm text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg><span class="font-medium">${link.location}</span></div>
+                    </div>
+                </div>`;
             return card;
+        }
+
+        function generatePageContent() {
+            linkContainer.innerHTML = '';
+            const currentAndUpcomingLinks = [];
+            const pastLinks = [];
+            for (const link of linksData) {
+                const workshopEndDate = new Date(link.endDate + 'T00:00:00');
+                if (workshopEndDate >= today) currentAndUpcomingLinks.push(link);
+                else pastLinks.push(link);
+            }
+
+            if (currentAndUpcomingLinks.length > 0) {
+                const currentSection = document.createElement('section');
+                currentSection.className = 'year-section';
+                currentSection.id = 'current-workshops-section';
+                currentSection.innerHTML = `<h2 class="text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-green-500">Upcoming & Happening Now</h2><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>`;
+                currentAndUpcomingLinks.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+                currentAndUpcomingLinks.forEach(link => currentSection.querySelector('.grid').appendChild(createCardElement(link)));
+                linkContainer.appendChild(currentSection);
+            }
+
+            const pastLinksByYear = pastLinks.reduce((acc, link) => { (acc[link.year] = acc[link.year] || []).push(link); return acc; }, {});
+            const sortedYears = Object.keys(pastLinksByYear).sort((a, b) => b - a);
+            let firstPastSectionAssigned = false;
+            sortedYears.forEach(year => {
+                const yearSection = document.createElement('section');
+                yearSection.className = 'year-section';
+                if (!firstPastSectionAssigned) { yearSection.id = 'past-workshops-section'; firstPastSectionAssigned = true; }
+                yearSection.innerHTML = `<h2 class="text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-brand-purple">${year}</h2><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>`;
+                pastLinksByYear[year].forEach(link => yearSection.querySelector('.grid').appendChild(createCardElement(link)));
+                linkContainer.appendChild(yearSection);
+            });
+            linkContainer.appendChild(noResultsMessage); // Move message to the end
+        }
+        
+        function updateFilterCounts() {
+            for (const type in allFilters) {
+                const count = allFilters[type].active.size;
+                const countEl = document.getElementById(`${type}-filter-count`);
+                if(countEl) {
+                    countEl.textContent = count;
+                    countEl.classList.toggle('hidden', count === 0);
+                }
+            }
         }
 
         function applyFilters() {
@@ -132,46 +210,109 @@ document.addEventListener('DOMContentLoaded', async () => {
             let totalVisibleCards = 0;
             noResultsMessage.classList.add('hidden');
 
-            document.querySelectorAll('.year-section').forEach(section => {
-                let visibleCardsInSection = 0;
-                section.querySelectorAll('.card').forEach(card => {
-                    const searchMatch = !searchTerm || card.dataset.search.includes(searchTerm);
-                    
-                    let filtersMatch = true;
-                    for (const type in activeFilters) {
-                        if (activeFilters[type].size === 0) continue;
-                        const cardValues = new Set(JSON.parse(card.dataset[type] || '[]'));
-                        if (![...activeFilters[type]].some(filterValue => cardValues.has(filterValue))) {
-                            filtersMatch = false;
-                            break;
-                        }
+            document.querySelectorAll('.card').forEach(card => {
+                const searchMatch = !searchTerm || card.dataset.search.includes(searchTerm);
+                let filtersMatch = true;
+                for (const type in allFilters) {
+                    if (allFilters[type].active.size === 0) continue;
+                    const cardValues = new Set(JSON.parse(card.dataset[type] || '[]'));
+                    if (![...allFilters[type].active].some(filterValue => cardValues.has(filterValue))) {
+                        filtersMatch = false;
+                        break;
                     }
-
-                    if (searchMatch && filtersMatch) {
-                        card.classList.remove('hidden');
-                        visibleCardsInSection++;
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
-
-                if (visibleCardsInSection > 0) {
-                    section.classList.remove('hidden');
-                    totalVisibleCards += visibleCardsInSection;
-                } else {
-                    section.classList.add('hidden');
                 }
+                if (searchMatch && filtersMatch) {
+                    card.classList.remove('hidden');
+                    totalVisibleCards++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            document.querySelectorAll('.year-section').forEach(section => {
+                const visibleCards = section.querySelectorAll('.card:not(.hidden)').length;
+                section.classList.toggle('hidden', visibleCards === 0);
             });
 
             if (totalVisibleCards === 0) noResultsMessage.classList.remove('hidden');
+            updateFilterCounts();
         }
-        
-        // Refactored generatePageContent, generateFilterOptions, setupInteraction would go here.
-        // It's critical that the full, tested script is used.
-        
-        // Placeholder for the full logic:
-        console.log("Script loaded. You need to paste the full JS logic here.");
 
+        function generateFilterOptions() {
+            const options = {
+                year: [...new Set(linksData.map(link => link.year))].sort((a, b) => b - a),
+                regions: regionOrder,
+                title: [...new Set(linksData.map(link => link.title))].sort(),
+                tags: [...new Set(linksData.flatMap(link => link.tags))].sort(),
+                format: [...new Set(linksData.map(link => link.format))].sort(),
+                status: ["Upcoming", "Happening Now", "Past"]
+            };
+
+            for (const type in allFilters) {
+                if (options[type] && options[type].length > 0) {
+                    const dropdown = document.createElement('div');
+                    dropdown.className = 'relative';
+                    const dropdownPanel = document.createElement('div');
+                    dropdownPanel.className = 'dropdown-panel hidden absolute z-10 mt-2 w-56 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0 max-h-60 overflow-y-auto';
+                    const checkboxContainer = document.createElement('div');
+                    checkboxContainer.className = 'p-2 space-y-1';
+                    
+                    options[type].forEach(value => {
+                        const label = document.createElement('label');
+                        label.className = 'flex items-center space-x-3 p-2 hover:bg-slate-100 rounded-md cursor-pointer';
+                        label.innerHTML = `<input type="checkbox" data-type="${type}" value="${value}" class="h-4 w-4 rounded border-gray-300 text-brand-purple focus:ring-brand-purple/50"><span class="text-sm text-gray-700 font-medium">${value}</span>`;
+                        checkboxContainer.appendChild(label);
+                    });
+                    
+                    dropdownPanel.appendChild(checkboxContainer);
+                    dropdown.innerHTML = `<button class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200"><span>${allFilters[type].label}</span><span id="${type}-filter-count" class="ml-2 bg-brand-purple text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span><svg class="dropdown-arrow w-4 h-4 ml-2 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>`;
+                    dropdown.appendChild(dropdownPanel);
+                    filterBar.appendChild(dropdown);
+                    allFilters[type].container = checkboxContainer;
+                }
+            }
+            const resetButton = document.createElement('button');
+            resetButton.id = 'reset-filters-button';
+            resetButton.className = 'bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2.5 px-5 rounded-lg shadow-sm flex items-center transition-all duration-200';
+            resetButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a9 9 0 0114.12-5.12M20 15a9 9 0 01-14.12 5.12" /></svg>Reset`;
+            filterBar.appendChild(resetButton);
+        }
+
+        function setupInteraction() {
+            filterBar.addEventListener('click', e => {
+                if (e.target.closest('.filter-button')) {
+                    const button = e.target.closest('.filter-button');
+                    const panel = button.nextElementSibling;
+                    const wasHidden = panel.classList.contains('hidden');
+                    document.querySelectorAll('.dropdown-panel').forEach(p => p.classList.add('hidden'));
+                    if(wasHidden) panel.classList.remove('hidden');
+                }
+                
+                if (e.target.type === 'checkbox') {
+                    const type = e.target.dataset.type;
+                    const value = e.target.value;
+                    if (e.target.checked) allFilters[type].active.add(value);
+                    else allFilters[type].active.delete(value);
+                    applyFilters();
+                }
+
+                if(e.target.closest('#reset-filters-button')) {
+                    searchInput.value = '';
+                    document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+                    for (const type in allFilters) allFilters[type].active.clear();
+                    applyFilters();
+                }
+            });
+            document.addEventListener('click', e => {
+                if (!e.target.closest('.relative')) document.querySelectorAll('.dropdown-panel').forEach(p => p.classList.add('hidden'));
+            });
+            searchInput.addEventListener('input', applyFilters);
+        }
+
+        generatePageContent();
+        generateFilterOptions();
+        setupInteraction();
+        updateFilterCounts();
 
     } catch (error) {
         console.error("Could not initialize the app:", error);
