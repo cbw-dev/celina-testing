@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             card.dataset.search = (
                 link.title + ' ' + 
                 link.tags.join(' ') + ' ' + 
-                link.location + ' ' +
+                (link.locations || []).join(' ') + ' ' +
                 (link.instructors || []).join(' ')
             ).toLowerCase();
 
@@ -144,7 +144,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             let statusFlagHTML = '';
             let statusTags = [];
 
-            // MODIFICATION: Added flex classes for centering text in the status flag
             if (workshopStartDate <= today && today <= workshopEndDate) {
                 statusFlagHTML = `<div class="flex items-center justify-center bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Happening Now</div>`;
                 statusTags = ["Happening Now", "Past"];
@@ -156,7 +155,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             card.dataset.status = JSON.stringify(statusTags);
             
-            // MODIFICATION: Added inline-flex and items-center for centering text in region tags
             const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
             const regionTagsHTML = sortedRegions.map(region => `<span class="inline-flex items-center bg-region-${region.toLowerCase().replace(' ', '-')} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm">${region}</span>`).join('');
 
@@ -167,6 +165,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             } else if (regionColors.length === 1) {
                 colorBarHTML = `<div class="h-1.5" style="background-color: ${regionColors[0]}"></div>`;
             }
+            
+            // MODIFICATION: Generate multiple location lines if `link.locations` is an array
+            const locationsHTML = (link.locations || []).map(loc => `
+                <div class="flex items-center text-sm text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    <span class="font-medium">${loc}</span>
+                </div>
+            `).join('');
 
             card.innerHTML = `
                 ${colorBarHTML}
@@ -187,7 +193,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <h3 class="text-lg font-bold text-gray-800 mb-3"><a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}</a></h3>
                     <div class="space-y-2">
                         <div class="flex items-center text-sm text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg><span class="font-medium">${formatDateRange(link.startDate, link.endDate)}</span></div>
-                        <div class="flex items-center text-sm text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg><span class="font-medium">${link.location}</span></div>
+                        ${locationsHTML}
                     </div>
                 </div>`;
             return card;
@@ -259,7 +265,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 for (const type in allFilters) {
                     if (allFilters[type].active.size === 0) continue;
                     
-                    // MODIFICATION: Convert card data values to strings for reliable comparison
                     const cardValues = new Set(JSON.parse(card.dataset[type] || '[]').map(String));
 
                     if (![...allFilters[type].active].some(filterValue => cardValues.has(filterValue))) {

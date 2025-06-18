@@ -22,18 +22,25 @@
                     "enum": ["BC", "Alberta", "Prairies", "Ontario", "Quebec", "Atlantic", "Online"]
                 }
             },
-            "year": { "type": "number", "minimum": 1999 },
+            "year": {
+                "type": "number",
+                "minimum": 1999
+            },
             "startDate": { "type": "string", "format": "date" },
             "endDate": { "type": "string", "format": "date" },
-            "image": { "type": "string", "format": "uri" },
-            "location": { "type": "string" },
+            "image": { "type": "string" },
+            "locations": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "type": "string" }
+            },
             "format": {
                 "type": "string",
                 "enum": ["Online", "In-person", "Distributed", "Flipped", "Asynchronous"]
             }
         },
         "required": [
-            "url", "title", "tags", "regions", "year", "startDate", "endDate", "image", "location", "format"
+            "url", "title", "tags", "regions", "year", "startDate", "endDate", "image", "locations", "format"
         ]
     }
 }

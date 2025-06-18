@@ -9,7 +9,7 @@
         "startDate": "2026-07-20",
         "endDate": "2026-07-24",
         "image": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=800",
-        "location": "Online Quantum Realm",
+        "locations": "Online Quantum Realm",
         "format": "Online"
     },
     {
@@ -22,7 +22,7 @@
         "startDate": "2025-11-03",
         "endDate": "2025-11-07",
         "image": "https://images.unsplash.com/photo-1578496468897-52a7b4c818e8?q=80&w=800",
-        "location": "Toronto, ON",
+        "locations": ["Toronto, ON"],
         "format": "In-person"
     },
     {
@@ -35,7 +35,7 @@
         "startDate": "2025-06-01",
         "endDate": "2025-12-01",
         "image": "https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?q=80&w=800",
-        "location": "Across Canada",
+        "locations": "Across Canada",
         "format": "Distributed"
     },
     {
@@ -48,7 +48,7 @@
         "startDate": "2025-08-18",
         "endDate": "2025-08-22",
         "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800",
-        "location": "Distributed",
+        "locations": ["Toronto, ON", "Vancouver, BC"],
         "format": "Distributed"
     },
     {
@@ -61,7 +61,7 @@
         "startDate": "2025-03-01",
         "endDate": "2025-03-31",
         "image": "https://images.unsplash.com/photo-1555949963-ff98c8726515?q=80&w=800",
-        "location": "Self-paced",
+        "locations": "Self-paced",
         "format": "Asynchronous"
     },
     {
@@ -74,7 +74,7 @@
         "startDate": "2025-02-03",
         "endDate": "2025-02-07",
         "image": "https://images.unsplash.com/photo-1579154215152-a7261ac4d773?q=80&w=800",
-        "location": "MaRS Centre, Toronto",
+        "locations": "MaRS Centre, Toronto",
         "format": "In-person"
     },
     {
@@ -87,7 +87,7 @@
         "startDate": "2024-06-03",
         "endDate": "2024-06-07",
         "image": "https://images.unsplash.com/photo-1614929821945-938458a264a3?q=80&w=800",
-        "location": "McGill University",
+        "locations": "McGill University",
         "format": "In-person"
     },
     {
@@ -100,7 +100,7 @@
         "startDate": "2024-10-07",
         "endDate": "2024-10-11",
         "image": "https://images.unsplash.com/photo-1581093581539-4c622343237a?q=80&w=800",
-        "location": "Halifax, NS",
+        "locations": "Halifax, NS",
         "format": "Flipped"
     },
     {
@@ -113,7 +113,7 @@
         "startDate": "2024-09-09",
         "endDate": "2024-09-13",
         "image": "https://images.unsplash.com/photo-1627993092497-84174a7a529e?q=80&w=800",
-        "location": "Calgary & Saskatoon",
+        "locations": "Calgary & Saskatoon",
         "format": "Distributed"
     },
     {
@@ -126,7 +126,7 @@
         "startDate": "2024-07-15",
         "endDate": "2024-07-19",
         "image": "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -139,7 +139,7 @@
         "startDate": "2024-08-19",
         "endDate": "2024-08-23",
         "image": "https://images.unsplash.com/photo-1603581523821-2e211339897c?q=80&w=800",
-        "location": "Vancouver & Toronto",
+        "locations": "Vancouver & Toronto",
         "format": "Distributed"
     },
     {
@@ -152,7 +152,7 @@
         "startDate": "2024-03-04",
         "endDate": "2024-03-08",
         "image": "https://images.unsplash.com/photo-1590650153355-a55651214a1c?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -165,7 +165,7 @@
         "startDate": "2024-05-27",
         "endDate": "2024-05-31",
         "image": "https://images.unsplash.com/photo-1554151228-a4ffd467b79a?q=80&w=800",
-        "location": "University of Manitoba",
+        "locations": "University of Manitoba",
         "format": "In-person"
     },
     {
@@ -178,7 +178,7 @@
         "startDate": "2024-01-22",
         "endDate": "2024-01-26",
         "image": "https://images.unsplash.com/photo-1574958269355-d45543e49193?q=80&w=800",
-        "location": "Dalhousie University",
+        "locations": "Dalhousie University",
         "format": "In-person"
     },
     {
@@ -191,7 +191,7 @@
         "startDate": "2023-07-17",
         "endDate": "2023-07-21",
         "image": "https://images.unsplash.com/photo-1576444434609-ac744b934185?q=80&w=800",
-        "location": "Vancouver, BC",
+        "locations": "Vancouver, BC",
         "format": "In-person"
     },
     {
@@ -204,7 +204,7 @@
         "startDate": "2023-01-23",
         "endDate": "2023-01-24",
         "image": "https://images.unsplash.com/photo-1544890225-2f3faec4446f?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -217,7 +217,7 @@
         "startDate": "2023-05-15",
         "endDate": "2023-05-19",
         "image": "https://images.unsplash.com/photo-1581143763422-b53e8e5c8544?q=80&w=800",
-        "location": "University of Toronto",
+        "locations": "University of Toronto",
         "format": "In-person"
     },
     {
@@ -230,7 +230,7 @@
         "startDate": "2023-09-01",
         "endDate": "2023-09-30",
         "image": "https://images.unsplash.com/photo-1531306728370-753a3c9e7a2b?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Asynchronous"
     },
     {
@@ -243,7 +243,7 @@
         "startDate": "2023-11-20",
         "endDate": "2023-11-24",
         "image": "https://images.unsplash.com/photo-1581092916259-93b764a85633?q=80&w=800",
-        "location": "Distributed",
+        "locations": "Distributed",
         "format": "Distributed"
     },
     {
@@ -256,7 +256,7 @@
         "startDate": "2023-04-03",
         "endDate": "2023-04-04",
         "image": "https://images.unsplash.com/photo-1605745341315-052b388b4887?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -269,7 +269,7 @@
         "startDate": "2023-08-14",
         "endDate": "2023-08-18",
         "image": "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=800",
-        "location": "UBC",
+        "locations": "UBC",
         "format": "In-person"
     },
     {
@@ -282,7 +282,7 @@
         "startDate": "2023-10-02",
         "endDate": "2023-10-06",
         "image": "https://images.unsplash.com/photo-1620712943543-2858200e74b4?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -295,7 +295,7 @@
         "startDate": "2023-06-12",
         "endDate": "2023-06-16",
         "image": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=800",
-        "location": "University of Saskatchewan",
+        "locations": "University of Saskatchewan",
         "format": "In-person"
     },
     {
@@ -308,7 +308,7 @@
         "startDate": "2023-02-27",
         "endDate": "2023-02-28",
         "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -321,7 +321,7 @@
         "startDate": "2021-11-08",
         "endDate": "2021-11-12",
         "image": "https://images.unsplash.com/photo-1505751172876-66b43674fff6?q=80&w=800",
-        "location": "Distributed",
+        "locations": "Distributed",
         "format": "Distributed"
     },
     {
@@ -334,7 +334,7 @@
         "startDate": "2021-07-12",
         "endDate": "2021-07-16",
         "image": "https://images.unsplash.com/photo-1550063873-ab792950096b?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -347,7 +347,7 @@
         "startDate": "2020-02-10",
         "endDate": "2020-02-12",
         "image": "https://images.unsplash.com/photo-1578916396957-67926a81f375?q=80&w=800",
-        "location": "Vancouver, BC",
+        "locations": "Vancouver, BC",
         "format": "In-person"
     },
     {
@@ -360,7 +360,7 @@
         "startDate": "2019-10-21",
         "endDate": "2019-10-25",
         "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800",
-        "location": "SickKids, Toronto",
+        "locations": "SickKids, Toronto",
         "format": "In-person"
     },
     {
@@ -373,7 +373,7 @@
         "startDate": "2018-11-05",
         "endDate": "2018-11-06",
         "image": "https://images.unsplash.com/photo-1526374965328-5f61d4dc18c5?q=80&w=800",
-        "location": "Winnipeg, MB",
+        "locations": "Winnipeg, MB",
         "format": "In-person"
     },
     {
@@ -386,7 +386,7 @@
         "startDate": "2017-05-08",
         "endDate": "2017-05-12",
         "image": "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=800",
-        "location": "Montreal, QC",
+        "locations": "Montreal, QC",
         "format": "In-person"
     },
     {
@@ -399,7 +399,7 @@
         "startDate": "2016-04-18",
         "endDate": "2016-04-22",
         "image": "https://images.unsplash.com/photo-1518186213364-9a8f471b12d6?q=80&w=800",
-        "location": "University of Toronto",
+        "locations": "University of Toronto",
         "format": "In-person"
     },
     {
@@ -412,7 +412,7 @@
         "startDate": "2015-07-20",
         "endDate": "2015-07-24",
         "image": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -425,7 +425,7 @@
         "startDate": "2014-06-16",
         "endDate": "2014-06-20",
         "image": "https://images.unsplash.com/photo-1557969879-ea118bff48e2?q=80&w=800",
-        "location": "Distributed",
+        "locations": "Distributed",
         "format": "Distributed"
     },
     {
@@ -438,7 +438,7 @@
         "startDate": "2013-09-23",
         "endDate": "2013-09-27",
         "image": "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -451,7 +451,7 @@
         "startDate": "2012-05-14",
         "endDate": "2012-05-18",
         "image": "https://images.unsplash.com/photo-1532094206263-5a7a72a155c8?q=80&w=800",
-        "location": "Toronto, ON",
+        "locations": "Toronto, ON",
         "format": "In-person"
     },
     {
@@ -464,7 +464,7 @@
         "startDate": "2011-08-08",
         "endDate": "2011-08-12",
         "image": "https://images.unsplash.com/photo-1581091222045-a75a4f716676?q=80&w=800",
-        "location": "Toronto & Montreal",
+        "locations": "Toronto & Montreal",
         "format": "Distributed"
     },
     {
@@ -477,7 +477,7 @@
         "startDate": "2010-06-07",
         "endDate": "2010-06-11",
         "image": "https://images.unsplash.com/photo-1582719202047-96a2b163836d?q=80&w=800",
-        "location": "Montreal, QC",
+        "locations": "Montreal, QC",
         "format": "In-person"
     },
     {
@@ -490,7 +490,7 @@
         "startDate": "2008-07-14",
         "endDate": "2008-07-18",
         "image": "https://images.unsplash.com/photo-1567427018141-0584cfcbf1b8?q=80&w=800",
-        "location": "UBC",
+        "locations": "UBC",
         "format": "In-person"
     },
     {
@@ -503,7 +503,7 @@
         "startDate": "2005-08-01",
         "endDate": "2005-08-05",
         "image": "https://images.unsplash.com/photo-1614999088539-c5798953f932?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -516,7 +516,7 @@
         "startDate": "2003-04-14",
         "endDate": "2003-04-14",
         "image": "https://images.unsplash.com/photo-1555431189-0fabf24f5421?q=80&w=800",
-        "location": "Distributed",
+        "locations": "Distributed",
         "format": "Distributed"
     },
     {
@@ -529,7 +529,7 @@
         "startDate": "2001-10-01",
         "endDate": "2001-10-05",
         "image": "https://images.unsplash.com/photo-1504639725590-771e6503dfb5?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -542,7 +542,7 @@
         "startDate": "2001-08-20",
         "endDate": "2001-08-21",
         "image": "https://images.unsplash.com/photo-1628859017433-a3b9d1a355dd?q=80&w=800",
-        "location": "University of Toronto",
+        "locations": "University of Toronto",
         "format": "In-person"
     },
     {
@@ -555,7 +555,7 @@
         "startDate": "2001-11-05",
         "endDate": "2001-11-09",
         "image": "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -568,7 +568,7 @@
         "startDate": "2001-07-09",
         "endDate": "2001-07-10",
         "image": "https://images.unsplash.com/photo-1504242131-4142b2f68267?q=80&w=800",
-        "location": "University of Calgary",
+        "locations": "University of Calgary",
         "format": "In-person"
     },
     {
@@ -581,7 +581,7 @@
         "startDate": "2001-06-11",
         "endDate": "2001-06-15",
         "image": "https://images.unsplash.com/photo-1516589178581-6e4a42e4b78e?q=80&w=800",
-        "location": "UBC",
+        "locations": "UBC",
         "format": "In-person"
     },
     {
@@ -594,7 +594,7 @@
         "startDate": "2001-05-14",
         "endDate": "2001-05-18",
         "image": "https://images.unsplash.com/photo-1622028812492-35492a54e932?q=80&w=800",
-        "location": "Distributed",
+        "locations": "Distributed",
         "format": "Distributed"
     },
     {
@@ -607,7 +607,7 @@
         "startDate": "2001-04-02",
         "endDate": "2001-04-03",
         "image": "https://images.unsplash.com/photo-1618424181497-157f25b6ddd5?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -620,7 +620,7 @@
         "startDate": "2001-03-12",
         "endDate": "2001-03-16",
         "image": "https://images.unsplash.com/photo-1534670007418-fbb7f6cf32c3?q=80&w=800",
-        "location": "Dalhousie University",
+        "locations": "Dalhousie University",
         "format": "In-person"
     },
     {
@@ -633,7 +633,7 @@
         "startDate": "2001-02-05",
         "endDate": "2001-02-09",
         "image": "https://images.unsplash.com/photo-1563206767-5b18f218e8de?q=80&w=800",
-        "location": "University of Alberta",
+        "locations": "University of Alberta",
         "format": "In-person"
     },
     {
@@ -646,7 +646,7 @@
         "startDate": "2001-01-15",
         "endDate": "2001-01-19",
         "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800",
-        "location": "University of Manitoba",
+        "locations": "University of Manitoba",
         "format": "In-person"
     },
     {
@@ -659,7 +659,7 @@
         "startDate": "2001-12-03",
         "endDate": "2001-12-07",
         "image": "https://images.unsplash.com/photo-1573496277383-a42f6d23b2c8?q=80&w=800",
-        "location": "Distributed",
+        "locations": "Distributed",
         "format": "Distributed"
     },
     {
@@ -672,7 +672,7 @@
         "startDate": "2000-06-12",
         "endDate": "2000-06-16",
         "image": "https://images.unsplash.com/photo-1582063289734-2902b62b1b85?q=80&w=800",
-        "location": "St. John's, NL",
+        "locations": "St. John's, NL",
         "format": "In-person"
     },
     {
@@ -685,7 +685,7 @@
         "startDate": "1999-06-01",
         "endDate": "1999-06-03",
         "image": "https://images.unsplash.com/photo-1519791883288-dc8bd696e667?q=80&w=800",
-        "location": "Ottawa, ON",
+        "locations": "Ottawa, ON",
         "format": "In-person"
     },
     {
@@ -698,7 +698,7 @@
         "startDate": "1999-09-13",
         "endDate": "1999-09-14",
         "image": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=800",
-        "location": "Online",
+        "locations": "Online",
         "format": "Online"
     },
     {
@@ -711,7 +711,7 @@
         "startDate": "1999-12-27",
         "endDate": "1999-12-31",
         "image": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800",
-        "location": "Distributed",
+        "locations": "Distributed",
         "format": "Distributed"
     }
 ]
