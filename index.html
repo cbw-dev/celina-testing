@@ -11,20 +11,24 @@
                 extend: {
                     fontFamily: { sans: ['Manrope', 'sans-serif'], },
                     colors: {
+                        // Original Brand Colors (Used for borders and color bar)
                         'brand-purple': '#5A1F65', 
-                        'region-bc': '#3C9048', 'region-alberta': '#86264E',
-                        'region-prairies': '#BD8528', 'region-ontario': '#BB682C',
-                        'region-quebec': '#427FA4', 'region-atlantic': '#208A99',
+                        'region-bc': '#3C9048', 
+                        'region-alberta': '#86264E',
+                        'region-prairies': '#BD8528', 
+                        'region-ontario': '#BB682C',
+                        'region-quebec': '#427FA4', 
+                        'region-atlantic': '#208A99',
                         'region-online': '#5A1F65', // Same as brand-purple
 
                         // NEW LIGHTER REGIONAL COLORS FOR TAG BACKGROUNDS (AAA compliant with text-gray-900)
-                        'region-bc-light': '#e7f7e9',         // Very light green
-                        'region-alberta-light': '#fde8ed',    // Very light rose/pink
-                        'region-prairies-light': '#fcf2e0',   // Very light yellow-orange
-                        'region-ontario-light': '#fdf0e5',    // Very light orange
-                        'region-quebec-light': '#e8f2fa',     // Very light blue
-                        'region-atlantic-light': '#e4f5f7',   // Very light teal
-                        'region-online-light': '#f1e8f2',     // Very light purple (matching brand-purple)
+                        'region-bc-light': '#8ed792',         // CBH British Columbia light
+                        'region-alberta-light': '#ca668a',    // CBH Alberta light
+                        'region-prairies-light': '#f6bc6a',   // CBH Prairies light
+                        'region-ontario-light': '#ffb37a',    // CBH Ontario light
+                        'region-quebec-light': '#9bccf0',     // CBH Quebec light
+                        'region-atlantic-light': '#84d3e1',   // CBH Atlantic light
+                        'region-online-light': '#cc7ed9',     // CBW light (matching brand-purple light)
                     }
                 }
             }
@@ -195,11 +199,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
             
-            // Updated regional tag styling
+            // Updated regional tag styling using the new light background and original darker border
             const regionTagsHTML = sortedRegions.map(region => {
-                // Use the new light background color and brand-purple for the border
-                const lightBgClass = `bg-region-${region.toLowerCase().replace(' ', '-')}-light`;
-                return `<span class="flex items-center justify-center ${lightBgClass} text-gray-900 border-2 border-brand-purple rounded-full px-3 py-1 text-xs font-bold shadow-sm" title="Region: ${region}">${region}</span>`;
+                const borderClass = `border-region-${region.toLowerCase().replace(' ', '-')}`; // Original darker color for border
+                const lightBgClass = `bg-region-${region.toLowerCase().replace(' ', '-')}-light`; // New lighter color for background
+                return `<span class="flex items-center justify-center ${lightBgClass} text-gray-900 border-2 ${borderClass} rounded-full px-3 py-1 text-xs font-bold shadow-sm" title="Region: ${region}">${region}</span>`;
             }).join('');
 
             const regionColors = sortedRegions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]).filter(Boolean);
