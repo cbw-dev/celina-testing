@@ -8,7 +8,7 @@
         "year": 2026,
         "startDate": "2026-07-20",
         "endDate": "2026-07-24",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/4923591410644484641",
+        "image": "https://picsum.photos/seed/4923591410644484641/300/200",
         "locations": ["A Galaxy Far, Far Away"],
         "format": "Online"
     },
@@ -21,7 +21,7 @@
         "year": 2025,
         "startDate": "2025-11-03",
         "endDate": "2025-11-07",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/9988563528338852493",
+        "image": "https://picsum.photos/seed/9988563528338852493/300/200",
         "locations": ["Kamino Cloning Facilities"],
         "format": "In-person"
     },
@@ -34,7 +34,7 @@
         "year": 2025,
         "startDate": "2025-06-01",
         "endDate": "2025-12-01",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/12526741459027429684",
+        "image": "https://picsum.photos/seed/12526741459027429684/300/200",
         "locations": ["Corellia", "Kashyyyk", "Tatooine", "Bespin"],
         "format": "Distributed"
     },
@@ -47,7 +47,7 @@
         "year": 2025,
         "startDate": "2025-08-18",
         "endDate": "2025-08-22",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/7198709944855461216",
+        "image": "https://picsum.photos/seed/7198709944855461216/300/200",
         "locations": ["Jedi Temple, Coruscant", "Jedi Enclave, Dantooine"],
         "format": "Distributed"
     },
@@ -60,7 +60,7 @@
         "year": 2025,
         "startDate": "2025-03-01",
         "endDate": "2025-03-31",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/12571718903766739583",
+        "image": "https://picsum.photos/seed/12571718903766739583/300/200",
         "locations": ["Self-paced"],
         "format": "Asynchronous"
     },
@@ -73,7 +73,7 @@
         "year": 2025,
         "startDate": "2025-02-03",
         "endDate": "2025-02-07",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/13253122430848598651",
+        "image": "https://picsum.photos/seed/13253122430848598651/300/200",
         "locations": ["Rebel Base, Yavin 4"],
         "format": "In-person"
     },
@@ -86,7 +86,7 @@
         "year": 2024,
         "startDate": "2024-06-03",
         "endDate": "2024-06-07",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/11400877817206138416",
+        "image": "https://picsum.photos/seed/11400877817206138416/300/200",
         "locations": ["Imperial Citadel, Scarif"],
         "format": "In-person"
     },
@@ -99,7 +99,7 @@
         "year": 2024,
         "startDate": "2024-10-07",
         "endDate": "2024-10-11",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/170293031088345651",
+        "image": "https://picsum.photos/seed/170293031088345651/300/200",
         "locations": ["Great Pit of Carkoon"],
         "format": "Flipped"
     },
@@ -112,7 +112,7 @@
         "year": 2024,
         "startDate": "2024-09-09",
         "endDate": "2024-09-13",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/679019129689169310",
+        "image": "https://picsum.photos/seed/679019129689169310/300/200",
         "locations": ["Cloud City, Bespin"],
         "format": "Distributed"
     },
@@ -125,7 +125,7 @@
         "year": 2024,
         "startDate": "2024-07-15",
         "endDate": "2024-07-19",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/14785122921121325444",
+        "image": "https://picsum.photos/seed/14785122921121325444/300/200",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -138,7 +138,7 @@
         "year": 2023,
         "startDate": "2023-07-17",
         "endDate": "2023-07-21",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/6309412030940968003",
+        "image": "https://picsum.photos/seed/6309412030940968003/300/200",
         "locations": ["Dagobah"],
         "format": "In-person"
     },
@@ -151,7 +151,7 @@
         "year": 2023,
         "startDate": "2023-01-23",
         "endDate": "2023-01-24",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/3998603823284601268",
+        "image": "https://picsum.photos/seed/3998603823284601268/300/200",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -164,7 +164,7 @@
         "year": 2019,
         "startDate": "2019-10-21",
         "endDate": "2019-10-25",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/17791196762060370659",
+        "image": "https://picsum.photos/seed/17791196762060370659/300/200",
         "locations": ["Rebel Fleet Command"],
         "format": "In-person"
     },
@@ -177,7 +177,7 @@
         "year": 2018,
         "startDate": "2018-11-05",
         "endDate": "2018-11-06",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/3306561010775546321",
+        "image": "https://picsum.photos/seed/3306561010775546321/300/200",
         "locations": ["Death Star Conference Room"],
         "format": "In-person"
     },
@@ -190,7 +190,7 @@
         "year": 2017,
         "startDate": "2017-05-08",
         "endDate": "2017-05-12",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/3489447186423666522",
+        "image": "https://picsum.photos/seed/3489447186423666522/300/200",
         "locations": ["Beggar's Canyon, Tatooine"],
         "format": "In-person"
     },
@@ -203,7 +203,7 @@
         "year": 2016,
         "startDate": "2016-04-18",
         "endDate": "2016-04-22",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/170293031088346646",
+        "image": "https://picsum.photos/seed/170293031088346646/300/200",
         "locations": ["Jedi Temple, Coruscant"],
         "format": "In-person"
     },
@@ -216,7 +216,7 @@
         "year": 2015,
         "startDate": "2015-07-20",
         "endDate": "2015-07-24",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/14785122921121326218",
+        "image": "https://picsum.photos/seed/14785122921121326218/300/200",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -229,7 +229,7 @@
         "year": 1999,
         "startDate": "1999-12-27",
         "endDate": "1999-12-31",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/10483403315378721955",
+        "image": "https://picsum.photos/seed/10483403315378721955/300/200",
         "locations": ["Otoh Gunga"],
         "format": "Distributed"
     },
@@ -242,7 +242,7 @@
         "year": 1999,
         "startDate": "1999-09-13",
         "endDate": "1999-09-14",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/4816978237189677379",
+        "image": "https://picsum.photos/seed/4816978237189677379/300/200",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -255,7 +255,7 @@
         "year": 1999,
         "startDate": "1999-06-01",
         "endDate": "1999-06-03",
-        "image": "http://googleusercontent.com/image_collection/image_retrieval/9230787896209163664",
+        "image": "https://picsum.photos/seed/9230787896209163664/300/200",
         "locations": ["Ottawa, ON"],
         "format": "In-person"
     }

@@ -51,7 +51,6 @@
             }
         }
         
-        /* FIX: Changed line clamp from 3 to 2 */
         .truncate-2-lines {
             overflow: hidden;
             display: -webkit-box;
@@ -155,7 +154,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (workshopStartDate <= today && today <= workshopEndDate) {
                 statusFlagHTML = `<div class="flex items-center justify-center bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Happening Now</div>`;
-                statusTags = ["Happening Now", "Past"];
+                // FIX: A workshop that is "Happening Now" is no longer also considered "Past" for filtering purposes.
+                statusTags = ["Happening Now"];
             } else if (workshopStartDate > today) {
                 statusFlagHTML = `<div class="flex items-center justify-center bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
                 statusTags = ["Upcoming"];
