@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
             
-            // Updated regional tag styling using the new light background and original darker border
+            // Regional tag styling: light background, darker border, dark text
             const regionTagsHTML = sortedRegions.map(region => {
                 const borderClass = `border-region-${region.toLowerCase().replace(' ', '-')}`; // Original darker color for border
                 const lightBgClass = `bg-region-${region.toLowerCase().replace(' ', '-')}-light`; // New lighter color for background
@@ -228,12 +228,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <img loading="lazy" class="w-full h-48 object-cover" src="${link.image}" alt="Image for ${link.title} workshop" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
                     </a>
                     
-                    <div class="absolute top-3 left-3 z-10"> 
-                        ${statusFlagHTML}
+                    <div class="absolute top-3 right-3 z-10"> <div class="flex flex-wrap justify-end gap-2 max-w-[calc(100% - 6rem)]"> ${regionTagsHTML}
+                        </div>
                     </div>
 
-                    <div class="absolute top-3 right-3 z-10 p-1 rounded-md bg-black/30"> <div class="flex flex-col items-end gap-2 max-h-[calc(100% - 1rem)] overflow-y-auto"> ${regionTagsHTML}
-                        </div>
+                    <div class="absolute bottom-3 left-3 z-10"> 
+                        ${statusFlagHTML}
                     </div>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
