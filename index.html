@@ -30,30 +30,26 @@
         .card.hidden, .year-section.hidden { opacity: 0; transform: scale(0.95); max-height: 0; overflow: hidden; margin: 0 !important; padding: 0 !important; border: none; pointer-events: none; }
         .filter-button:hover .dropdown-arrow { transform: translateY(2px); }
 
-        /* MODIFICATION START: Custom CSS for Mobile Carousel */
-        @media (max-width: 639px) { /* Applies only on screens smaller than Tailwind's 'sm' breakpoint */
+        @media (max-width: 639px) {
             .carousel-on-mobile {
                 display: flex;
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
                 gap: 1rem;
-                /* Add padding inside the carousel and use negative margin to make it full-width within its parent container */
                 padding: 0.5rem 1rem;
                 margin: 0 -1rem;
-                /* Hide the scrollbar but keep it scrollable */
-                scrollbar-width: none; /* Firefox */
-                -ms-overflow-style: none;  /* IE and Edge */
+                scrollbar-width: none;
+                -ms-overflow-style: none;
             }
             .carousel-on-mobile::-webkit-scrollbar {
-                display: none; /* Chrome, Safari, and Opera */
+                display: none;
             }
             .carousel-on-mobile > .card {
-                flex: 0 0 80%; /* Each card takes up 80% of the screen width */
-                max-width: 320px; /* But don't let cards get excessively large on wide mobile screens */
-                scroll-snap-align: start; /* Snap to the beginning of each card */
+                flex: 0 0 80%;
+                max-width: 320px;
+                scroll-snap-align: start;
             }
         }
-        /* MODIFICATION END */
     </style>
 </head>
 <body class="antialiased">
@@ -144,14 +140,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const workshopStartDate = new Date(link.startDate + 'T00:00:00');
             const workshopEndDate = new Date(link.endDate + 'T00:00:00');
+            
             let statusFlagHTML = '';
             let statusTags = [];
 
             if (workshopStartDate <= today && today <= workshopEndDate) {
-                statusFlagHTML = `<div class="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Happening Now</div>`;
+                statusFlagHTML = `<div class="bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Happening Now</div>`;
                 statusTags = ["Happening Now", "Past"];
             } else if (workshopStartDate > today) {
-                statusFlagHTML = `<div class="absolute top-2 left-2 bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
+                statusFlagHTML = `<div class="bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
                 statusTags = ["Upcoming"];
             } else {
                  statusTags = ["Past"];
@@ -159,6 +156,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             card.dataset.status = JSON.stringify(statusTags);
             
             const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
+            const regionTagsHTML = sortedRegions.map(region => `<span class="inline-block bg-region-${region.toLowerCase().replace(' ', '-')} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm">${region}</span>`).join('');
+
             const regionColors = sortedRegions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]).filter(Boolean);
             let colorBarHTML = '<div class="h-1.5 bg-gray-300"></div>';
             if (regionColors.length > 1) {
@@ -173,10 +172,20 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block">
                         <img loading="lazy" class="w-full h-48 object-cover" src="${link.image}" alt="${link.title} workshop image" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
                     </a>
-                    ${statusFlagHTML}
-                    <div class="absolute top-2 right-2 flex flex-wrap gap-2 justify-end">
-                        ${sortedRegions.map(region => `<span class="inline-block bg-region-${region.toLowerCase().replace(' ', '-')} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm">${region}</span>`).join('')}
+                    
+                    <!-- MODIFICATION START: Single container for all top overlay content -->
+                    <div class="absolute top-0 left-0 right-0 p-2 flex justify-between items-start gap-2">
+                        <!-- Left side: Status Flag -->
+                        <div>
+                            ${statusFlagHTML}
+                        </div>
+                        <!-- Right side: Region Tags -->
+                        <div class="flex flex-wrap justify-end gap-2">
+                            ${regionTagsHTML}
+                        </div>
                     </div>
+                    <!-- MODIFICATION END -->
+
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
                     <h3 class="text-lg font-bold text-gray-800 mb-3"><a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}</a></h3>
@@ -205,7 +214,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 currentTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-green-500';
                 currentTitle.textContent = 'Upcoming & Happening Now';
                 const gridContainer = document.createElement('div');
-                // MODIFICATION: Added carousel class for mobile and responsive grid classes for larger screens
                 gridContainer.className = 'carousel-on-mobile sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-8';
                 currentAndUpcomingLinks.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
                 currentAndUpcomingLinks.forEach(link => gridContainer.appendChild(createCardElement(link)));
@@ -225,7 +233,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 yearTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-brand-purple';
                 yearTitle.textContent = year;
                 const gridContainer = document.createElement('div');
-                // MODIFICATION: Added carousel class for mobile and responsive grid classes for larger screens
                 gridContainer.className = 'carousel-on-mobile sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-8';
                 pastLinksByYear[year].forEach(link => gridContainer.appendChild(createCardElement(link)));
                 yearSection.appendChild(yearTitle);
