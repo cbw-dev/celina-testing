@@ -49,7 +49,7 @@
             <div class="relative w-full sm:w-auto">
                 <input type="search" id="text-search-input" placeholder="Search..." class="w-full sm:w-48 px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-purple focus:border-brand-purple transition">
             </div>
-            </div>
+        </div>
 
         <main id="link-container" class="space-y-16">
             <div id="no-results-message" class="hidden">
@@ -103,29 +103,35 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         function createCardElement(link) {
             const card = document.createElement('article');
-            card.className = 'card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl';
+            card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl`;
             
-            card.dataset.year = link.year;
-            card.dataset.title = link.title;
+            card.dataset.year = JSON.stringify([link.year]);
+            card.dataset.title = JSON.stringify([link.title]);
             card.dataset.tags = JSON.stringify(link.tags);
             card.dataset.regions = JSON.stringify(link.regions);
-            card.dataset.format = link.format;
-            card.dataset.startDate = link.startDate;
-            card.dataset.endDate = link.endDate;
-            card.dataset.search = (link.title + ' ' + link.tags.join(' ') + ' ' + link.location).toLowerCase();
+            card.dataset.format = JSON.stringify([link.format]);
+            card.dataset.search = (
+                link.title + ' ' + 
+                link.tags.join(' ') + ' ' + 
+                link.location + ' ' +
+                (link.instructors || []).join(' ')
+            ).toLowerCase();
 
             const workshopStartDate = new Date(link.startDate + 'T00:00:00');
             const workshopEndDate = new Date(link.endDate + 'T00:00:00');
             let statusFlagHTML = '';
+            let statusTags = [];
+
             if (workshopStartDate <= today && today <= workshopEndDate) {
                 statusFlagHTML = `<div class="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Happening Now</div>`;
-                card.dataset.status = JSON.stringify(["Happening Now", "Past"]);
+                statusTags = ["Happening Now", "Past"];
             } else if (workshopStartDate > today) {
                 statusFlagHTML = `<div class="absolute top-2 left-2 bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
-                card.dataset.status = JSON.stringify(["Upcoming"]);
+                statusTags = ["Upcoming"];
             } else {
-                 card.dataset.status = JSON.stringify(["Past"]);
+                 statusTags = ["Past"];
             }
+            card.dataset.status = JSON.stringify(statusTags);
             
             const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
             const regionColors = sortedRegions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]).filter(Boolean);

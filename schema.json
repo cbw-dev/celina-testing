@@ -8,6 +8,11 @@
         "properties": {
             "url": { "type": "string", "format": "uri-reference" },
             "title": { "type": "string", "minLength": 3 },
+            "instructors": {
+                "description": "A list of instructor names for the workshop.",
+                "type": "array",
+                "items": { "type": "string" }
+            },
             "tags": { "type": "array", "items": { "type": "string" } },
             "regions": {
                 "type": "array",
