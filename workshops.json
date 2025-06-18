@@ -1,22 +1,22 @@
 [
     {
         "url": "#",
-        "title": "AI for Drug Discovery",
-        "instructors": ["Dr. Demis Hassabis"],
-        "tags": ["ai", "drug-discovery", "machine-learning"],
+        "title": "Quantum Computing for Bioinformatics",
+        "instructors": ["Dr. John Preskill"],
+        "tags": ["quantum", "ai", "future-tech"],
         "regions": ["Online"],
         "year": 2026,
-        "startDate": "2026-04-20",
-        "endDate": "2026-04-24",
-        "image": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=800",
-        "location": "Online via Zoom",
+        "startDate": "2026-07-20",
+        "endDate": "2026-07-24",
+        "image": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=800",
+        "location": "Online Quantum Realm",
         "format": "Online"
     },
     {
         "url": "#",
-        "title": "Advanced Transcriptomics",
+        "title": "Advanced Transcriptomics & Spatial Analysis",
         "instructors": ["Dr. Alistair Ward", "Dr. Lior Pachter"],
-        "tags": ["genomics", "bioinformatics", "rnaseq", "transcriptomics"],
+        "tags": ["genomics", "bioinformatics", "rnaseq", "spatial"],
         "regions": ["Ontario"],
         "year": 2025,
         "startDate": "2025-11-03",
@@ -40,7 +40,7 @@
     },
     {
         "url": "#",
-        "title": "Live Chemoinformatics Workshop",
+        "title": "HAPPENING NOW: Live Chemoinformatics",
         "instructors": ["Dr. Jürgen Bajorath"],
         "tags": ["chemistry", "chemoinformatics", "drug-discovery"],
         "regions": ["Quebec"],
@@ -100,7 +100,7 @@
         "startDate": "2024-09-09",
         "endDate": "2024-09-13",
         "image": "https://images.unsplash.com/photo-1627993092497-84174a7a529e?q=80&w=800",
-        "location": "Calgary, AB & Saskatoon, SK",
+        "location": "Calgary & Saskatoon",
         "format": "Distributed"
     },
     {
@@ -167,19 +167,6 @@
         "image": "https://images.unsplash.com/photo-1581143763422-b53e8e5c8544?q=80&w=800",
         "location": "University of Toronto",
         "format": "In-person"
-    },
-    {
-        "url": "#",
-        "title": "Self-Paced Intro to Galaxy",
-        "instructors": [],
-        "tags": ["galaxy", "workflow", "genomics"],
-        "regions": ["Online"],
-        "year": 2023,
-        "startDate": "2023-09-01",
-        "endDate": "2023-09-30",
-        "image": "https://images.unsplash.com/photo-1531306728370-753a3c9e7a2b?q=80&w=800",
-        "location": "Online",
-        "format": "Asynchronous"
     },
     {
         "url": "#",
@@ -284,5 +271,96 @@
         "image": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=800",
         "location": "Online",
         "format": "Online"
+    },
+    {
+        "url": "#",
+        "title": "Foundations of Systems Biology",
+        "instructors": ["Dr. Trey Ideker"],
+        "tags": ["systems-biology", "networks", "legacy"],
+        "regions": ["BC", "Ontario", "Quebec", "Atlantic"],
+        "year": 2014,
+        "startDate": "2014-08-11",
+        "endDate": "2014-08-15",
+        "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800",
+        "location": "Distributed",
+        "format": "Distributed"
+    },
+    {
+        "url": "#",
+        "title": "Bio-Data Curation and Management",
+        "instructors": [],
+        "tags": ["data-management", "curation", "databases"],
+        "regions": ["Online"],
+        "year": 2013,
+        "startDate": "2013-09-23",
+        "endDate": "2013-09-27",
+        "image": "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?q=80&w=800",
+        "location": "Online",
+        "format": "Online"
+    },
+    {
+        "url": "#",
+        "title": "Introduction to Next-Generation Sequencing",
+        "instructors": ["Dr. Elaine Mardis"],
+        "tags": ["ngs", "genomics", "sequencing", "legacy"],
+        "regions": ["Ontario"],
+        "year": 2012,
+        "startDate": "2012-05-14",
+        "endDate": "2012-05-18",
+        "image": "https://images.unsplash.com/photo-1532094206263-5a7a72a155c8?q=80&w=800",
+        "location": "Toronto, ON",
+        "format": "In-person"
+    },
+    {
+        "url": "#",
+        "title": "Sanger Sequencing and Analysis",
+        "instructors": [],
+        "tags": ["sanger", "sequencing", "legacy"],
+        "regions": ["Quebec"],
+        "year": 2010,
+        "startDate": "2010-06-07",
+        "endDate": "2010-06-11",
+        "image": "https://images.unsplash.com/photo-1582719202047-96a2b163836d?q=80&w=800",
+        "location": "Montreal, QC",
+        "format": "In-person"
+    },
+    {
+        "url": "#",
+        "title": "BLAST and Sequence Alignment",
+        "instructors": ["Dr. Stephen Altschul"],
+        "tags": ["blast", "alignment", "legacy"],
+        "regions": ["Online"],
+        "year": 2005,
+        "startDate": "2005-08-01",
+        "endDate": "2005-08-05",
+        "image": "https://images.unsplash.com/photo-1614999088539-c5798953f932?q=80&w=800",
+        "location": "Online",
+        "format": "Online"
+    },
+    {
+        "url": "#",
+        "title": "The Human Genome Project: A Retrospective",
+        "instructors": ["Dr. Francis Collins", "Dr. Eric Lander"],
+        "tags": ["hgp", "genomics", "legacy", "history"],
+        "regions": ["BC", "Ontario"],
+        "year": 2003,
+        "startDate": "2003-04-14",
+        "endDate": "2003-04-14",
+        "image": "https://images.unsplash.com/photo-1555431189-0fabf24f5421?q=80&w=800",
+        "location": "Distributed",
+        "format": "Distributed"
+    },
+    {
+        "url": "#",
+        "title": "Founding Workshop: Bioinformatics in Canada",
+        "instructors": ["Dr. Francis Ouellette"],
+        "tags": ["history", "legacy"],
+        "regions": ["Ontario"],
+        "year": 1999,
+        "startDate": "1999-06-01",
+        "endDate": "1999-06-03",
+        "image": "https://images.unsplash.com/photo-1519791883288-dc8bd696e667?q=80&w=800",
+        "location": "Ottawa, ON",
+        "format": "In-person"
     }
 ]
