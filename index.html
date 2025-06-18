@@ -44,11 +44,13 @@
             <a href="#past-workshops-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">Past Workshops</a>
             <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-purple hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg" style="background-color: #5A1F65;">Apply Now</a>
         </div>
-        <div class="mb-4 max-w-lg mx-auto">
-             <input type="search" id="text-search-input" placeholder="Search by title, topic, etc..." class="w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-purple focus:border-brand-purple transition">
-        </div>
+        
         <div id="filter-bar" class="mb-12 flex justify-center items-center flex-wrap gap-4 p-4 bg-slate-100/70 rounded-xl">
+            <div class="relative w-full sm:w-auto">
+                <input type="search" id="text-search-input" placeholder="Search..." class="w-full sm:w-48 px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-purple focus:border-brand-purple transition">
             </div>
+            </div>
+
         <main id="link-container" class="space-y-16">
             <div id="no-results-message" class="hidden">
                 <div class="text-center py-12 px-6 bg-slate-50 rounded-lg"><h3 class="mt-2 text-xl font-semibold text-gray-900">No workshops found</h3><p class="mt-1 text-base text-gray-500">Try adjusting your search or filter criteria.</p></div>
@@ -56,7 +58,7 @@
         </main>
         <section id="about-section" class="mt-20 pt-16 border-t border-gray-200">
              <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 tracking-tight text-center">About The Canadian Bioinformatics Workshops</h2>
-             <div class="max-w-4xl mx-auto mt-8 text-lg text-gray-600 space-y-6 text-left"><p>The Canadian Bioinformatics Workshops (CBW) series was initiated in 1999 by the Canadian Genetic Diseases Network...</p></div>
+             <div class="max-w-4xl mx-auto mt-8 text-lg text-gray-600 space-y-6 text-left"><p>The Canadian Bioinformatics Workshops (CBW) series was initiated in 1999 by the Canadian Genetic Diseases Network as a forum for graduate students and other researchers to learn about new tools and techniques in bioinformatics. The series has been a great success, with over 5,000 trainees attending workshops since its inception.</p></div>
         </section>
     </div>
 
@@ -101,7 +103,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         function createCardElement(link) {
             const card = document.createElement('article');
-            card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl`;
+            card.className = 'card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl';
             
             card.dataset.year = link.year;
             card.dataset.title = link.title;
@@ -156,7 +158,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         function generatePageContent() {
-            linkContainer.innerHTML = '';
             const currentAndUpcomingLinks = [];
             const pastLinks = [];
             for (const link of linksData) {
@@ -172,7 +173,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 currentSection.innerHTML = `<h2 class="text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-green-500">Upcoming & Happening Now</h2><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>`;
                 currentAndUpcomingLinks.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
                 currentAndUpcomingLinks.forEach(link => currentSection.querySelector('.grid').appendChild(createCardElement(link)));
-                linkContainer.appendChild(currentSection);
+                linkContainer.insertBefore(currentSection, noResultsMessage);
             }
 
             const pastLinksByYear = pastLinks.reduce((acc, link) => { (acc[link.year] = acc[link.year] || []).push(link); return acc; }, {});
@@ -184,9 +185,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (!firstPastSectionAssigned) { yearSection.id = 'past-workshops-section'; firstPastSectionAssigned = true; }
                 yearSection.innerHTML = `<h2 class="text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-brand-purple">${year}</h2><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>`;
                 pastLinksByYear[year].forEach(link => yearSection.querySelector('.grid').appendChild(createCardElement(link)));
-                linkContainer.appendChild(yearSection);
+                linkContainer.insertBefore(yearSection, noResultsMessage);
             });
-            linkContainer.appendChild(noResultsMessage); // Move message to the end
         }
         
         function updateFilterCounts() {
@@ -275,12 +275,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         function setupInteraction() {
             filterBar.addEventListener('click', e => {
-                if (e.target.closest('.filter-button')) {
-                    const button = e.target.closest('.filter-button');
+                const button = e.target.closest('.filter-button');
+                if (button) {
                     const panel = button.nextElementSibling;
                     const wasHidden = panel.classList.contains('hidden');
                     document.querySelectorAll('.dropdown-panel').forEach(p => p.classList.add('hidden'));
                     if(wasHidden) panel.classList.remove('hidden');
+                    return; 
                 }
                 
                 if (e.target.type === 'checkbox') {
@@ -289,6 +290,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     if (e.target.checked) allFilters[type].active.add(value);
                     else allFilters[type].active.delete(value);
                     applyFilters();
+                    return;
                 }
 
                 if(e.target.closest('#reset-filters-button')) {
@@ -299,7 +301,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
             document.addEventListener('click', e => {
-                if (!e.target.closest('.relative')) document.querySelectorAll('.dropdown-panel').forEach(p => p.classList.add('hidden'));
+                if (!e.target.closest('.relative')) {
+                    document.querySelectorAll('.dropdown-panel').forEach(p => p.classList.add('hidden'));
+                }
             });
             searchInput.addEventListener('input', applyFilters);
         }
@@ -311,7 +315,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     } catch (error) {
         console.error("Could not initialize the app:", error);
-        document.body.innerHTML = `<div class="text-center p-8 text-red-500">A critical error occurred. Could not load or render workshops. Please check the browser console for details.</div>`;
+        document.body.innerHTML = `<div class="text-center p-8"><h2 class="text-xl font-bold text-red-700">A critical error occurred.</h2><p class="text-red-500 mt-2">Could not load or render workshops. Please check the browser console for details.</p></div>`;
     }
 });
 </script>
