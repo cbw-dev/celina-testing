@@ -78,7 +78,7 @@
 </p>
         </header>
 
-        <div class="text-center mb-12 flex justify-center items-center gap-4 flex-wrap">
+        <div class="text-center mb-8 flex justify-center items-center gap-4 flex-wrap">
             <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-purple hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg" style="background-color: #5A1F65;">
                 Apply Now
             </a>
@@ -86,8 +86,16 @@
                 About
             </a>
         </div>
-
-
+        
+        <div class="text-center mb-12 flex justify-center items-center gap-6 border-t border-b border-gray-200 py-3">
+             <a href="#current-workshops-section" class="text-gray-600 hover:text-brand-purple font-semibold transition-colors text-lg">
+                Upcoming Workshops
+            </a>
+            <span class="text-gray-300">|</span>
+             <a href="#past-workshops-section" class="text-gray-600 hover:text-brand-purple font-semibold transition-colors text-lg">
+                Past Workshops
+            </a>
+        </div>
         <div class="mb-12 flex justify-center items-center flex-wrap gap-4 p-4 bg-slate-100/70 rounded-xl">
             <div class="relative" data-dropdown="year">
                 <button data-dropdown-button class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200">
@@ -198,6 +206,10 @@
 
                     // Define the canonical order of regions
                     const regionOrder = ['BC', 'Alberta', 'Prairies', 'Ontario', 'Quebec', 'Atlantic', 'Online'];
+                    
+                    // Define a constant for today's date, time-stripped for accurate comparisons
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
 
                     // --- DOM Elements ---
                     const linkContainer = document.getElementById('link-container');
@@ -216,138 +228,180 @@
                     let activeTitles = new Set();
                     let activeFormats = new Set();
 
-                    // --- All functions are now defined inside initializeApp ---
+                    // --- Helper Functions ---
                     
-                    // --- MODIFICATION START: Added date formatting helper function ---
                     /**
                      * Formats a date range into a human-readable string.
-                     * Handles same-month, different-month, and single-day events.
-                     * @param {string} startDateStr - The start date in 'YYYY-MM-DD' format.
-                     * @param {string} endDateStr - The end date in 'YYYY-MM-DD' format.
-                     * @returns {string} A formatted date string.
                      */
                     function formatDateRange(startDateStr, endDateStr) {
-                        // Appending 'T00:00:00' avoids timezone issues by treating dates as local.
                         const start = new Date(startDateStr + 'T00:00:00');
                         const end = new Date(endDateStr + 'T00:00:00');
-
                         const startMonth = start.toLocaleString('en-US', { month: 'long' });
                         const startDay = start.getDate();
                         const year = start.getFullYear();
 
-                        // Handle single-day events or cases where endDate is missing.
                         if (!endDateStr || startDateStr === endDateStr) {
                             return `${startMonth} ${startDay}, ${year}`;
                         }
-
                         const endMonth = end.toLocaleString('en-US', { month: 'long' });
                         const endDay = end.getDate();
-
                         if (startMonth === endMonth) {
                             return `${startMonth} ${startDay}-${endDay}, ${year}`;
                         } else {
-                            // Assumes the year is the same for start and end dates.
                             return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${year}`;
                         }
                     }
-                    // --- MODIFICATION END ---
+                    
+                    /**
+                     * Creates and returns a complete HTML element for a workshop card.
+                     */
+                    function createCardElement(link) {
+                        const card = document.createElement('article');
+                        card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl`;
+                        card.dataset.tags = JSON.stringify(link.tags);
+                        card.dataset.regions = JSON.stringify(link.regions);
+                        card.dataset.title = link.title;
+                        card.dataset.startDate = link.startDate;
+                        card.dataset.format = link.format;
 
+                        const colorBar = document.createElement('div');
+                        colorBar.className = 'h-1.5';
+                        const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
+                        const regionColors = sortedRegions
+                            .map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`])
+                            .filter(Boolean);
+                        if (regionColors.length > 1) {
+                            colorBar.style.backgroundImage = `linear-gradient(to right, ${regionColors.join(', ')})`;
+                        } else if (regionColors.length === 1) {
+                            colorBar.style.backgroundColor = regionColors[0];
+                        } else {
+                            colorBar.classList.add('bg-gray-300');
+                        }
+                        card.appendChild(colorBar);
+
+                        const workshopStartDate = new Date(link.startDate + 'T00:00:00');
+                        const workshopEndDate = new Date(link.endDate + 'T00:00:00');
+                        
+                        let statusFlagHTML = '';
+                        if (workshopStartDate <= today && today <= workshopEndDate) {
+                            statusFlagHTML = `<div class="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Happening Now</div>`;
+                        } else if (workshopStartDate > today) {
+                            statusFlagHTML = `<div class="absolute top-2 left-2 bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
+                        }
+
+                        const cardContent = document.createElement('div');
+                        cardContent.className = 'flex-grow flex flex-col';
+                        cardContent.innerHTML = `
+                            <div class="relative">
+                                <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block">
+                                    <img class="w-full h-48 object-cover" src="${link.image}" alt="${link.title} workshop image" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
+                                </a>
+                                ${statusFlagHTML}
+                                <div class="absolute top-2 right-2 flex flex-wrap gap-2 justify-end">
+                                    ${sortedRegions.map(region => {
+                                        const regionColor = `bg-region-${region.toLowerCase().replace(' ', '-')}`;
+                                        return `<span class="inline-block ${regionColor} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm">${region}</span>`
+                                    }).join('')}
+                                </div>
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <div class="mb-4">
+                                    <h3 class="text-lg font-bold text-gray-800 mb-3">
+                                        <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}</a>
+                                    </h3>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                            <span class="font-medium">${formatDateRange(link.startDate, link.endDate)}</span>
+                                        </div>
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                            <span class="font-medium">${link.location}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                        card.appendChild(cardContent);
+                        return card;
+                    }
 
                     /**
-                     * Generates the link cards, grouped by year.
+                     * Partitions data, then generates and renders all workshop sections and cards.
                      */
-                    function generateLinkCardsByYear() {
+                    function generatePageContent() {
                         linkContainer.innerHTML = '';
-                        const linksByYear = linksData.reduce((acc, link) => {
+
+                        const currentAndUpcomingLinks = [];
+                        const pastLinks = [];
+                        
+                        for (const link of linksData) {
+                            const workshopEndDate = new Date(link.endDate + 'T00:00:00');
+                            if (workshopEndDate >= today) {
+                                currentAndUpcomingLinks.push(link);
+                            } else {
+                                pastLinks.push(link);
+                            }
+                        }
+
+                        if (currentAndUpcomingLinks.length > 0) {
+                            const currentSection = document.createElement('section');
+                            currentSection.className = 'year-section';
+                            currentSection.dataset.year = 'current';
+                            currentSection.id = 'current-workshops-section'; // MODIFICATION: Added ID for anchor link
+                            
+                            const currentTitle = document.createElement('h2');
+                            currentTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-green-500';
+                            currentTitle.textContent = 'Upcoming & Happening Now';
+                            currentSection.appendChild(currentTitle);
+
+                            const cardGrid = document.createElement('div');
+                            cardGrid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8';
+                            
+                            currentAndUpcomingLinks.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+                            
+                            currentAndUpcomingLinks.forEach(link => {
+                                cardGrid.appendChild(createCardElement(link));
+                            });
+                            
+                            currentSection.appendChild(cardGrid);
+                            linkContainer.appendChild(currentSection);
+                        }
+
+                        const pastLinksByYear = pastLinks.reduce((acc, link) => {
                             (acc[link.year] = acc[link.year] || []).push(link);
                             return acc;
                         }, {});
 
-                        const sortedYears = Object.keys(linksByYear).sort((a, b) => b - a);
+                        const sortedYears = Object.keys(pastLinksByYear).sort((a, b) => b - a);
+
+                        // MODIFICATION START: Logic to assign ID to the first past section
+                        let firstPastSectionAssigned = false;
+                        // MODIFICATION END
 
                         sortedYears.forEach(year => {
                             const yearSection = document.createElement('section');
                             yearSection.className = 'year-section';
                             yearSection.dataset.year = year;
+                            
+                            // MODIFICATION START: Assign ID if this is the first past section
+                            if (!firstPastSectionAssigned) {
+                                yearSection.id = 'past-workshops-section';
+                                firstPastSectionAssigned = true;
+                            }
+                            // MODIFICATION END
+                            
                             const yearTitle = document.createElement('h2');
                             yearTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-brand-purple';
-                            yearTitle.textContent = year;
+                            yearTitle.textContent = `Past Workshops: ${year}`;
+                            yearSection.appendChild(yearTitle);
+
                             const cardGrid = document.createElement('div');
                             cardGrid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8';
-
-                            linksByYear[year].forEach(link => {
-                                const card = document.createElement('article');
-                                card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl`;
-                                card.dataset.tags = JSON.stringify(link.tags);
-                                card.dataset.regions = JSON.stringify(link.regions);
-                                card.dataset.title = link.title;
-                                card.dataset.startDate = link.startDate;
-                                card.dataset.format = link.format;
-
-                                // Create and style the color bar
-                                const colorBar = document.createElement('div');
-                                colorBar.className = 'h-1.5';
-                                const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
-                                const regionColors = sortedRegions
-                                    .map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`])
-                                    .filter(Boolean);
-
-                                if (regionColors.length > 1) {
-                                    colorBar.style.backgroundImage = `linear-gradient(to right, ${regionColors.join(', ')})`;
-                                } else if (regionColors.length === 1) {
-                                    colorBar.style.backgroundColor = regionColors[0];
-                                } else {
-                                    colorBar.classList.add('bg-gray-300');
-                                }
-                                card.appendChild(colorBar);
-
-                                // Check for upcoming tag
-                                const today = new Date();
-                                today.setHours(0, 0, 0, 0);
-                                const workshopStartDate = new Date(link.startDate + 'T00:00:00');
-                                let upcomingTagHTML = '';
-                                if (workshopStartDate >= today) {
-                                    upcomingTagHTML = `<div class="absolute top-2 left-2 bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
-                                }
-
-                                const cardContent = document.createElement('div');
-                                cardContent.className = 'flex-grow flex flex-col';
-                                // --- MODIFICATION START: Replaced 'link.dates' with a call to 'formatDateRange' ---
-                                cardContent.innerHTML = `
-                                    <div class="relative">
-                                        <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block">
-                                            <img class="w-full h-48 object-cover" src="${link.image}" alt="${link.title} workshop image" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
-                                        </a>
-                                        ${upcomingTagHTML}
-                                        <div class="absolute top-2 right-2 flex flex-wrap gap-2 justify-end">
-                                            ${sortedRegions.map(region => {
-                                                const regionColor = `bg-region-${region.toLowerCase().replace(' ', '-')}`;
-                                                return `<span class="inline-block ${regionColor} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm">${region}</span>`
-                                            }).join('')}
-                                        </div>
-                                    </div>
-                                    <div class="p-5 flex flex-col flex-grow">
-                                        <div class="mb-4">
-                                            <h3 class="text-lg font-bold text-gray-800 mb-3">
-                                                <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}</a>
-                                            </h3>
-                                            <div class="space-y-2">
-                                                <div class="flex items-center text-sm text-gray-500">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                                                    <span class="font-medium">${formatDateRange(link.startDate, link.endDate)}</span>
-                                                </div>
-                                                <div class="flex items-center text-sm text-gray-500">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                                                    <span class="font-medium">${link.location}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>`;
-                                // --- MODIFICATION END ---
-                                card.appendChild(cardContent);
-                                cardGrid.appendChild(card);
+                            
+                            pastLinksByYear[year].forEach(link => {
+                                cardGrid.appendChild(createCardElement(link));
                             });
-                            yearSection.appendChild(yearTitle);
+
                             yearSection.appendChild(cardGrid);
                             linkContainer.appendChild(yearSection);
                         });
@@ -379,6 +433,8 @@
 
                         statusFilterContainer.appendChild(createCheckbox('Upcoming', 'status'));
                         statusFilterContainer.appendChild(createCheckbox('Past', 'status'));
+                        statusFilterContainer.appendChild(createCheckbox('Happening Now', 'status'));
+
 
                         if (topics.length > 0) {
                             topics.forEach(topic => topicFilterContainer.appendChild(createCheckbox(topic, 'topic')));
@@ -424,10 +480,19 @@
                         activeFormats = new Set([...formatFilterContainer.querySelectorAll('input:checked')].map(cb => cb.value));
                         const upcomingChecked = statusFilterContainer.querySelector('input[value="Upcoming"]').checked;
                         const pastChecked = statusFilterContainer.querySelector('input[value="Past"]').checked;
+                        const nowChecked = statusFilterContainer.querySelector('input[value="Happening Now"]').checked;
 
                         document.querySelectorAll('.year-section').forEach(section => {
                             const sectionYear = section.dataset.year;
-                            const yearMatch = activeYears.size === 0 || activeYears.has(sectionYear);
+                            let yearMatch = activeYears.size === 0 || activeYears.has(sectionYear);
+                            
+                            if((upcomingChecked || nowChecked) && sectionYear === 'current' && activeYears.size === 0) {
+                                yearMatch = true;
+                            }
+                            if(pastChecked && sectionYear !== 'current' && activeYears.size === 0) {
+                                yearMatch = true;
+                            }
+
                             let visibleCardsInSection = 0;
 
                             section.querySelectorAll('.card').forEach(card => {
@@ -436,36 +501,33 @@
                                 const cardTitle = card.dataset.title;
                                 const cardFormat = card.dataset.format;
                                 const cardStartDate = new Date(card.dataset.startDate + 'T00:00:00');
-                                const today = new Date();
-                                today.setHours(0,0,0,0);
+                                const cardEndDate = new Date(linksData.find(d => d.title === cardTitle && d.startDate === card.dataset.startDate).endDate + 'T00:00:00');
 
                                 const topicMatch = activeTopics.size === 0 || [...activeTopics].every(topic => cardTags.has(topic));
                                 const regionMatch = activeRegions.size === 0 || [...activeRegions].some(region => cardRegions.has(region));
                                 const titleMatch = activeTitles.size === 0 || activeTitles.has(cardTitle);
                                 const formatMatch = activeFormats.size === 0 || activeFormats.has(cardFormat);
-
-                                let statusMatch = true;
-                                if (upcomingChecked && !pastChecked) {
-                                    statusMatch = cardStartDate >= today;
-                                } else if (!upcomingChecked && pastChecked) {
-                                    statusMatch = cardStartDate < today;
-                                }
-
-                                if (topicMatch && regionMatch && titleMatch && formatMatch && statusMatch) {
+                                
+                                let statusMatch = !upcomingChecked && !pastChecked && !nowChecked; 
+                                if (nowChecked && cardStartDate <= today && today <= cardEndDate) statusMatch = true;
+                                if (upcomingChecked && cardStartDate > today) statusMatch = true;
+                                if (pastChecked && cardEndDate < today) statusMatch = true;
+                                
+                                if (yearMatch && topicMatch && regionMatch && titleMatch && formatMatch && statusMatch) {
                                     card.classList.remove('hidden');
                                     visibleCardsInSection++;
                                 } else {
                                     card.classList.add('hidden');
                                 }
                             });
-
-                            if (yearMatch && visibleCardsInSection > 0) {
+                            
+                            if (visibleCardsInSection > 0) {
                                 section.classList.remove('hidden');
                             } else {
                                 section.classList.add('hidden');
                             }
                         });
-
+                        
                         updateFilterCounts();
                     }
 
@@ -505,7 +567,7 @@
                     }
 
                     // --- Initialization ---
-                    generateLinkCardsByYear();
+                    generatePageContent(); // This is the new main rendering function
                     generateFilterOptions();
                     setupInteraction();
                     updateFilterCounts(); // Initial check

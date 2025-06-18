@@ -13,14 +13,14 @@
     },
     {
         "url": "#",
-        "title": "Intro to R",
+        "title": "Intro to R for Active Testing",
         "tags": [ "development", "tools", "code" ],
         "regions": [ "Ontario" ],
-        "year": 2023,
-        "startDate": "2023-07-10",
-        "endDate": "2023-07-14",
+        "year": 2025,
+        "startDate": "2025-06-16",
+        "endDate": "2025-06-20",
         "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800",
-        "location": "Guelph, ON",
+        "location": "Toronto, ON",
         "format": "In-person"
     },
     {
