@@ -8,7 +8,7 @@
         "year": 2026,
         "startDate": "2026-07-20",
         "endDate": "2026-07-24",
-        "image": "https://upload.wikimedia.org/wikipedia/en/9/9b/Yoda_Empire_Strikes_Back.png",
+        "image": "https://source.unsplash.com/800x600/?star-wars,yoda",
         "locations": ["A Galaxy Far, Far Away"],
         "format": "Online"
     },
@@ -21,7 +21,7 @@
         "year": 2025,
         "startDate": "2025-11-03",
         "endDate": "2025-11-07",
-        "image": "https://upload.wikimedia.org/wikipedia/en/d/d7/Lama_Su.jpg",
+        "image": "https://source.unsplash.com/800x600/?star-wars,clone",
         "locations": ["Kamino Cloning Facilities"],
         "format": "In-person"
     },
@@ -34,7 +34,7 @@
         "year": 2025,
         "startDate": "2025-06-01",
         "endDate": "2025-12-01",
-        "image": "https://upload.wikimedia.org/wikipedia/en/3/32/Millennium_Falcon_in_The_Force_Awakens.png",
+        "image": "https://source.unsplash.com/800x600/?galaxy,space-ship",
         "locations": ["Corellia", "Kashyyyk", "Tatooine", "Bespin"],
         "format": "Distributed"
     },
@@ -47,7 +47,7 @@
         "year": 2025,
         "startDate": "2025-08-18",
         "endDate": "2025-08-22",
-        "image": "https://upload.wikimedia.org/wikipedia/en/c/c5/Obi-wan-kenobi.png",
+        "image": "https://source.unsplash.com/800x600/?star-wars,lego,jedi",
         "locations": ["Jedi Temple, Coruscant", "Jedi Enclave, Dantooine"],
         "format": "Distributed"
     },
@@ -60,7 +60,7 @@
         "year": 2025,
         "startDate": "2025-03-01",
         "endDate": "2025-03-31",
-        "image": "https://upload.wikimedia.org/wikipedia/en/5/5c/C-3PO_droid.png",
+        "image": "https://source.unsplash.com/800x600/?robot,gold",
         "locations": ["Self-paced"],
         "format": "Asynchronous"
     },
@@ -73,7 +73,7 @@
         "year": 2025,
         "startDate": "2025-02-03",
         "endDate": "2025-02-07",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/A_screenshot_from_the_film_Star_Wars_Episode_IV_A_New_Hope.jpg/640px-A_screenshot_from_the_film_Star_Wars_Episode_IV_A_New_Hope.jpg",
+        "image": "https://source.unsplash.com/800x600/?target,space",
         "locations": ["Rebel Base, Yavin 4"],
         "format": "In-person"
     },
@@ -86,7 +86,7 @@
         "year": 2024,
         "startDate": "2024-06-03",
         "endDate": "2024-06-07",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/2/23/Death_Star_Plans.png",
+        "image": "https://source.unsplash.com/800x600/?star-wars,death-star",
         "locations": ["Imperial Citadel, Scarif"],
         "format": "In-person"
     },
@@ -99,7 +99,7 @@
         "year": 2024,
         "startDate": "2024-10-07",
         "endDate": "2024-10-11",
-        "image": "https://upload.wikimedia.org/wikipedia/en/3/3e/Boba_Fett_in_The_Empire_Strikes_Back.png",
+        "image": "https://source.unsplash.com/800x600/?sand,monster",
         "locations": ["Great Pit of Carkoon"],
         "format": "Flipped"
     },
@@ -112,7 +112,7 @@
         "year": 2024,
         "startDate": "2024-09-09",
         "endDate": "2024-09-13",
-        "image": "https://upload.wikimedia.org/wikipedia/en/8/88/Han_Solo_in_carbonite.png",
+        "image": "https://source.unsplash.com/800x600/?metal,carbon",
         "locations": ["Cloud City, Bespin"],
         "format": "Distributed"
     },
@@ -125,7 +125,7 @@
         "year": 2024,
         "startDate": "2024-07-15",
         "endDate": "2024-07-19",
-        "image": "https://upload.wikimedia.org/wikipedia/en/3/39/R2-D2_Droid.png",
+        "image": "https://source.unsplash.com/800x600/?star-wars,r2d2",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -138,7 +138,7 @@
         "year": 2023,
         "startDate": "2023-07-17",
         "endDate": "2023-07-21",
-        "image": "https://upload.wikimedia.org/wikipedia/en/1/1c/Dagobah.jpg",
+        "image": "https://source.unsplash.com/800x600/?swamp,forest",
         "locations": ["Dagobah"],
         "format": "In-person"
     },
@@ -151,7 +151,7 @@
         "year": 2023,
         "startDate": "2023-01-23",
         "endDate": "2023-01-24",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/3/32/Star_Wars_-_Darth_Vader.jpg",
+        "image": "https://source.unsplash.com/800x600/?star-wars,darth-vader",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -164,7 +164,7 @@
         "year": 2019,
         "startDate": "2019-10-21",
         "endDate": "2019-10-25",
-        "image": "https://upload.wikimedia.org/wikipedia/en/e/e7/AckbarStanding.jpg",
+        "image": "https://source.unsplash.com/800x600/?trap",
         "locations": ["Rebel Fleet Command"],
         "format": "In-person"
     },
@@ -177,7 +177,7 @@
         "year": 2018,
         "startDate": "2018-11-05",
         "endDate": "2018-11-06",
-        "image": "https://upload.wikimedia.org/wikipedia/en/c/c1/Tarkininfobox.jpg",
+        "image": "https://source.unsplash.com/800x600/?star-wars,empire",
         "locations": ["Death Star Conference Room"],
         "format": "In-person"
     },
@@ -190,7 +190,7 @@
         "year": 2017,
         "startDate": "2017-05-08",
         "endDate": "2017-05-12",
-        "image": "https://upload.wikimedia.org/wikipedia/en/9/99/Luke_Skywalker_pre-duel_with_Vader.png",
+        "image": "https://source.unsplash.com/800x600/?desert,canyon",
         "locations": ["Beggar's Canyon, Tatooine"],
         "format": "In-person"
     },
@@ -203,7 +203,7 @@
         "year": 2016,
         "startDate": "2016-04-18",
         "endDate": "2016-04-22",
-        "image": "https://upload.wikimedia.org/wikipedia/en/9/92/Jocasta-nu.jpg",
+        "image": "https://source.unsplash.com/800x600/?library,archive",
         "locations": ["Jedi Temple, Coruscant"],
         "format": "In-person"
     },
@@ -216,7 +216,7 @@
         "year": 2015,
         "startDate": "2015-07-20",
         "endDate": "2015-07-24",
-        "image": "https://upload.wikimedia.org/wikipedia/en/1/1b/Princess_Leia%27s_characteristic_hairstyle.jpg",
+        "image": "https://source.unsplash.com/800x600/?nerf,toy",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -229,7 +229,7 @@
         "year": 1999,
         "startDate": "1999-12-27",
         "endDate": "1999-12-31",
-        "image": "https://upload.wikimedia.org/wikipedia/en/4/4b/Jar_Jar_Binks_in_The_Phantom_Menace.png",
+        "image": "https://source.unsplash.com/800x600/?oops,clumsy",
         "locations": ["Otoh Gunga"],
         "format": "Distributed"
     },
@@ -242,7 +242,7 @@
         "year": 1999,
         "startDate": "1999-09-13",
         "endDate": "1999-09-14",
-        "image": "https://upload.wikimedia.org/wikipedia/en/5/52/Bail_Organa.jpg",
+        "image": "https://source.unsplash.com/800x600/?vintage,computer",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -255,7 +255,7 @@
         "year": 1999,
         "startDate": "1999-06-01",
         "endDate": "1999-06-03",
-        "image": "https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg",
+        "image": "https://source.unsplash.com/800x600/?hope,stars",
         "locations": ["Ottawa, ON"],
         "format": "In-person"
     }
