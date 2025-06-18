@@ -21,7 +21,7 @@
                         'region-ontario': '#BB682C',
                         'region-quebec': '#427FA4',
                         'region-atlantic': '#208A99',
-                        'region-online': '#5A1F65', 
+                        'region-online': '#5A1F65',
                     }
                 }
             }
@@ -70,7 +70,6 @@
 
     <div class="container mx-auto my-8 md:my-12">
         <header class="text-center mb-12">
-            <!-- Logo Added Here -->
             <a href="https://bioinformatics.ca" target="_blank" rel="noopener noreferrer">
                 <img src="img/CBW_logo.png" alt="Canadian Bioinformatics Workshops Logo" class="mx-auto mb-6 h-40 w-auto">
             </a>
@@ -79,17 +78,17 @@
 </p>
         </header>
 
-        <!-- Apply Now Button -->
-        <div class="text-center mb-8">
+        <div class="text-center mb-12 flex justify-center items-center gap-4 flex-wrap">
             <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-purple hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg" style="background-color: #5A1F65;">
                 Apply Now
+            </a>
+            <a href="#about-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">
+                About
             </a>
         </div>
 
 
-        <!-- Filter Dropdowns -->
         <div class="mb-12 flex justify-center items-center flex-wrap gap-4 p-4 bg-slate-100/70 rounded-xl">
-            <!-- Year Dropdown -->
             <div class="relative" data-dropdown="year">
                 <button data-dropdown-button class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200">
                     <span>Year</span>
@@ -98,12 +97,10 @@
                 </button>
                 <div data-dropdown-panel id="year-filter-options" class="dropdown-panel hidden absolute z-10 mt-2 w-48 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0">
                     <div class="p-2 space-y-1">
-                        <!-- Year checkboxes will be generated here -->
-                    </div>
+                        </div>
                 </div>
             </div>
 
-            <!-- Region Dropdown -->
             <div class="relative" data-dropdown="region">
                 <button data-dropdown-button class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200">
                     <span>Region</span>
@@ -112,12 +109,10 @@
                 </button>
                 <div data-dropdown-panel id="region-filter-options" class="dropdown-panel hidden absolute z-10 mt-2 w-48 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0">
                     <div class="p-2 space-y-1">
-                        <!-- Region checkboxes will be generated here -->
-                    </div>
+                        </div>
                 </div>
             </div>
-            
-            <!-- Title Dropdown -->
+
             <div class="relative" data-dropdown="title">
                 <button data-dropdown-button class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200">
                     <span>Workshop</span>
@@ -126,12 +121,10 @@
                 </button>
                 <div data-dropdown-panel id="title-filter-options" class="dropdown-panel hidden absolute z-10 mt-2 w-56 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0 max-h-60 overflow-y-auto">
                     <div class="p-2 space-y-1">
-                        <!-- Title checkboxes will be generated here -->
-                    </div>
+                        </div>
                 </div>
             </div>
 
-            <!-- Topics Dropdown -->
             <div class="relative" data-dropdown="topics">
                 <button data-dropdown-button class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200">
                     <span>Topics</span>
@@ -140,12 +133,10 @@
                 </button>
                 <div data-dropdown-panel id="topic-filter-options" class="dropdown-panel hidden absolute z-10 mt-2 w-56 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0">
                     <div class="p-2 space-y-1">
-                        <!-- Topic checkboxes will be generated here -->
-                    </div>
+                        </div>
                 </div>
             </div>
 
-            <!-- Format Dropdown -->
             <div class="relative" data-dropdown="format">
                 <button data-dropdown-button class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200">
                     <span>Format</span>
@@ -154,13 +145,11 @@
                 </button>
                 <div data-dropdown-panel id="format-filter-options" class="dropdown-panel hidden absolute z-10 mt-2 w-48 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0">
                     <div class="p-2 space-y-1">
-                        <!-- Format checkboxes will be generated here -->
-                    </div>
+                        </div>
                 </div>
             </div>
 
-             <!-- Status Dropdown -->
-            <div class="relative" data-dropdown="status">
+             <div class="relative" data-dropdown="status">
                 <button data-dropdown-button class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200">
                     <span>Status</span>
                     <span id="status-filter-count" class="ml-2 bg-brand-purple text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
@@ -168,13 +157,11 @@
                 </button>
                 <div data-dropdown-panel id="status-filter-options" class="dropdown-panel hidden absolute z-10 mt-2 w-48 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0">
                     <div class="p-2 space-y-1">
-                        <!-- Status checkbox will be generated here -->
-                    </div>
+                        </div>
                 </div>
             </div>
 
-            <!-- Reset Button -->
-             <button id="reset-filters-button" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2.5 px-5 rounded-lg shadow-sm flex items-center transition-all duration-200">
+            <button id="reset-filters-button" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2.5 px-5 rounded-lg shadow-sm flex items-center transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a9 9 0 0114.12-5.12M20 15a9 9 0 01-14.12 5.12" />
                 </svg>
@@ -183,13 +170,22 @@
         </div>
 
         <main id="link-container" class="space-y-16">
-            <!-- Content generated by JavaScript -->
-        </main>
+            </main>
+
+        <section id="about-section" class="mt-20 pt-16 border-t border-gray-200">
+             <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 tracking-tight text-center">About The Canadian Bioinformatics Workshops</h2>
+             <div class="max-w-4xl mx-auto mt-8 text-lg text-gray-600 space-y-6 text-left">
+                <p>The Canadian Bioinformatics Workshops (CBW) series was initiated in 1999 by the Canadian Genetic Diseases Network as a forum for graduate students and other researchers to learn about new tools and techniques in bioinformatics. The series has been a great success, with over 5,000 trainees attending workshops since its inception.</p>
+                <p>Our mission is to provide accessible, high-quality, and hands-on training in bioinformatics to the Canadian research community. We cover a wide range of topics, from foundational skills in programming and data analysis to advanced topics in genomics, proteomics, and systems biology. Workshops are delivered by expert instructors from across Canada and are designed to be highly interactive, ensuring that participants gain practical skills they can immediately apply to their own research.</p>
+                <p>The CBW is a key component of the bioinformatics training landscape in Canada, supported by a consortium of institutions dedicated to advancing computational biology research and education.</p>
+             </div>
+        </section>
+
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            
+
             // --- Fetch data and initialize the application ---
             async function initializeApp() {
                 try {
@@ -199,7 +195,7 @@
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     const linksData = await response.json();
-                    
+
                     // Define the canonical order of regions
                     const regionOrder = ['BC', 'Alberta', 'Prairies', 'Ontario', 'Quebec', 'Atlantic', 'Online'];
 
@@ -222,6 +218,41 @@
 
                     // --- All functions are now defined inside initializeApp ---
                     
+                    // --- MODIFICATION START: Added date formatting helper function ---
+                    /**
+                     * Formats a date range into a human-readable string.
+                     * Handles same-month, different-month, and single-day events.
+                     * @param {string} startDateStr - The start date in 'YYYY-MM-DD' format.
+                     * @param {string} endDateStr - The end date in 'YYYY-MM-DD' format.
+                     * @returns {string} A formatted date string.
+                     */
+                    function formatDateRange(startDateStr, endDateStr) {
+                        // Appending 'T00:00:00' avoids timezone issues by treating dates as local.
+                        const start = new Date(startDateStr + 'T00:00:00');
+                        const end = new Date(endDateStr + 'T00:00:00');
+
+                        const startMonth = start.toLocaleString('en-US', { month: 'long' });
+                        const startDay = start.getDate();
+                        const year = start.getFullYear();
+
+                        // Handle single-day events or cases where endDate is missing.
+                        if (!endDateStr || startDateStr === endDateStr) {
+                            return `${startMonth} ${startDay}, ${year}`;
+                        }
+
+                        const endMonth = end.toLocaleString('en-US', { month: 'long' });
+                        const endDay = end.getDate();
+
+                        if (startMonth === endMonth) {
+                            return `${startMonth} ${startDay}-${endDay}, ${year}`;
+                        } else {
+                            // Assumes the year is the same for start and end dates.
+                            return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${year}`;
+                        }
+                    }
+                    // --- MODIFICATION END ---
+
+
                     /**
                      * Generates the link cards, grouped by year.
                      */
@@ -272,15 +303,16 @@
 
                                 // Check for upcoming tag
                                 const today = new Date();
-                                today.setHours(0, 0, 0, 0); 
+                                today.setHours(0, 0, 0, 0);
                                 const workshopStartDate = new Date(link.startDate + 'T00:00:00');
                                 let upcomingTagHTML = '';
                                 if (workshopStartDate >= today) {
                                     upcomingTagHTML = `<div class="absolute top-2 left-2 bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
                                 }
-                                
+
                                 const cardContent = document.createElement('div');
                                 cardContent.className = 'flex-grow flex flex-col';
+                                // --- MODIFICATION START: Replaced 'link.dates' with a call to 'formatDateRange' ---
                                 cardContent.innerHTML = `
                                     <div class="relative">
                                         <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block">
@@ -302,7 +334,7 @@
                                             <div class="space-y-2">
                                                 <div class="flex items-center text-sm text-gray-500">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                                                    <span class="font-medium">${link.dates}</span>
+                                                    <span class="font-medium">${formatDateRange(link.startDate, link.endDate)}</span>
                                                 </div>
                                                 <div class="flex items-center text-sm text-gray-500">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
@@ -311,6 +343,7 @@
                                             </div>
                                         </div>
                                     </div>`;
+                                // --- MODIFICATION END ---
                                 card.appendChild(cardContent);
                                 cardGrid.appendChild(card);
                             });
@@ -329,7 +362,7 @@
                         label.innerHTML = `<input type="checkbox" data-type="${type}" value="${value}" class="h-4 w-4 rounded border-gray-300 text-brand-purple focus:ring-brand-purple/50"><span class="text-sm text-gray-700 font-medium">${value}</span>`;
                         return label;
                     }
-                    
+
                     /**
                      * Generates checkboxes for all filter categories.
                      */
@@ -343,7 +376,7 @@
                         regionOrder.forEach(region => regionFilterContainer.appendChild(createCheckbox(region, 'region')));
                         titles.forEach(title => titleFilterContainer.appendChild(createCheckbox(title, 'title')));
                         formats.forEach(format => formatFilterContainer.appendChild(createCheckbox(format, 'format')));
-                        
+
                         statusFilterContainer.appendChild(createCheckbox('Upcoming', 'status'));
                         statusFilterContainer.appendChild(createCheckbox('Past', 'status'));
 
@@ -410,14 +443,14 @@
                                 const regionMatch = activeRegions.size === 0 || [...activeRegions].some(region => cardRegions.has(region));
                                 const titleMatch = activeTitles.size === 0 || activeTitles.has(cardTitle);
                                 const formatMatch = activeFormats.size === 0 || activeFormats.has(cardFormat);
-                                
-                                let statusMatch = true; 
+
+                                let statusMatch = true;
                                 if (upcomingChecked && !pastChecked) {
                                     statusMatch = cardStartDate >= today;
                                 } else if (!upcomingChecked && pastChecked) {
                                     statusMatch = cardStartDate < today;
                                 }
-                                
+
                                 if (topicMatch && regionMatch && titleMatch && formatMatch && statusMatch) {
                                     card.classList.remove('hidden');
                                     visibleCardsInSection++;
@@ -425,14 +458,14 @@
                                     card.classList.add('hidden');
                                 }
                             });
-                            
+
                             if (yearMatch && visibleCardsInSection > 0) {
                                 section.classList.remove('hidden');
                             } else {
                                 section.classList.add('hidden');
                             }
                         });
-                        
+
                         updateFilterCounts();
                     }
 
@@ -445,7 +478,7 @@
                         });
                         applyFilters();
                     }
-                    
+
                     /**
                      * Sets up event listeners for dropdowns and checkboxes.
                      */
