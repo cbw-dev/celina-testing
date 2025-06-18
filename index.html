@@ -173,10 +173,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Add `aria-live="polite"` to dynamically updated status flags if they change frequently and are important for screen readers.
             // For static flags, a simple visually hidden span might be enough to provide context.
             if (workshopStartDate <= today && today <= workshopEndDate) {
-                statusFlagHTML = `<div class="flex items-center justify-center bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Happening Now</div>`;
+                statusFlagHTML = `<div class="flex items-center justify-center bg-green-700 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Happening Now</div>`;
                 statusTags = ["Happening Now"];
             } else if (workshopStartDate > today) {
-                statusFlagHTML = `<div class="flex items-center justify-center bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Upcoming</div>`;
+                statusFlagHTML = `<div class="flex items-center justify-center bg-yellow-600 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Upcoming</div>`;
                 statusTags = ["Upcoming"];
             } else {
                  statusTags = ["Past"];
