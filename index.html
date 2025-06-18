@@ -51,7 +51,6 @@
             }
         }
         
-        /* MODIFICATION: Added CSS for multi-line title truncation */
         .truncate-3-lines {
             overflow: hidden;
             display: -webkit-box;
@@ -62,6 +61,18 @@
 </head>
 <body class="antialiased">
     <div class="container mx-auto my-8 md:my-12">
+        <header class="text-center mb-12">
+            <a href="https://bioinformatics.ca" target="_blank" rel="noopener noreferrer"><img src="img/CBW_logo.png" alt="Canadian Bioinformatics Workshops Logo" class="mx-auto mb-6 h-40 w-auto"></a>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight">Canadian Bioinformatics Workshops</h1>
+            <p class="text-lg text-gray-500 mt-3 max-w-2xl mx-auto">Every year, the CBW offers hands-on workshops in bioinformatics. These pages contain the materials for those workshops. You can apply for upcoming workshops here:</p>
+        </header>
+        <div class="text-center mb-12 flex justify-center items-center gap-4 md:gap-6 flex-wrap border-t border-b border-gray-200 py-4">
+            <a href="#about-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">About</a>
+            <a href="#current-workshops-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">Upcoming Workshops</a>
+            <a href="#past-workshops-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">Past Workshops</a>
+            <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-purple hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg" style="background-color: #5A1F65;">Apply Now</a>
+        </div>
+        
         <div id="filter-bar" class="mb-12 flex justify-center items-center flex-wrap gap-4 p-4 bg-slate-100/70 rounded-xl">
             <div class="relative w-full sm:w-auto">
                 <input type="search" id="text-search-input" placeholder="Search..." class="w-full sm:w-48 px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-purple focus:border-brand-purple transition">
@@ -69,10 +80,14 @@
         </div>
 
         <main id="link-container" class="space-y-16">
-            </main>
-        
+            <div id="no-results-message" class="hidden">
+                <div class="text-center py-12 px-6 bg-slate-50 rounded-lg"><h3 class="mt-2 text-xl font-semibold text-gray-900">No workshops found</h3><p class="mt-1 text-base text-gray-500">Try adjusting your search or filter criteria.</p></div>
+            </div>
+        </main>
         <section id="about-section" class="mt-20 pt-16 border-t border-gray-200">
-             </section>
+             <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 tracking-tight text-center">About The Canadian Bioinformatics Workshops</h2>
+             <div class="max-w-4xl mx-auto mt-8 text-lg text-gray-600 space-y-6 text-left"><p>The Canadian Bioinformatics Workshops (CBW) series was initiated in 1999 by the Canadian Genetic Diseases Network as a forum for graduate students and other researchers to learn about new tools and techniques in bioinformatics. The series has been a great success, with over 5,000 trainees attending workshops since its inception.</p></div>
+        </section>
     </div>
 
 <script>
@@ -135,12 +150,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             let statusFlagHTML = '';
             let statusTags = [];
-
+            
+            // MODIFICATION: Set fixed height and remove vertical padding for perfect centering
             if (workshopStartDate <= today && today <= workshopEndDate) {
-                statusFlagHTML = `<div class="inline-flex items-center justify-center bg-green-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Happening Now</div>`;
+                statusFlagHTML = `<div class="inline-flex items-center justify-center h-6 bg-green-500 text-white text-xs font-bold uppercase px-3 rounded-full shadow-lg">Happening Now</div>`;
                 statusTags = ["Happening Now", "Past"];
             } else if (workshopStartDate > today) {
-                statusFlagHTML = `<div class="inline-flex items-center justify-center bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">Upcoming</div>`;
+                statusFlagHTML = `<div class="inline-flex items-center justify-center h-6 bg-yellow-400 text-yellow-900 text-xs font-bold uppercase px-3 rounded-full shadow-lg">Upcoming</div>`;
                 statusTags = ["Upcoming"];
             } else {
                  statusTags = ["Past"];
@@ -148,7 +164,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             card.dataset.status = JSON.stringify(statusTags);
             
             const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
-            const regionTagsHTML = sortedRegions.map(region => `<span class="inline-flex items-center bg-region-${region.toLowerCase().replace(' ', '-')} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm">${region}</span>`).join('');
+            const regionTagsHTML = sortedRegions.map(region => `<span class="inline-flex items-center h-6 bg-region-${region.toLowerCase().replace(' ', '-')} text-white rounded-full px-3 text-xs font-bold shadow-sm">${region}</span>`).join('');
 
             const regionColors = sortedRegions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]).filter(Boolean);
             let colorBarHTML = '<div class="h-1.5 bg-gray-300"></div>';
@@ -165,6 +181,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
             `).join('');
 
+            // MODIFICATION: Restructured the card content area to ensure date alignment
             card.innerHTML = `
                 ${colorBarHTML}
                 <div class="relative">
@@ -181,12 +198,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
-                    <div class="flex-grow">
-                        <h3 class="text-lg font-bold text-gray-800 mb-3 truncate-3-lines">
+                    <div style="min-height: 5.25rem;">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 truncate-3-lines">
                             <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}</a>
                         </h3>
                     </div>
-                    <div class="space-y-2">
+                    <div class="mt-auto space-y-2">
                         <div class="flex items-center text-sm text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg><span class="font-medium">${formatDateRange(link.startDate, link.endDate)}</span></div>
                         ${locationsHTML}
                     </div>
