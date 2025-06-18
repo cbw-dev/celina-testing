@@ -22,7 +22,7 @@
                     "enum": ["BC", "Alberta", "Prairies", "Ontario", "Quebec", "Atlantic", "Online"]
                 }
             },
-            "year": { "type": "number", "minimum": 2020 },
+            "year": { "type": "number", "minimum": 1999 },
             "startDate": { "type": "string", "format": "date" },
             "endDate": { "type": "string", "format": "date" },
             "image": { "type": "string", "format": "uri" },
