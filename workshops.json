@@ -8,7 +8,7 @@
         "year": 2026,
         "startDate": "2026-07-20",
         "endDate": "2026-07-24",
-        "image": "https://www.sideshow.com/storage/product-images/903562/yoda_star-wars_gallery_5c4fb7e43e1f0.jpg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/d/d6/Yoda_SWSB.png",
         "locations": ["A Galaxy Far, Far Away"],
         "format": "Online"
     },
@@ -21,7 +21,7 @@
         "year": 2025,
         "startDate": "2025-11-03",
         "endDate": "2025-11-07",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/kamino-main_9d5446a0.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/9/9c/Kamino-DB.png",
         "locations": ["Kamino Cloning Facilities"],
         "format": "In-person"
     },
@@ -34,7 +34,7 @@
         "year": 2025,
         "startDate": "2025-06-01",
         "endDate": "2025-12-01",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/solo-a-star-wars-story-the-kessel-run-millennium-falcon_a_49994c3e.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/5/53/Kessel_Run_Falcon.png",
         "locations": ["Corellia", "Kashyyyk", "Tatooine", "Bespin"],
         "format": "Distributed"
     },
@@ -47,7 +47,7 @@
         "year": 2025,
         "startDate": "2025-08-18",
         "endDate": "2025-08-22",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/obi-wan-kenobi-gallery-05-main_d9991845.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/e/e9/Obi-Wan_Kenobi_EU_promo.jpg",
         "locations": ["Jedi Temple, Coruscant", "Jedi Enclave, Dantooine"],
         "format": "Distributed"
     },
@@ -60,7 +60,7 @@
         "year": 2025,
         "startDate": "2025-03-01",
         "endDate": "2025-03-31",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/c-3po-main_417a2902.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/3/3f/C-3PO_TLJ_Main_Art_2.png",
         "locations": ["Self-paced"],
         "format": "Asynchronous"
     },
@@ -73,7 +73,7 @@
         "year": 2025,
         "startDate": "2025-02-03",
         "endDate": "2025-02-07",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/resistance-heroes-main_92c3c66d.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/4/4c/JanDodonna-ANH.png",
         "locations": ["Rebel Base, Yavin 4"],
         "format": "In-person"
     },
@@ -86,7 +86,7 @@
         "year": 2024,
         "startDate": "2024-06-03",
         "endDate": "2024-06-07",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/death-star-main_e6b0b66b.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/8/8c/Death_Star_Plans_Fathead.png",
         "locations": ["Imperial Citadel, Scarif"],
         "format": "In-person"
     },
@@ -99,7 +99,7 @@
         "year": 2024,
         "startDate": "2024-10-07",
         "endDate": "2024-10-11",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/boba-fett-main_734268e2.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/d/de/Sarlacc-BTM-TBOBF.png",
         "locations": ["Great Pit of Carkoon"],
         "format": "Flipped"
     },
@@ -112,7 +112,7 @@
         "year": 2024,
         "startDate": "2024-09-09",
         "endDate": "2024-09-13",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/han-solo-carbonite-main_2901a8d4.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/6/64/Han-Carbonite-TESB.png",
         "locations": ["Cloud City, Bespin"],
         "format": "Distributed"
     },
@@ -125,7 +125,7 @@
         "year": 2024,
         "startDate": "2024-07-15",
         "endDate": "2024-07-19",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/r2-d2-main_86916bb6.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/3/34/R2-D2-Fathead.png",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -138,7 +138,7 @@
         "year": 2023,
         "startDate": "2023-07-17",
         "endDate": "2023-07-21",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/dagobah-main_b11910d6.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/c/c2/Dagobah.jpg",
         "locations": ["Dagobah"],
         "format": "In-person"
     },
@@ -151,7 +151,7 @@
         "year": 2023,
         "startDate": "2023-01-23",
         "endDate": "2023-01-24",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/darth-vader-main_4560aff7.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/b/b3/Vader_SWSB.png",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -164,7 +164,7 @@
         "year": 2019,
         "startDate": "2019-10-21",
         "endDate": "2019-10-25",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/admiral-ackbar-main_9d134542.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/2/29/Ackbar-SWCT.png",
         "locations": ["Rebel Fleet Command"],
         "format": "In-person"
     },
@@ -177,7 +177,7 @@
         "year": 2018,
         "startDate": "2018-11-05",
         "endDate": "2018-11-06",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/grand-moff-tarkin-main_75455648.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/4/4a/Tarkin-Fathead.png",
         "locations": ["Death Star Conference Room"],
         "format": "In-person"
     },
@@ -190,7 +190,7 @@
         "year": 2017,
         "startDate": "2017-05-08",
         "endDate": "2017-05-12",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/luke-skywalker-main_5a38c454.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/d/d4/Luke-ANH-sand-Fathead.png",
         "locations": ["Beggar's Canyon, Tatooine"],
         "format": "In-person"
     },
@@ -203,7 +203,7 @@
         "year": 2016,
         "startDate": "2016-04-18",
         "endDate": "2016-04-22",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/jedi-archives-main_d9b50977.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/e/e5/Jocasta_Nu_card_trader.png",
         "locations": ["Jedi Temple, Coruscant"],
         "format": "In-person"
     },
@@ -216,7 +216,7 @@
         "year": 2015,
         "startDate": "2015-07-20",
         "endDate": "2015-07-24",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/leia-organa-main_910a287c.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/6/6b/Leia_SWSB.png",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -229,7 +229,7 @@
         "year": 1999,
         "startDate": "1999-12-27",
         "endDate": "1999-12-31",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/jar-jar-binks-main_5c613148.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/d/d2/Jar_Jar_aotc.jpg",
         "locations": ["Otoh Gunga"],
         "format": "Distributed"
     },
@@ -242,7 +242,7 @@
         "year": 1999,
         "startDate": "1999-09-13",
         "endDate": "1999-09-14",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/bail-organa-main_a8e63a12.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/5/52/BailOrgana-SWSB.png",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -255,7 +255,7 @@
         "year": 1999,
         "startDate": "1999-06-01",
         "endDate": "1999-06-03",
-        "image": "https://lumiere-a.akamaihd.net/v1/images/a-new-hope-main_6_a756616a.jpeg",
+        "image": "https://static.wikia.nocookie.net/starwars/images/7/74/Yavin4-Fathead.png",
         "locations": ["Ottawa, ON"],
         "format": "In-person"
     }
