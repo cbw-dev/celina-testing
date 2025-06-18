@@ -8,7 +8,7 @@
         "year": 2026,
         "startDate": "2026-07-20",
         "endDate": "2026-07-24",
-        "image": "https://source.unsplash.com/800x600/?star-wars,yoda",
+        "image": "https://i.ytimg.com/vi/a2Wn2k2l4L0/maxresdefault.jpg",
         "locations": ["A Galaxy Far, Far Away"],
         "format": "Online"
     },
@@ -21,7 +21,7 @@
         "year": 2025,
         "startDate": "2025-11-03",
         "endDate": "2025-11-07",
-        "image": "https://source.unsplash.com/800x600/?star-wars,clone",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/kamino-main_92155a30.jpeg?region=160%2C0%2C960%2C540",
         "locations": ["Kamino Cloning Facilities"],
         "format": "In-person"
     },
@@ -34,7 +34,7 @@
         "year": 2025,
         "startDate": "2025-06-01",
         "endDate": "2025-12-01",
-        "image": "https://source.unsplash.com/800x600/?galaxy,space-ship",
+        "image": "https://media.wired.com/photos/593264c39be5e55af6c2461c/master/w_1600%2Cc_limit/kesselrun-featured.jpg",
         "locations": ["Corellia", "Kashyyyk", "Tatooine", "Bespin"],
         "format": "Distributed"
     },
@@ -47,7 +47,7 @@
         "year": 2025,
         "startDate": "2025-08-18",
         "endDate": "2025-08-22",
-        "image": "https://source.unsplash.com/800x600/?star-wars,lego,jedi",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/databank_jediyounglings_01_169_e0871a74.jpeg?region=0%2C0%2C1560%2C878&width=960",
         "locations": ["Jedi Temple, Coruscant", "Jedi Enclave, Dantooine"],
         "format": "Distributed"
     },
@@ -60,7 +60,7 @@
         "year": 2025,
         "startDate": "2025-03-01",
         "endDate": "2025-03-31",
-        "image": "https://source.unsplash.com/800x600/?robot,gold",
+        "image": "https://www.sideshow.com/storage/product-images/2171/c-3po_star-wars_silo.png",
         "locations": ["Self-paced"],
         "format": "Asynchronous"
     },
@@ -73,7 +73,7 @@
         "year": 2025,
         "startDate": "2025-02-03",
         "endDate": "2025-02-07",
-        "image": "https://source.unsplash.com/800x600/?target,space",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/open-uri20150608-27674-1izk0y8_a2b3c229.jpeg?region=0%2C0%2C1280%2C720",
         "locations": ["Rebel Base, Yavin 4"],
         "format": "In-person"
     },
@@ -86,7 +86,7 @@
         "year": 2024,
         "startDate": "2024-06-03",
         "endDate": "2024-06-07",
-        "image": "https://source.unsplash.com/800x600/?star-wars,death-star",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/Death-Star-I-copy_36ad2505.jpeg?region=0%2C0%2C1600%2C900",
         "locations": ["Imperial Citadel, Scarif"],
         "format": "In-person"
     },
@@ -99,7 +99,7 @@
         "year": 2024,
         "startDate": "2024-10-07",
         "endDate": "2024-10-11",
-        "image": "https://source.unsplash.com/800x600/?sand,monster",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/boba-fett-sarlacc-pit_166b6943.jpeg?region=0%2C0%2C1280%2C720",
         "locations": ["Great Pit of Carkoon"],
         "format": "Flipped"
     },
@@ -112,7 +112,7 @@
         "year": 2024,
         "startDate": "2024-09-09",
         "endDate": "2024-09-13",
-        "image": "https://source.unsplash.com/800x600/?metal,carbon",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/han-solo-carbonite_dd69c139.jpeg?region=0%2C0%2C1280%2C720",
         "locations": ["Cloud City, Bespin"],
         "format": "Distributed"
     },
@@ -125,7 +125,7 @@
         "year": 2024,
         "startDate": "2024-07-15",
         "endDate": "2024-07-19",
-        "image": "https://source.unsplash.com/800x600/?star-wars,r2d2",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/r2-d2-main_f3160e20.jpeg?region=273%2C0%2C951%2C536",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -138,7 +138,7 @@
         "year": 2023,
         "startDate": "2023-07-17",
         "endDate": "2023-07-21",
-        "image": "https://source.unsplash.com/800x600/?swamp,forest",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/dagobah_2076662c.jpeg?region=0%2C0%2C1280%2C720",
         "locations": ["Dagobah"],
         "format": "In-person"
     },
@@ -151,7 +151,7 @@
         "year": 2023,
         "startDate": "2023-01-23",
         "endDate": "2023-01-24",
-        "image": "https://source.unsplash.com/800x600/?star-wars,darth-vader",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/Darth-Vader_6b24df85.jpeg?region=0%2C23%2C1400%2C785",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -164,7 +164,7 @@
         "year": 2019,
         "startDate": "2019-10-21",
         "endDate": "2019-10-25",
-        "image": "https://source.unsplash.com/800x600/?trap",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/admiral-ackbar-main_e83866e3.jpeg?region=0%2C0%2C1280%2C720",
         "locations": ["Rebel Fleet Command"],
         "format": "In-person"
     },
@@ -177,7 +177,7 @@
         "year": 2018,
         "startDate": "2018-11-05",
         "endDate": "2018-11-06",
-        "image": "https://source.unsplash.com/800x600/?star-wars,empire",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/Grand-Moff-Tarkin_31d743a4.jpeg?region=0%2C0%2C1280%2C720",
         "locations": ["Death Star Conference Room"],
         "format": "In-person"
     },
@@ -190,7 +190,7 @@
         "year": 2017,
         "startDate": "2017-05-08",
         "endDate": "2017-05-12",
-        "image": "https://source.unsplash.com/800x600/?desert,canyon",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/databank_womprat_01_169_969d74a1.jpeg?region=0%2C0%2C1560%2C878&width=960",
         "locations": ["Beggar's Canyon, Tatooine"],
         "format": "In-person"
     },
@@ -203,7 +203,7 @@
         "year": 2016,
         "startDate": "2016-04-18",
         "endDate": "2016-04-22",
-        "image": "https://source.unsplash.com/800x600/?library,archive",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/Jocasta-Nu_d5b1b44d.jpeg?region=0%2C0%2C1280%2C720",
         "locations": ["Jedi Temple, Coruscant"],
         "format": "In-person"
     },
@@ -216,7 +216,7 @@
         "year": 2015,
         "startDate": "2015-07-20",
         "endDate": "2015-07-24",
-        "image": "https://source.unsplash.com/800x600/?nerf,toy",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/leia-organa-feature-image_d53d6abe.jpeg?region=0%2C0%2C1280%2C720",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -229,7 +229,7 @@
         "year": 1999,
         "startDate": "1999-12-27",
         "endDate": "1999-12-31",
-        "image": "https://source.unsplash.com/800x600/?oops,clumsy",
+        "image": "https://www.giantfreakinrobot.com/wp-content/uploads/2021/07/jar-jar-binks-star-wars-900x506.jpg",
         "locations": ["Otoh Gunga"],
         "format": "Distributed"
     },
@@ -242,7 +242,7 @@
         "year": 1999,
         "startDate": "1999-09-13",
         "endDate": "1999-09-14",
-        "image": "https://source.unsplash.com/800x600/?vintage,computer",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/bail-organa-main_5c47a463.jpeg?region=0%2C0%2C1280%2C720",
         "locations": ["Online"],
         "format": "Online"
     },
@@ -255,7 +255,7 @@
         "year": 1999,
         "startDate": "1999-06-01",
         "endDate": "1999-06-03",
-        "image": "https://source.unsplash.com/800x600/?hope,stars",
+        "image": "https://lumiere-a.akamaihd.net/v1/images/Tatooine_32155d4c.jpeg?region=0%2C0%2C1280%2C720",
         "locations": ["Ottawa, ON"],
         "format": "In-person"
     }
