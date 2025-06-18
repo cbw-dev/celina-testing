@@ -78,22 +78,18 @@
 </p>
         </header>
 
-        <div class="text-center mb-8 flex justify-center items-center gap-4 flex-wrap">
-            <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-purple hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg" style="background-color: #5A1F65;">
+        <div class="text-center mb-12 flex justify-center items-center gap-4 md:gap-6 flex-wrap border-t border-b border-gray-200 py-4">
+             <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-purple hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg" style="background-color: #5A1F65;">
                 Apply Now
             </a>
-            <a href="#about-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">
-                About
-            </a>
-        </div>
-        
-        <div class="text-center mb-12 flex justify-center items-center gap-6 border-t border-b border-gray-200 py-3">
-             <a href="#current-workshops-section" class="text-gray-600 hover:text-brand-purple font-semibold transition-colors text-lg">
+            <a href="#current-workshops-section" class="text-gray-700 hover:text-brand-purple font-semibold transition-colors text-base md:text-lg">
                 Upcoming Workshops
             </a>
-            <span class="text-gray-300">|</span>
-             <a href="#past-workshops-section" class="text-gray-600 hover:text-brand-purple font-semibold transition-colors text-lg">
+            <a href="#past-workshops-section" class="text-gray-700 hover:text-brand-purple font-semibold transition-colors text-base md:text-lg">
                 Past Workshops
+            </a>
+            <a href="#about-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">
+                About
             </a>
         </div>
         <div class="mb-12 flex justify-center items-center flex-wrap gap-4 p-4 bg-slate-100/70 rounded-xl">
@@ -347,7 +343,7 @@
                             const currentSection = document.createElement('section');
                             currentSection.className = 'year-section';
                             currentSection.dataset.year = 'current';
-                            currentSection.id = 'current-workshops-section'; // MODIFICATION: Added ID for anchor link
+                            currentSection.id = 'current-workshops-section'; 
                             
                             const currentTitle = document.createElement('h2');
                             currentTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-green-500';
@@ -374,25 +370,21 @@
 
                         const sortedYears = Object.keys(pastLinksByYear).sort((a, b) => b - a);
 
-                        // MODIFICATION START: Logic to assign ID to the first past section
                         let firstPastSectionAssigned = false;
-                        // MODIFICATION END
 
                         sortedYears.forEach(year => {
                             const yearSection = document.createElement('section');
                             yearSection.className = 'year-section';
                             yearSection.dataset.year = year;
                             
-                            // MODIFICATION START: Assign ID if this is the first past section
                             if (!firstPastSectionAssigned) {
                                 yearSection.id = 'past-workshops-section';
                                 firstPastSectionAssigned = true;
                             }
-                            // MODIFICATION END
                             
                             const yearTitle = document.createElement('h2');
                             yearTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-brand-purple';
-                            yearTitle.textContent = `Past Workshops: ${year}`;
+                            yearTitle.textContent = year; // MODIFICATION: Removed "Past Workshops:" prefix
                             yearSection.appendChild(yearTitle);
 
                             const cardGrid = document.createElement('div');

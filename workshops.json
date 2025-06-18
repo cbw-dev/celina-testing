@@ -18,10 +18,22 @@
         "regions": [ "Ontario" ],
         "year": 2025,
         "startDate": "2025-06-16",
-        "endDate": "2025-06-20",
+        "endDate": "2025-08-20",
         "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800",
         "location": "Toronto, ON",
         "format": "In-person"
+    },
+    {
+        "url": "#",
+        "title": "Bioinformatics for Beginners",
+        "tags": [ "bioinformatics", "introduction" ],
+        "regions": [ "Online" ],
+        "year": 2025,
+        "startDate": "2025-03-10",
+        "endDate": "2025-03-14",
+        "image": "https://images.unsplash.com/photo-1554224155-1696413565d3?q=80&w=800",
+        "location": "Online",
+        "format": "Online"
     },
     {
         "url": "#",
