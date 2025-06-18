@@ -29,6 +29,31 @@
         .dropdown-panel, .year-section, .card { transition: all 0.3s ease-in-out; }
         .card.hidden, .year-section.hidden { opacity: 0; transform: scale(0.95); max-height: 0; overflow: hidden; margin: 0 !important; padding: 0 !important; border: none; pointer-events: none; }
         .filter-button:hover .dropdown-arrow { transform: translateY(2px); }
+
+        /* MODIFICATION START: Custom CSS for Mobile Carousel */
+        @media (max-width: 639px) { /* Applies only on screens smaller than Tailwind's 'sm' breakpoint */
+            .carousel-on-mobile {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 1rem;
+                /* Add padding inside the carousel and use negative margin to make it full-width within its parent container */
+                padding: 0.5rem 1rem;
+                margin: 0 -1rem;
+                /* Hide the scrollbar but keep it scrollable */
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none;  /* IE and Edge */
+            }
+            .carousel-on-mobile::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, and Opera */
+            }
+            .carousel-on-mobile > .card {
+                flex: 0 0 80%; /* Each card takes up 80% of the screen width */
+                max-width: 320px; /* But don't let cards get excessively large on wide mobile screens */
+                scroll-snap-align: start; /* Snap to the beginning of each card */
+            }
+        }
+        /* MODIFICATION END */
     </style>
 </head>
 <body class="antialiased">
@@ -176,9 +201,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const currentSection = document.createElement('section');
                 currentSection.className = 'year-section';
                 currentSection.id = 'current-workshops-section';
-                currentSection.innerHTML = `<h2 class="text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-green-500">Upcoming & Happening Now</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>`;
+                const currentTitle = document.createElement('h2');
+                currentTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-green-500';
+                currentTitle.textContent = 'Upcoming & Happening Now';
+                const gridContainer = document.createElement('div');
+                // MODIFICATION: Added carousel class for mobile and responsive grid classes for larger screens
+                gridContainer.className = 'carousel-on-mobile sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-8';
                 currentAndUpcomingLinks.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
-                currentAndUpcomingLinks.forEach(link => currentSection.querySelector('.grid').appendChild(createCardElement(link)));
+                currentAndUpcomingLinks.forEach(link => gridContainer.appendChild(createCardElement(link)));
+                currentSection.appendChild(currentTitle);
+                currentSection.appendChild(gridContainer);
                 linkContainer.insertBefore(currentSection, noResultsMessage);
             }
 
@@ -189,8 +221,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const yearSection = document.createElement('section');
                 yearSection.className = 'year-section';
                 if (!firstPastSectionAssigned) { yearSection.id = 'past-workshops-section'; firstPastSectionAssigned = true; }
-                yearSection.innerHTML = `<h2 class="text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-brand-purple">${year}</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>`;
-                pastLinksByYear[year].forEach(link => yearSection.querySelector('.grid').appendChild(createCardElement(link)));
+                const yearTitle = document.createElement('h2');
+                yearTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-brand-purple';
+                yearTitle.textContent = year;
+                const gridContainer = document.createElement('div');
+                // MODIFICATION: Added carousel class for mobile and responsive grid classes for larger screens
+                gridContainer.className = 'carousel-on-mobile sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-8';
+                pastLinksByYear[year].forEach(link => gridContainer.appendChild(createCardElement(link)));
+                yearSection.appendChild(yearTitle);
+                yearSection.appendChild(gridContainer);
                 linkContainer.insertBefore(yearSection, noResultsMessage);
             });
         }
