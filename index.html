@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const currentSection = document.createElement('section');
                 currentSection.className = 'year-section';
                 currentSection.id = 'current-workshops-section';
-                currentSection.innerHTML = `<h2 class="text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-green-500">Upcoming & Happening Now</h2><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>`;
+                currentSection.innerHTML = `<h2 class="text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-green-500">Upcoming & Happening Now</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>`;
                 currentAndUpcomingLinks.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
                 currentAndUpcomingLinks.forEach(link => currentSection.querySelector('.grid').appendChild(createCardElement(link)));
                 linkContainer.insertBefore(currentSection, noResultsMessage);
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const yearSection = document.createElement('section');
                 yearSection.className = 'year-section';
                 if (!firstPastSectionAssigned) { yearSection.id = 'past-workshops-section'; firstPastSectionAssigned = true; }
-                yearSection.innerHTML = `<h2 class="text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-brand-purple">${year}</h2><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>`;
+                yearSection.innerHTML = `<h2 class="text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-brand-purple">${year}</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>`;
                 pastLinksByYear[year].forEach(link => yearSection.querySelector('.grid').appendChild(createCardElement(link)));
                 linkContainer.insertBefore(yearSection, noResultsMessage);
             });
