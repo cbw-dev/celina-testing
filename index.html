@@ -170,22 +170,45 @@ document.addEventListener('DOMContentLoaded', async () => {
             let statusFlagHTML = '';
             let statusTags = [];
 
-            // Add `aria-live="polite"` to dynamically updated status flags if they change frequently and are important for screen readers.
-            // For static flags, a simple visually hidden span might be enough to provide context.
+            // Updated colors for flags
             if (workshopStartDate <= today && today <= workshopEndDate) {
                 statusFlagHTML = `<div class="flex items-center justify-center bg-green-700 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Happening Now</div>`;
                 statusTags = ["Happening Now"];
             } else if (workshopStartDate > today) {
-                statusFlagHTML = `<div class="flex items-center justify-center bg-yellow-600 text-yellow-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Upcoming</div>`;
+                // Changed to orange with dark text for better contrast and distinction
+                statusFlagHTML = `<div class="flex items-center justify-center bg-orange-400 text-gray-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Upcoming</div>`;
                 statusTags = ["Upcoming"];
             } else {
                  statusTags = ["Past"];
             }
             card.dataset.status = JSON.stringify(statusTags);
+
+            // Function to determine text color for regional tags
+            function getAccessibleTextColorForRegion(regionName) {
+                const regionColorsMap = {
+                    'BC': '#3C9048',
+                    'Alberta': '#86264E',
+                    'Prairies': '#BD8528',
+                    'Ontario': '#BB682C',
+                    'Quebec': '#427FA4',
+                    'Atlantic': '#208A99',
+                    'Online': '#5A1F65'
+                };
+                const hexCode = regionColorsMap[regionName];
+
+                // These are just example thresholds, you must verify with a contrast checker.
+                // Assuming #BD8528 (Prairies) and #BB682C (Ontario) need dark text for AAA
+                if (hexCode === '#BD8528' || hexCode === '#BB682C') {
+                    return 'text-gray-900'; // Or 'text-black'
+                }
+                return 'text-white';
+            }
             
             const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
-            // Add `aria-label` or `title` to region tags if the visual color isn't enough context
-            const regionTagsHTML = sortedRegions.map(region => `<span class="flex items-center justify-center bg-region-${region.toLowerCase().replace(' ', '-')} text-white rounded-full px-3 py-1 text-xs font-bold shadow-sm" title="Region: ${region}">${region}</span>`).join('');
+            const regionTagsHTML = sortedRegions.map(region => {
+                const textColorClass = getAccessibleTextColorForRegion(region);
+                return `<span class="flex items-center justify-center bg-region-${region.toLowerCase().replace(' ', '-')} ${textColorClass} rounded-full px-3 py-1 text-xs font-bold shadow-sm" title="Region: ${region}">${region}</span>`;
+            }).join('');
 
             const regionColors = sortedRegions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]).filter(Boolean);
             let colorBarHTML = '<div class="h-1.5 bg-gray-300"><span class="sr-only">Workshop regions color bar</span></div>'; // Added sr-only
@@ -488,7 +511,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     } catch (error) {
         console.error("Could not initialize the app:", error);
-        document.body.innerHTML = `<div class="text-center p-8"><h2 class="text-xl font-bold text-red-700">A critical error occurred.</h2><p class="text-red-500 mt-2">Could not load or render workshops. Please check the browser console for details.</p></div>`;
+        document.body.innerHTML = `<div class="text-center p-8"><h2 class="text-xl font-bold text-red-700">A critical error occurred.</h2><p class="mt-2 text-red-500">Could not load or render workshops. Please check the browser console for details.</p></div>`;
     }
 });
 </script>
