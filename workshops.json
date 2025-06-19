@@ -1,6 +1,6 @@
 [
     {
-        "url": "#",
+        "url": "",
         "title": "Quantum Computing: Searching for Midichlorians",
         "instructors": ["Master Yoda", "Dr. Qui-Gon Jinn"],
         "tags": ["quantum", "ai", "future-tech", "the-force"],
@@ -13,7 +13,6 @@
         "format": "Online"
     },
     {
-        "url": "#",
         "title": "Advanced Transcriptomics: Attack of the Clones",
         "instructors": ["Lama Su", "Taun We"],
         "tags": ["genomics", "bioinformatics", "rnaseq", "cloning"],
