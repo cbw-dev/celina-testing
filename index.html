@@ -45,7 +45,12 @@
         /* Removed hover effects from .card directly */
         .container { background-color: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); width: 100%; max-width: 80rem; border: 1px solid #e5e7eb; }
         /* Apply transition to the wrapper that gets the hover effects */
-        .dropdown-panel, .year-section, .card-interactive-wrapper, .card-image-no-link { transition: all 0.3s ease-in-out; }
+        .dropdown-panel, .year-section, .card-interactive-wrapper { transition: all 0.3s ease-in-out; }
+        /* Add transition for non-linked cards directly on the card for background and image */
+        .card:not(.has-link) { transition: background-color 0.3s ease-in-out; }
+        .card:not(.has-link) img { transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out; }
+
+
         .card.hidden, .year-section.hidden { opacity: 0; transform: scale(0.95); max-height: 0; overflow: hidden; margin: 0 !important; padding: 0 !important; border: none; pointer-events: none; }
         .filter-button:hover .dropdown-arrow { transform: translateY(2px); }
 
@@ -164,12 +169,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         function createCardElement(link) {
-            // Apply hover:bg-gray-50 if no URL exists, ensure transition is for background
-            const cardHoverClass = link.url ? '' : 'hover:bg-gray-50 transition-colors duration-300';
+            // Apply hover:bg-gray-100 to the card itself if no URL exists
+            const cardClassSuffix = link.url ? '' : ' hover:bg-gray-100 has-no-link'; // Added has-no-link class for CSS targeting
             const card = document.createElement('article');
-            card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden ${cardHoverClass}`;
-            // Removed tabindex from article here, as the wrapping <a> will handle focus for clickable cards
-            card.setAttribute('role', 'group'); // Still a group of content
+            card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden ${cardClassSuffix}`;
+            card.setAttribute('role', 'group');
 
             card.dataset.year = JSON.stringify([link.year]);
             card.dataset.title = JSON.stringify([link.title]);
@@ -223,12 +227,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
             `).join('');
 
-            // Conditional class for image hover opacity
+            // Conditional class for image hover opacity/grayscale (only for non-linked cards)
             const imageBaseClass = 'w-full h-48 object-cover';
-            // Stronger gray for non-linked image hover
-            const imageHoverClass = (!link.url || link.url === "") ? 'hover:opacity-40 transition-opacity duration-300' : '';
-
-            let cardInnerContent; // This will hold the common structure for both linked and non-linked cards
+            // Applied to the image itself, combined with the card's background hover
+            const imageHoverEffectClass = (!link.url || link.url === "") ? 'group-hover:grayscale group-hover:opacity-60 transition-all duration-300' : ''; // Use group-hover
 
             // Materials Not Available button style
             let materialsStatusHTML = '';
@@ -240,7 +242,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Common HTML structure for the card's visual content, regardless of clickability
             const commonCardVisuals = `
                 <div class="relative">
-                    <img loading="lazy" class="${imageBaseClass} ${imageHoverClass}" src="${link.image}" alt="Image for ${link.title} workshop${(!link.url || link.url === "") ? ' (materials not available)' : ''}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
+                    <img loading="lazy" class="${imageBaseClass} ${imageHoverEffectClass}" src="${link.image}" alt="Image for ${link.title} workshop${(!link.url || link.url === "") ? ' (materials not available)' : ''}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
 
                     <div class="absolute top-3 right-3 z-10"> <div class="flex flex-wrap justify-end gap-2 max-w-[calc(100% - 6rem)]"> ${regionTagsHTML}
                         </div>
@@ -269,8 +271,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (link.url) {
                 // If URL exists, wrap the entire visual content in an <a> tag
-                cardInnerContent = `
-                    <a href="${link.url}" target="_blank" rel="noopener noreferrer" 
+                card.innerHTML = `
+                    <a href="${link.url}" target="_blank" rel="noopener noreferrer"
                        class="card-interactive-wrapper flex flex-col flex-grow transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl">
                         ${colorBarHTML}
                         ${commonCardVisuals}
@@ -278,8 +280,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </a>
                 `;
             } else {
-                // If no URL, provide the content without a wrapping <a>
-                cardInnerContent = `
+                // If no URL, provide the content directly within the article, and use a 'group' class
+                card.classList.add('group'); // Add group class for targeting img hover effects
+                card.innerHTML = `
                     ${colorBarHTML}
                     <div class="flex flex-col flex-grow">
                         ${commonCardVisuals}
@@ -287,7 +290,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 `;
             }
 
-            card.innerHTML = cardInnerContent; // Assign the constructed content to the card
             return card;
         }
 
