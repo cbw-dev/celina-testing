@@ -47,9 +47,14 @@
         /* Apply transition to the wrapper that gets the hover effects */
         .dropdown-panel, .year-section, .card-interactive-wrapper { transition: all 0.3s ease-in-out; }
         /* Add transition for non-linked cards directly on the card for background and image */
-        .card:not(.has-link) { transition: background-color 0.3s ease-in-out; }
-        .card:not(.has-link) img { transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out; }
-
+        .card.has-no-link { transition: background-color 0.3s ease-in-out; }
+        .card.has-no-link img { transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out; }
+        /* Apply grayscale to color bar and region tags on hover for the whole card */
+        .card:hover .h-1\.5, /* Targets the color bar */
+        .card:hover .flex-wrap > span { /* Targets the region tags */
+          filter: grayscale(100%);
+          transition: filter 0.3s ease-in-out;
+        }
 
         .card.hidden, .year-section.hidden { opacity: 0; transform: scale(0.95); max-height: 0; overflow: hidden; margin: 0 !important; padding: 0 !important; border: none; pointer-events: none; }
         .filter-button:hover .dropdown-arrow { transform: translateY(2px); }
@@ -104,7 +109,7 @@
             <a href="#about-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">About</a>
             <a href="#current-workshops-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">Upcoming Workshops</a>
             <a href="#past-workshops-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">Past Workshops</a>
-            <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-purple hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg" style="background-color: #5A1F65;">Apply Now<span class="sr-only"> (opens in new tab)</span></a>
+            <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">Apply Now<span class="sr-only"> (opens in new tab)</span></a>
         </nav>
 
         <div id="filter-bar" role="region" aria-label="Workshop Filters" class="mb-12 flex justify-center items-center flex-wrap gap-4 p-4 bg-slate-100/70 rounded-xl">
@@ -173,7 +178,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const cardClassSuffix = link.url ? '' : ' hover:bg-gray-100 has-no-link'; // Added has-no-link class for CSS targeting
             const card = document.createElement('article');
             card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden ${cardClassSuffix}`;
-            card.setAttribute('role', 'group');
+            card.setAttribute('role', 'group'); // Used for group-hover targeting in CSS
 
             card.dataset.year = JSON.stringify([link.year]);
             card.dataset.title = JSON.stringify([link.title]);
@@ -209,14 +214,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             const regionTagsHTML = sortedRegions.map(region => {
                 const borderClass = `border-region-${region.toLowerCase().replace(' ', '-')}`;
                 const lightBgClass = `bg-region-${region.toLowerCase().replace(' ', '-')}-light`;
+                // Apply group-hover for grayscale to region tags
                 return `<span class="flex items-center justify-center ${lightBgClass} text-gray-900 border-2 ${borderClass} rounded-full px-3 py-1 text-xs font-bold shadow-sm" title="Region: ${region}">${region}</span>`;
             }).join('');
 
             const regionColors = sortedRegions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]).filter(Boolean);
             let colorBarHTML = '<div class="h-1.5 bg-gray-300"><span class="sr-only">Workshop regions color bar</span></div>';
             if (regionColors.length > 1) {
+                // Apply group-hover for grayscale to the color bar
                 colorBarHTML = `<div class="h-1.5" style="background-image: linear-gradient(to right, ${regionColors.join(', ')})"><span class="sr-only">Workshop regions color bar</span></div>`;
             } else if (regionColors.length === 1) {
+                // Apply group-hover for grayscale to the color bar
                 colorBarHTML = `<div class="h-1.5" style="background-color: ${regionColors[0]}"><span class="sr-only">Workshop region: ${sortedRegions[0]}</span></div>`;
             }
 
@@ -230,13 +238,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Conditional class for image hover opacity/grayscale (only for non-linked cards)
             const imageBaseClass = 'w-full h-48 object-cover';
             // Applied to the image itself, combined with the card's background hover
-            const imageHoverEffectClass = (!link.url || link.url === "") ? 'group-hover:grayscale group-hover:opacity-60 transition-all duration-300' : ''; // Use group-hover
+            const imageHoverEffectClass = (!link.url || link.url === "") ? 'group-hover:grayscale group-hover:opacity-60 transition-all duration-300' : ''; // Use group-hover and stronger opacity
 
-            // Materials Not Available button style
+            // Materials Not Available button style (reverted to original size, stronger background)
             let materialsStatusHTML = '';
             if (!link.url || link.url === "") {
-                // Made the button more prominent with a stronger background color and larger text, shadow
-                materialsStatusHTML = `<div class="flex items-center justify-center bg-gray-800 text-white text-base font-bold uppercase px-4 py-2 rounded-full shadow-lg ml-2" role="status" aria-label="Materials not available for this workshop">Materials Not Available</div>`;
+                materialsStatusHTML = `<div class="flex items-center justify-center bg-gray-800 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg ml-2" role="status" aria-label="Materials not available for this workshop">Materials Not Available</div>`;
             }
 
             // Common HTML structure for the card's visual content, regardless of clickability
