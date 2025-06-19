@@ -44,7 +44,8 @@
         body { background-color: #f8fafc; }
         /* Removed hover effects from .card directly */
         .container { background-color: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); width: 100%; max-width: 80rem; border: 1px solid #e5e7eb; }
-        .dropdown-panel, .year-section, .card-interactive-wrapper { transition: all 0.3s ease-in-out; } /* Apply transition to the wrapper */
+        /* Ensure transitions are on elements that are actually changing */
+        .dropdown-panel, .year-section, .card-interactive-wrapper, .card-image-no-link { transition: all 0.3s ease-in-out; }
         .card.hidden, .year-section.hidden { opacity: 0; transform: scale(0.95); max-height: 0; overflow: hidden; margin: 0 !important; padding: 0 !important; border: none; pointer-events: none; }
         .filter-button:hover .dropdown-arrow { transform: translateY(2px); }
 
@@ -162,10 +163,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         function createCardElement(link) {
-            // Apply hover:bg-gray-50 if no URL exists
-            const cardHoverClass = link.url ? '' : 'hover:bg-gray-50';
+            // Apply hover:bg-gray-50 if no URL exists, ensure transition is for background
+            const cardHoverClass = link.url ? '' : 'hover:bg-gray-50 transition-colors duration-300';
             const card = document.createElement('article');
-            card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden ${cardHoverClass}`; // Added conditional hover class
+            card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden ${cardHoverClass}`;
             card.setAttribute('tabindex', '0');
             card.setAttribute('role', 'group');
 
@@ -225,13 +226,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             const interactiveWrapperClasses = link.url ? 'card-interactive-wrapper flex flex-col flex-grow transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl' : 'flex flex-col flex-grow';
 
             // Conditional class for image hover opacity
-            const imageHeightClass = link.url ? 'w-full h-full object-cover' : 'w-full h-full object-cover hover:opacity-75 transition-opacity duration-300';
+            // Apply hover:opacity-75 and transition directly to the img for non-linked cards
+            const imageBaseClass = 'w-full h-48 object-cover';
+            const imageHoverClass = (!link.url || link.url === "") ? 'hover:opacity-75 transition-opacity duration-300' : '';
 
             const imageContent = link.url ?
                 `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block w-full h-48">
-                    <img loading="lazy" class="${imageHeightClass}" src="${link.image}" alt="Image for ${link.title} workshop" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
+                    <img loading="lazy" class="${imageBaseClass}" src="${link.image}" alt="Image for ${link.title} workshop" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
                 </a>` :
-                `<img loading="lazy" class="w-full h-48 object-cover ${imageHeightClass}" src="${link.image}" alt="Image for ${link.title} workshop (materials not available)" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">`;
+                // For non-linked images, directly apply the hover effect
+                `<img loading="lazy" class="${imageBaseClass} ${imageHoverClass}" src="${link.image}" alt="Image for ${link.title} workshop (materials not available)" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">`;
+
 
             const titleContent = link.url ?
                 `<h3 class="text-lg font-bold text-gray-800 truncate-2-lines">
