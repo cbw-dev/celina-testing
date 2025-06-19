@@ -162,8 +162,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         function createCardElement(link) {
+            // Apply hover:bg-gray-50 if no URL exists
+            const cardHoverClass = link.url ? '' : 'hover:bg-gray-50';
             const card = document.createElement('article');
-            card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden`; // Removed hover classes
+            card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden ${cardHoverClass}`; // Added conditional hover class
             card.setAttribute('tabindex', '0');
             card.setAttribute('role', 'group');
 
@@ -237,7 +239,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </h3>`;
 
             let materialsStatusHTML = '';
-            if (!link.url) {
+            // Condition for "Materials Not Available" for both no URL field or empty URL string
+            if (!link.url || link.url === "") {
                 materialsStatusHTML = `<div class="flex items-center justify-center bg-gray-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg ml-2" role="status" aria-label="Materials not available for this workshop">Materials Not Available</div>`;
             }
 
