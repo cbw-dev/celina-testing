@@ -14,12 +14,12 @@
                     fontFamily: { sans: ['Manrope', 'sans-serif'], },
                     colors: {
                         // Original Brand Colors (Used for borders and color bar)
-                        'brand-purple': '#5A1F65', 
-                        'region-bc': '#3C9048', 
+                        'brand-purple': '#5A1F65',
+                        'region-bc': '#3C9048',
                         'region-alberta': '#86264E',
-                        'region-prairies': '#BD8528', 
+                        'region-prairies': '#BD8528',
                         'region-ontario': '#BB682C',
-                        'region-quebec': '#427FA4', 
+                        'region-quebec': '#427FA4',
                         'region-atlantic': '#208A99',
                         'region-online': '#5A1F65', // Same as brand-purple
 
@@ -73,7 +73,7 @@
                 scroll-snap-align: start;
             }
         }
-        
+
         .truncate-2-lines {
             overflow: hidden;
             display: -webkit-box;
@@ -90,7 +90,6 @@
                 <img src="img/CBW_logo.png" alt="Canadian Bioinformatics Workshops Logo - Link to Bioinformatics.ca homepage" class="mx-auto mb-6 h-40 w-auto">
             </a>
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight">Canadian Bioinformatics Workshops</h1>
-            <!-- <p class="text-lg text-gray-500 mt-3 max-w-2xl mx-auto">Every year, the CBW offers hands-on workshops in bioinformatics. These pages contain the materials for those workshops. You can apply for upcoming workshops here:</p> -->
         </header>
 
         <nav aria-label="Main Navigation" class="text-center mb-12 flex justify-center items-center gap-4 md:gap-6 flex-wrap py-4">
@@ -99,7 +98,7 @@
             <a href="#past-workshops-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">Past Workshops</a>
             <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-purple hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg" style="background-color: #5A1F65;">Apply Now<span class="sr-only"> (opens in new tab)</span></a>
         </nav>
-        
+
         <div id="filter-bar" role="region" aria-label="Workshop Filters" class="mb-12 flex justify-center items-center flex-wrap gap-4 p-4 bg-slate-100/70 rounded-xl">
             <div class="relative w-full sm:w-auto">
                 <label for="text-search-input" class="sr-only">Search workshops by keyword</label>
@@ -138,7 +137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const noResultsMessage = document.getElementById('no-results-message');
         const searchInput = document.getElementById('text-search-input');
         const filterBar = document.getElementById('filter-bar');
-        
+
         const allFilters = {
             year: { container: null, active: new Set(), label: "Year" },
             regions: { container: null, active: new Set(), label: "Region" },
@@ -162,12 +161,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         function createCardElement(link) {
-            // Use <article> for independent content blocks
             const card = document.createElement('article');
             card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl`;
-            // Add tabindex for keyboard navigation if cards are interactive beyond links
-            card.setAttribute('tabindex', '0'); 
-            card.setAttribute('role', 'group'); // Indicate it's a group of related elements
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'group');
 
             card.dataset.year = JSON.stringify([link.year]);
             card.dataset.title = JSON.stringify([link.title]);
@@ -175,19 +172,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             card.dataset.regions = JSON.stringify(link.regions);
             card.dataset.format = JSON.stringify([link.format]);
             card.dataset.search = (
-                link.title + ' ' + 
-                link.tags.join(' ') + ' ' + 
+                link.title + ' ' +
+                link.tags.join(' ') + ' ' +
                 (link.locations || []).join(' ') + ' ' +
                 (link.instructors || []).join(' ')
             ).toLowerCase();
 
             const workshopStartDate = new Date(link.startDate + 'T00:00:00');
             const workshopEndDate = new Date(link.endDate + 'T00:00:00');
-            
+
             let statusFlagHTML = '';
             let statusTags = [];
 
-            // Updated colors for status flags (AAA compliant)
             if (workshopStartDate <= today && today <= workshopEndDate) {
                 statusFlagHTML = `<div class="flex items-center justify-center bg-green-700 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Happening Now</div>`;
                 statusTags = ["Happening Now"];
@@ -198,24 +194,23 @@ document.addEventListener('DOMContentLoaded', async () => {
                  statusTags = ["Past"];
             }
             card.dataset.status = JSON.stringify(statusTags);
-            
+
             const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
-            
-            // Regional tag styling: light background, darker border, dark text
+
             const regionTagsHTML = sortedRegions.map(region => {
-                const borderClass = `border-region-${region.toLowerCase().replace(' ', '-')}`; // Original darker color for border
-                const lightBgClass = `bg-region-${region.toLowerCase().replace(' ', '-')}-light`; // New lighter color for background
+                const borderClass = `border-region-${region.toLowerCase().replace(' ', '-')}`;
+                const lightBgClass = `bg-region-${region.toLowerCase().replace(' ', '-')}-light`;
                 return `<span class="flex items-center justify-center ${lightBgClass} text-gray-900 border-2 ${borderClass} rounded-full px-3 py-1 text-xs font-bold shadow-sm" title="Region: ${region}">${region}</span>`;
             }).join('');
 
             const regionColors = sortedRegions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]).filter(Boolean);
-            let colorBarHTML = '<div class="h-1.5 bg-gray-300"><span class="sr-only">Workshop regions color bar</span></div>'; // Added sr-only
+            let colorBarHTML = '<div class="h-1.5 bg-gray-300"><span class="sr-only">Workshop regions color bar</span></div>';
             if (regionColors.length > 1) {
-                colorBarHTML = `<div class="h-1.5" style="background-image: linear-gradient(to right, ${regionColors.join(', ')})"><span class="sr-only">Workshop regions color bar</span></div>`; // Added sr-only
+                colorBarHTML = `<div class="h-1.5" style="background-image: linear-gradient(to right, ${regionColors.join(', ')})"><span class="sr-only">Workshop regions color bar</span></div>`;
             } else if (regionColors.length === 1) {
-                colorBarHTML = `<div class="h-1.5" style="background-color: ${regionColors[0]}"><span class="sr-only">Workshop region: ${sortedRegions[0]}</span></div>`; // Added sr-only
+                colorBarHTML = `<div class="h-1.5" style="background-color: ${regionColors[0]}"><span class="sr-only">Workshop region: ${sortedRegions[0]}</span></div>`;
             }
-            
+
             const locationsHTML = (link.locations || []).map(loc => `
                 <div class="flex items-center text-sm text-gray-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
@@ -223,26 +218,44 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
             `).join('');
 
+            // Conditional rendering for the image and title based on link.url
+            const imageContent = link.url ?
+                `<a href="${link.url}" target="_blank" rel="noopener noreferrer">
+                    <img loading="lazy" class="w-full h-48 object-cover" src="${link.image}" alt="Image for ${link.title} workshop" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
+                </a>` :
+                `<img loading="lazy" class="w-full h-48 object-cover" src="${link.image}" alt="Image for ${link.title} workshop (materials not available)" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">`;
+
+            const titleContent = link.url ?
+                `<h3 class="text-lg font-bold text-gray-800 truncate-2-lines">
+                    <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}<span class="sr-only"> (opens in new tab)</span></a>
+                </h3>` :
+                `<h3 class="text-lg font-bold text-gray-600 truncate-2-lines" aria-label="${link.title} - Materials not available">
+                    ${link.title}
+                </h3>`;
+
+            let materialsStatusHTML = '';
+            if (!link.url) {
+                materialsStatusHTML = `<div class="flex items-center justify-center bg-gray-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg ml-2" role="status">Materials Not Available</div>`;
+            }
+
+
             card.innerHTML = `
                 ${colorBarHTML}
                 <div class="relative">
-                    <a href="${link.url}" target="_blank" rel="noopener noreferrer">
-                        <img loading="lazy" class="w-full h-48 object-cover" src="${link.image}" alt="Image for ${link.title} workshop" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
-                    </a>
-                    
+                    ${imageContent}
+
                     <div class="absolute top-3 right-3 z-10"> <div class="flex flex-wrap justify-end gap-2 max-w-[calc(100% - 6rem)]"> ${regionTagsHTML}
                         </div>
                     </div>
 
-                    <div class="absolute bottom-3 left-3 z-10"> 
+                    <div class="absolute bottom-3 left-3 z-10 flex items-center">
                         ${statusFlagHTML}
+                        ${materialsStatusHTML}
                     </div>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
                     <div class="min-h-16">
-                        <h3 class="text-lg font-bold text-gray-800 truncate-2-lines">
-                            <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}<span class="sr-only"> (opens in new tab)</span></a>
-                        </h3>
+                        ${titleContent}
                     </div>
                     <div class="space-y-2 mt-3">
                         <div class="flex items-center text-sm text-gray-500">
@@ -268,11 +281,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const currentSection = document.createElement('section');
                 currentSection.className = 'year-section';
                 currentSection.id = 'current-workshops-section';
-                // Use a meaningful heading for the section
                 const currentTitle = document.createElement('h2');
                 currentTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-green-500';
                 currentTitle.textContent = 'Happening Now & Upcoming';
-                // Add aria-live region to the grid container if cards within it can change dynamically
                 const gridContainer = document.createElement('div');
                 gridContainer.className = 'carousel-on-mobile sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-8';
                 gridContainer.setAttribute('role', 'region');
@@ -293,7 +304,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (!firstPastSectionAssigned) { yearSection.id = 'past-workshops-section'; firstPastSectionAssigned = true; }
                 const yearTitle = document.createElement('h2');
                 yearTitle.className = 'text-3xl font-bold mb-8 text-gray-800 pl-3 border-l-4 border-brand-purple';
-                yearTitle.textContent = `${year}`; // More descriptive title
+                yearTitle.textContent = `${year}`;
                 const gridContainer = document.createElement('div');
                 gridContainer.className = 'carousel-on-mobile sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-8';
                 gridContainer.setAttribute('role', 'region');
@@ -304,7 +315,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 linkContainer.insertBefore(yearSection, noResultsMessage);
             });
         }
-        
+
         function updateFilterCounts() {
             for (const type in allFilters) {
                 const count = allFilters[type].active.size;
@@ -312,7 +323,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if(countEl) {
                     countEl.textContent = count;
                     countEl.classList.toggle('hidden', count === 0);
-                    // Update aria-label for screen reader users
                     const button = countEl.closest('.filter-button');
                     if (button) {
                         if (count > 0) {
@@ -329,15 +339,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             const searchTerm = searchInput.value.toLowerCase().trim();
             let totalVisibleCards = 0;
             noResultsMessage.classList.add('hidden');
-            // Announce changes to screen readers when filters are applied
-            noResultsMessage.setAttribute('aria-live', 'off'); // Temporarily turn off for filtering
-            
+            noResultsMessage.setAttribute('aria-live', 'off');
+
             document.querySelectorAll('.card').forEach(card => {
                 const searchMatch = !searchTerm || card.dataset.search.includes(searchTerm);
                 let filtersMatch = true;
                 for (const type in allFilters) {
                     if (allFilters[type].active.size === 0) continue;
-                    
+
                     const cardValues = new Set(JSON.parse(card.dataset[type] || '[]').map(String));
 
                     if (![...allFilters[type].active].some(filterValue => cardValues.has(filterValue))) {
@@ -352,18 +361,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                     card.classList.add('hidden');
                 }
             });
-            
+
             document.querySelectorAll('.year-section').forEach(section => {
                 const visibleCards = section.querySelectorAll('.card:not(.hidden)').length;
                 section.classList.toggle('hidden', visibleCards === 0);
-                // Adjust section heading level if it becomes empty or regains content (less common but good for dynamic views)
             });
 
             if (totalVisibleCards === 0) {
                 noResultsMessage.classList.remove('hidden');
-                noResultsMessage.setAttribute('aria-live', 'polite'); // Announce no results
+                noResultsMessage.setAttribute('aria-live', 'polite');
             } else {
-                noResultsMessage.setAttribute('aria-live', 'off'); // Turn off if results are back
+                noResultsMessage.setAttribute('aria-live', 'off');
             }
             updateFilterCounts();
         }
@@ -382,35 +390,32 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (options[type] && options[type].length > 0) {
                     const dropdown = document.createElement('div');
                     dropdown.className = 'relative';
-                    // Use ARIA attributes for dropdowns: role="combobox", aria-haspopup, aria-expanded, aria-controls
                     const dropdownButtonId = `filter-button-${type}`;
                     const dropdownPanelId = `filter-panel-${type}`;
 
                     const dropdownPanel = document.createElement('div');
                     dropdownPanel.className = 'dropdown-panel hidden absolute z-10 mt-2 w-56 bg-white rounded-md shadow-2xl border border-gray-200/80 origin-top-right right-0 max-h-60 overflow-y-auto';
-                    dropdownPanel.setAttribute('role', 'listbox'); // Indicate it's a list of options
+                    dropdownPanel.setAttribute('role', 'listbox');
                     dropdownPanel.setAttribute('id', dropdownPanelId);
                     dropdownPanel.setAttribute('aria-labelledby', dropdownButtonId);
 
                     const checkboxContainer = document.createElement('div');
                     checkboxContainer.className = 'p-2 space-y-1';
-                    
+
                     options[type].forEach(value => {
-                        // FIX APPLIED HERE: Convert value to string before .replace()
-                        const optionId = `filter-${type}-${String(value).replace(/\s+/g, '-')}`; 
+                        const optionId = `filter-${type}-${String(value).replace(/\s+/g, '-')}`;
                         const label = document.createElement('label');
                         label.className = 'flex items-center space-x-3 p-2 hover:bg-slate-100 rounded-md cursor-pointer';
-                        label.setAttribute('for', optionId); // Link label to input
-                        
-                        // Add aria-checked for checkboxes
+                        label.setAttribute('for', optionId);
+
                         label.innerHTML = `
-                            <input type="checkbox" id="${optionId}" data-type="${type}" value="${value}" 
+                            <input type="checkbox" id="${optionId}" data-type="${type}" value="${value}"
                                 class="h-4 w-4 rounded border-gray-300 text-brand-purple focus:ring-brand-purple/50">
                             <span class="text-sm text-gray-700 font-medium">${value}</span>
                         `;
                         checkboxContainer.appendChild(label);
                     });
-                    
+
                     dropdownPanel.appendChild(checkboxContainer);
                     dropdown.innerHTML = `
                         <button id="${dropdownButtonId}" class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200"
@@ -427,7 +432,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const resetButton = document.createElement('button');
             resetButton.id = 'reset-filters-button';
             resetButton.className = 'bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2.5 px-5 rounded-lg shadow-sm flex items-center transition-all duration-200';
-            resetButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a9 9 0 0114.12-5.12M20 15a9 9 0 01-14.12 5.12" /></svg>Reset Filters`; // More descriptive
+            resetButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a9 9 0 0114.12-5.12M20 15a9 9 0 01-14.12 5.12" /></svg>Reset Filters`;
             filterBar.appendChild(resetButton);
         }
 
@@ -438,13 +443,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const panel = button.nextElementSibling;
                     const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
-                    // Close all other dropdowns
                     document.querySelectorAll('.dropdown-panel').forEach(p => {
                         p.classList.add('hidden');
                         p.previousElementSibling.setAttribute('aria-expanded', 'false');
                     });
-                    
-                    // Toggle current dropdown
+
                     if (!isExpanded) {
                         panel.classList.remove('hidden');
                         button.setAttribute('aria-expanded', 'true');
@@ -452,9 +455,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                         panel.classList.add('hidden');
                         button.setAttribute('aria-expanded', 'false');
                     }
-                    return; 
+                    return;
                 }
-                
+
                 if (e.target.type === 'checkbox') {
                     const type = e.target.dataset.type;
                     const value = e.target.value;
@@ -469,7 +472,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                     document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
                     for (const type in allFilters) allFilters[type].active.clear();
                     applyFilters();
-                    // Announce reset action
                     const liveRegion = document.createElement('div');
                     liveRegion.setAttribute('aria-live', 'polite');
                     liveRegion.classList.add('sr-only');
@@ -479,7 +481,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
 
-            // Close dropdowns when clicking outside
             document.addEventListener('click', e => {
                 if (!e.target.closest('.relative') && !e.target.closest('.dropdown-panel')) {
                     document.querySelectorAll('.dropdown-panel').forEach(p => {
@@ -489,7 +490,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
 
-            // Keyboard navigation for dropdowns (Escape to close)
             document.addEventListener('keydown', e => {
                 if (e.key === 'Escape') {
                     document.querySelectorAll('.dropdown-panel').forEach(p => {
