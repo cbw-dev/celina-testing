@@ -258,12 +258,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // Past workshop with no materials
                 materialsStatusTagHTML = `<div class="flex items-center justify-center bg-gray-800 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg ml-2" role="status" aria-label="Materials not available for this workshop">Materials Not Available</div>`;
                 titleAriaLabelSuffix = ' - Materials not available';
-            } else if (!isPastWorkshop && hasNoUrl) {
-                // Upcoming or happening now workshop with no URL yet
-                materialsStatusTagHTML = `<div class="flex items-center justify-center bg-blue-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg ml-2" role="status" aria-label="Materials coming soon for this workshop">Materials Coming Soon</div>`;
-                titleAriaLabelSuffix = ' - Materials coming soon';
             }
-            // If it's a past workshop WITH a URL, or an upcoming/current workshop WITH a URL, no extra tag.
+            // Removed the 'Materials Coming Soon' else if block as requested.
 
 
             // Common HTML structure for the card's visual content, regardless of clickability
