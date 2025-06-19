@@ -56,6 +56,27 @@
           transition: filter 0.3s ease-in-out;
         }
 
+        /* Styling for the "Materials Coming Soon" overlay */
+        .materials-coming-soon-overlay {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark overlay */
+            opacity: 0; /* Initially hidden */
+            transition: opacity 0.3s ease-in-out; /* Smooth transition */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none; /* Allows clicks to pass through to elements below if desired, though here it covers the image */
+            text-align: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem; /* text-xl */
+            padding: 1rem;
+        }
+        /* When the parent card (which has 'group' class) is hovered, show the overlay */
+        .card.group:hover .materials-coming-soon-overlay {
+            opacity: 1;
+        }
+
+
         .card.hidden, .year-section.hidden { opacity: 0; transform: scale(0.95); max-height: 0; overflow: hidden; margin: 0 !important; padding: 0 !important; border: none; pointer-events: none; }
         .filter-button:hover .dropdown-arrow { transform: translateY(2px); }
 
@@ -184,12 +205,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Determine if this card should have the 'past-no-materials' behavior (graying, MNA tag)
             const applyPastNoMaterialsBehavior = isPastWorkshop && hasNoUrl;
+            // Determine if this card needs the "Materials Coming Soon" overlay
+            const applyComingSoonOverlay = !isPastWorkshop && hasNoUrl;
+
 
             // Apply hover:bg-gray-100 to the card itself if it's a past workshop with no URL
             const cardClassSuffix = applyPastNoMaterialsBehavior ? ' hover:bg-gray-100 past-no-materials' : '';
             const card = document.createElement('article');
             card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden ${cardClassSuffix}`;
             card.setAttribute('role', 'group'); // Used for group-hover targeting in CSS
+
 
             card.dataset.year = JSON.stringify([link.year]);
             card.dataset.title = JSON.stringify([link.title]);
@@ -248,9 +273,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Conditional class for image hover opacity/grayscale (only for past workshops with no materials)
             const imageBaseClass = 'w-full h-48 object-cover';
+            // No image hover effect for "coming soon" cards, as the overlay will handle it.
             const imageHoverEffectClass = applyPastNoMaterialsBehavior ? 'group-hover:grayscale group-hover:opacity-60 transition-all duration-300' : '';
 
-            // Materials Status Tag Logic
+            // Materials Status Tag Logic for MNA (only for past workshops with no materials)
             let materialsStatusTagHTML = '';
             let titleAriaLabelSuffix = '';
 
@@ -259,15 +285,26 @@ document.addEventListener('DOMContentLoaded', async () => {
                 materialsStatusTagHTML = `<div class="flex items-center justify-center bg-gray-800 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg ml-2" role="status" aria-label="Materials not available for this workshop">Materials Not Available</div>`;
                 titleAriaLabelSuffix = ' - Materials not available';
             }
-            // Removed the 'Materials Coming Soon' else if block as requested.
+            // Removed the 'Materials Coming Soon' else if block as requested previously.
+
+
+            // Overlay for "Materials Coming Soon"
+            let comingSoonOverlayHTML = '';
+            if (applyComingSoonOverlay) {
+                comingSoonOverlayHTML = `
+                    <div class="absolute inset-0 flex items-center justify-center materials-coming-soon-overlay">
+                        <span class="text-xl font-bold uppercase">Materials Coming Soon</span>
+                        <span class="sr-only"> for ${link.title} workshop</span>
+                    </div>
+                `;
+            }
 
 
             // Common HTML structure for the card's visual content, regardless of clickability
             const commonCardVisuals = `
                 <div class="relative">
                     <img loading="lazy" class="${imageBaseClass} ${imageHoverEffectClass}" src="${link.image}" alt="Image for ${link.title} workshop${titleAriaLabelSuffix}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
-
-                    <div class="absolute top-3 right-3 z-10"> <div class="flex flex-wrap justify-end gap-2 max-w-[calc(100% - 6rem)]"> ${regionTagsHTML}
+                    ${comingSoonOverlayHTML} <div class="absolute top-3 right-3 z-10"> <div class="flex flex-wrap justify-end gap-2 max-w-[calc(100% - 6rem)]"> ${regionTagsHTML}
                         </div>
                     </div>
 
@@ -304,10 +341,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 `;
             } else {
                 // If no URL, provide the content directly within the article
-                // Only add 'group' class to the card if past and no materials, to enable group-hover CSS
-                if (applyPastNoMaterialsBehavior) {
-                    card.classList.add('group');
-                }
+                // Add 'group' class to the card to enable group-hover CSS for either 'past-no-materials' or 'coming-soon' overlays
+                card.classList.add('group');
                 card.innerHTML = `
                     ${colorBarHTML}
                     <div class="flex flex-col flex-grow">
