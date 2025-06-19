@@ -42,8 +42,9 @@
     <style>
         html, body { font-family: 'Manrope', sans-serif; scroll-behavior: smooth; }
         body { background-color: #f8fafc; }
+        /* Removed hover effects from .card directly */
         .container { background-color: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); width: 100%; max-width: 80rem; border: 1px solid #e5e7eb; }
-        .dropdown-panel, .year-section, .card { transition: all 0.3s ease-in-out; }
+        .dropdown-panel, .year-section, .card-interactive-wrapper { transition: all 0.3s ease-in-out; } /* Apply transition to the wrapper */
         .card.hidden, .year-section.hidden { opacity: 0; transform: scale(0.95); max-height: 0; overflow: hidden; margin: 0 !important; padding: 0 !important; border: none; pointer-events: none; }
         .filter-button:hover .dropdown-arrow { transform: translateY(2px); }
 
@@ -104,7 +105,7 @@
                 <label for="text-search-input" class="sr-only">Search workshops by keyword</label>
                 <input type="search" id="text-search-input" placeholder="Search workshops..." class="w-full sm:w-48 px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-purple focus:border-brand-purple transition">
             </div>
-            </div>
+        </div>
 
         <main id="link-container" class="space-y-16">
             <div id="no-results-message" class="hidden" role="status" aria-live="polite">
@@ -156,13 +157,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (!endDateStr || startDateStr === endDateStr) return `${startMonth} ${startDay}, ${year}`;
             const endMonth = end.toLocaleString('en-US', { month: 'long' });
             const endDay = end.getDate();
-            if (startMonth === endMonth) return `${startMonth} ${startDay}-${endDay}, ${year}`;
+            if (startMonth === endMonth) return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${year}`;
             return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${year}`;
         }
 
         function createCardElement(link) {
             const card = document.createElement('article');
-            card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl`;
+            card.className = `card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden`; // Removed hover classes
             card.setAttribute('tabindex', '0');
             card.setAttribute('role', 'group');
 
@@ -218,10 +219,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
             `).join('');
 
-            // Conditional rendering for the image and title based on link.url
+            // New wrapper for interactive cards
+            const interactiveWrapperClasses = link.url ? 'card-interactive-wrapper flex flex-col flex-grow transform hover:-translate-y-1 transition-all duration-300 ease-in-out hover:shadow-xl' : 'flex flex-col flex-grow';
+
             const imageContent = link.url ?
-                `<a href="${link.url}" target="_blank" rel="noopener noreferrer">
-                    <img loading="lazy" class="w-full h-48 object-cover" src="${link.image}" alt="Image for ${link.title} workshop" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
+                `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block w-full h-48">
+                    <img loading="lazy" class="w-full h-full object-cover" src="${link.image}" alt="Image for ${link.title} workshop" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
                 </a>` :
                 `<img loading="lazy" class="w-full h-48 object-cover" src="${link.image}" alt="Image for ${link.title} workshop (materials not available)" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">`;
 
@@ -235,34 +238,35 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             let materialsStatusHTML = '';
             if (!link.url) {
-                materialsStatusHTML = `<div class="flex items-center justify-center bg-gray-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg ml-2" role="status">Materials Not Available</div>`;
+                materialsStatusHTML = `<div class="flex items-center justify-center bg-gray-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg ml-2" role="status" aria-label="Materials not available for this workshop">Materials Not Available</div>`;
             }
-
 
             card.innerHTML = `
                 ${colorBarHTML}
-                <div class="relative">
-                    ${imageContent}
+                <div class="${interactiveWrapperClasses}">
+                    <div class="relative">
+                        ${imageContent}
 
-                    <div class="absolute top-3 right-3 z-10"> <div class="flex flex-wrap justify-end gap-2 max-w-[calc(100% - 6rem)]"> ${regionTagsHTML}
+                        <div class="absolute top-3 right-3 z-10"> <div class="flex flex-wrap justify-end gap-2 max-w-[calc(100% - 6rem)]"> ${regionTagsHTML}
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-3 left-3 z-10 flex items-center">
+                            ${statusFlagHTML}
+                            ${materialsStatusHTML}
                         </div>
                     </div>
-
-                    <div class="absolute bottom-3 left-3 z-10 flex items-center">
-                        ${statusFlagHTML}
-                        ${materialsStatusHTML}
-                    </div>
-                </div>
-                <div class="p-5 flex flex-col flex-grow">
-                    <div class="min-h-16">
-                        ${titleContent}
-                    </div>
-                    <div class="space-y-2 mt-3">
-                        <div class="flex items-center text-sm text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                            <span class="font-medium">${formatDateRange(link.startDate, link.endDate)}</span>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <div class="min-h-16">
+                            ${titleContent}
                         </div>
-                        ${locationsHTML}
+                        <div class="space-y-2 mt-3">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                <span class="font-medium">${formatDateRange(link.startDate, link.endDate)}</span>
+                            </div>
+                            ${locationsHTML}
+                        </div>
                     </div>
                 </div>`;
             return card;

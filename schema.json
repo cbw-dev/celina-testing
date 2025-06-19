@@ -40,7 +40,7 @@
             }
         },
         "required": [
-            "url", "title", "tags", "regions", "year", "startDate", "endDate", "image", "locations", "format"
+            "title", "tags", "regions", "year", "startDate", "endDate", "image", "locations", "format"
         ]
     }
 }
