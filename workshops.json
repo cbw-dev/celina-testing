@@ -26,7 +26,7 @@
         "format": "In-person"
     },
     {
-        "url": "",
+        "url": "#",
         "title": "The Great Kessel Run: A Bioinformatics Sabbatical",
         "instructors": ["Han Solo", "Chewbacca"],
         "tags": ["long-term", "sabbatical", "smuggling-data"],
@@ -247,7 +247,7 @@
         "format": "Online"
     },
     {
-        "url": "#",
+        "url": "",
         "title": "Founding Workshop: A New Hope for Bioinformatics",
         "instructors": ["Dr. Francis Ouellette"],
         "tags": ["history", "legacy", "a-new-hope"],
