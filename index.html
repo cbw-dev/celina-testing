@@ -147,10 +147,6 @@
                 <label for="text-search-input" class="sr-only">Search workshops by keyword</label>
                 <input type="search" id="text-search-input" placeholder="Search workshops..." class="w-full sm:w-48 px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-purple focus:border-brand-purple transition">
             </div>
-            <div class="flex items-center">
-                <input type="checkbox" id="show-materials-only" class="h-4 w-4 rounded border-gray-300 text-brand-purple focus:ring-brand-purple/50">
-                <label for="show-materials-only" class="ml-2 text-sm font-medium text-gray-700">Show Materials Only</label>
-            </div>
         </div>
 
         <main id="link-container" class="space-y-16">
@@ -184,7 +180,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         const noResultsMessage = document.getElementById('no-results-message');
         const searchInput = document.getElementById('text-search-input');
         const filterBar = document.getElementById('filter-bar');
-        const showMaterialsOnlyCheckbox = document.getElementById('show-materials-only'); // Get the new checkbox
 
         const allFilters = {
             year: { container: null, active: new Set(), label: "Year" },
@@ -236,8 +231,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 (link.locations || []).join(' ') + ' ' +
                 (link.instructors || []).join(' ')
             ).toLowerCase();
-            // Add a data attribute to indicate if the card has a URL
-            card.dataset.hasUrl = link.url ? 'true' : 'false';
 
 
             let statusFlagHTML = '';
@@ -324,7 +317,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     <div class="absolute bottom-3 left-3 z-10 flex items-center">
                         ${statusFlagHTML}
-                        ${materialsStatusTagHTML} </div>
+                        ${materialsStatusTagHTML}
+                    </div>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
                     <div class="min-h-16">
@@ -354,7 +348,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 `;
             } else {
                 // If no URL, provide the content directly within the article
-                card.classList.add('group'); // Crucial for the `group-hover` effect on the overlay
+                // Add 'group' class to the card to enable group-hover CSS for either 'past-no-materials' or 'coming-soon' overlays
+                card.classList.add('group');
                 card.innerHTML = `
                     ${colorBarHTML}
                     <div class="flex flex-col flex-grow">
@@ -442,8 +437,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         function applyFilters() {
             const searchTerm = searchInput.value.toLowerCase().trim();
-            const showMaterialsOnly = showMaterialsOnlyCheckbox.checked; // Get the state of the new checkbox
-
             let totalVisibleCards = 0;
             noResultsMessage.classList.add('hidden');
             noResultsMessage.setAttribute('aria-live', 'off');
@@ -461,12 +454,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         break;
                     }
                 }
-
-                // New logic for "Show Materials Only"
-                const materialsMatch = !showMaterialsOnly || card.dataset.hasUrl === 'true';
-
-
-                if (searchMatch && filtersMatch && materialsMatch) { // Include materialsMatch in the condition
+                if (searchMatch && filtersMatch) {
                     card.classList.remove('hidden');
                     totalVisibleCards++;
                 } else {
@@ -571,12 +559,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
 
                 if (e.target.type === 'checkbox') {
-                    // If it's the "Show Materials Only" checkbox
-                    if (e.target.id === 'show-materials-only') {
-                        applyFilters();
-                        return;
-                    }
-                    // Existing filter checkbox logic
                     const type = e.target.dataset.type;
                     const value = e.target.value;
                     if (e.target.checked) allFilters[type].active.add(value);
@@ -589,8 +571,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                     searchInput.value = '';
                     document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
                     for (const type in allFilters) allFilters[type].active.clear();
-                    // Make sure to uncheck the new checkbox on reset
-                    showMaterialsOnlyCheckbox.checked = false;
                     applyFilters();
                     const liveRegion = document.createElement('div');
                     liveRegion.setAttribute('aria-live', 'polite');
