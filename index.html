@@ -130,7 +130,7 @@
             align-items: center;
             font-size: 0.875rem; /* text-sm */
             font-weight: 600; /* font-semibold */
-            margin-top: 0.5rem;
+            /* Removed margin-top to allow custom placement in HTML structure */
             color: #374151; /* gray-700 */
         }
         .status-icon-text svg {
@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (workshopStartDate <= today && today <= workshopEndDate) {
                 // Happening Now: Icon with Text - Emerald 600
                 statusInfoHTML = `
-                    <div class="status-icon-text icon-green">
+                    <div class="status-icon-text icon-green mb-2"> <!-- Added mb-2 for spacing -->
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 6a.75.75 0 01.75.75v5.5a.75.75 0 01-1.5 0v-5.5A.75.75 0 0112 6Z" clip-rule="evenodd" /></svg>
                         <span>Happening Now</span>
                     </div>`;
@@ -267,7 +267,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             } else if (workshopStartDate > today) {
                 // Upcoming: Icon with Text - Indigo 700
                 statusInfoHTML = `
-                    <div class="status-icon-text icon-blue">
+                    <div class="status-icon-text icon-blue mb-2"> <!-- Added mb-2 for spacing -->
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6.75zm-1.5 9.75a.75.75 0 000 1.5h15a.75.75 0 000-1.5H5.25z" clip-rule="evenodd" /></svg>
                         <span>Upcoming</span>
                     </div>`;
@@ -317,14 +317,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             let overlayHTML = '';
             if (applyComingSoonOverlay) {
                 overlayHTML = `
-                    <div class="absolute inset-0 flex items-center justify-center materials-overlay">
+                    <div class="absolute inset-0 flex items-center justify-content-center materials-overlay">
                         <span class="text-xl font-bold uppercase">Materials Coming Soon</span>
                         <span class="sr-only"> for ${link.title} workshop</span>
                     </div>
                 `;
             } else if (applyPastNoMaterialsBehavior) {
                 overlayHTML = `
-                    <div class="absolute inset-0 flex items-center justify-center materials-overlay">
+                    <div class="absolute inset-0 flex items-center justify-content-center materials-overlay">
                         <span class="text-xl font-bold uppercase">Material Not Available</span>
                         <span class="sr-only"> for ${link.title} workshop</span>
                     </div>
@@ -345,12 +345,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
+                    ${statusInfoHTML} <!-- Status info moved here, above the title -->
                     <div class="min-h-16">
                         <h3 class="text-lg font-bold ${applyPastNoMaterialsBehavior ? 'text-gray-600' : 'text-gray-800'} truncate-2-lines" ${titleAriaLabelSuffix ? `aria-label="${link.title}${titleAriaLabelSuffix}"` : ''}>
                             ${link.title}
                         </h3>
                     </div>
-                    ${statusInfoHTML} <!-- Status info placed directly below the title/min-h-16 block -->
                     <div class="space-y-2 mt-3">
                         <div class="flex items-center text-sm text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
@@ -546,7 +546,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             aria-haspopup="listbox" aria-expanded="false" aria-controls="${dropdownPanelId}">
                             <span>${allFilters[type].label}</span>
                             <span id="${type}-filter-count" class="ml-2 bg-brand-purple text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
-                            <svg class="dropdown-arrow w-4 h-4 ml-2 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg class="dropdown-arrow w-4 h-4 ml-2 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
                         </button>`;
                     dropdown.appendChild(dropdownPanel);
                     filterBar.appendChild(dropdown);
