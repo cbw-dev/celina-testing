@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const isPastWorkshop = workshopEndDate < today;
             const hasNoUrl = (!link.url || link.url === "");
 
-            // Determine if this card should have the 'past-no-materials' behavior
+            // Determine if this card should have the 'past-no-materials' behavior (graying, MNA tag)
             const applyPastNoMaterialsBehavior = isPastWorkshop && hasNoUrl;
 
             // Apply hover:bg-gray-100 to the card itself if it's a past workshop with no URL
@@ -202,16 +202,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             let statusFlagHTML = '';
             let statusTags = [];
 
+            // Determine primary workshop status (Happening Now, Upcoming, Past)
             if (workshopStartDate <= today && today <= workshopEndDate) {
                 statusFlagHTML = `<div class="flex items-center justify-center bg-green-700 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Happening Now</div>`;
                 statusTags = ["Happening Now"];
             } else if (workshopStartDate > today) {
                 statusFlagHTML = `<div class="flex items-center justify-center bg-orange-400 text-gray-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Upcoming</div>`;
                 statusTags = ["Upcoming"];
-            } else {
+            } else { // Workshop is in the past
                  statusTags = ["Past"];
             }
             card.dataset.status = JSON.stringify(statusTags);
+
 
             const sortedRegions = [...link.regions].sort((a,b) => regionOrder.indexOf(a) - regionOrder.indexOf(b));
 
@@ -243,16 +245,26 @@ document.addEventListener('DOMContentLoaded', async () => {
             const imageBaseClass = 'w-full h-48 object-cover';
             const imageHoverEffectClass = applyPastNoMaterialsBehavior ? 'group-hover:grayscale group-hover:opacity-60 transition-all duration-300' : '';
 
-            // Materials Not Available button style (only for past workshops with no materials)
-            let materialsStatusHTML = '';
+            // Materials Status Tag Logic
+            let materialsStatusTagHTML = '';
+            let titleAriaLabelSuffix = '';
+
             if (applyPastNoMaterialsBehavior) {
-                materialsStatusHTML = `<div class="flex items-center justify-center bg-gray-800 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg ml-2" role="status" aria-label="Materials not available for this workshop">Materials Not Available</div>`;
+                // Past workshop with no materials
+                materialsStatusTagHTML = `<div class="flex items-center justify-center bg-gray-800 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg ml-2" role="status" aria-label="Materials not available for this workshop">Materials Not Available</div>`;
+                titleAriaLabelSuffix = ' - Materials not available';
+            } else if (!isPastWorkshop && hasNoUrl) {
+                // Upcoming or happening now workshop with no URL yet
+                materialsStatusTagHTML = `<div class="flex items-center justify-center bg-blue-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg ml-2" role="status" aria-label="Materials coming soon for this workshop">Materials Coming Soon</div>`;
+                titleAriaLabelSuffix = ' - Materials coming soon';
             }
+            // If it's a past workshop WITH a URL, or an upcoming/current workshop WITH a URL, no extra tag.
+
 
             // Common HTML structure for the card's visual content, regardless of clickability
             const commonCardVisuals = `
                 <div class="relative">
-                    <img loading="lazy" class="${imageBaseClass} ${imageHoverEffectClass}" src="${link.image}" alt="Image for ${link.title} workshop${applyPastNoMaterialsBehavior ? ' (materials not available)' : ''}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
+                    <img loading="lazy" class="${imageBaseClass} ${imageHoverEffectClass}" src="${link.image}" alt="Image for ${link.title} workshop${titleAriaLabelSuffix}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
 
                     <div class="absolute top-3 right-3 z-10"> <div class="flex flex-wrap justify-end gap-2 max-w-[calc(100% - 6rem)]"> ${regionTagsHTML}
                         </div>
@@ -260,12 +272,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     <div class="absolute bottom-3 left-3 z-10 flex items-center">
                         ${statusFlagHTML}
-                        ${materialsStatusHTML}
+                        ${materialsStatusTagHTML}
                     </div>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
                     <div class="min-h-16">
-                        <h3 class="text-lg font-bold ${applyPastNoMaterialsBehavior ? 'text-gray-600' : 'text-gray-800'} truncate-2-lines" ${applyPastNoMaterialsBehavior ? `aria-label="${link.title} - Materials not available"` : ''}>
+                        <h3 class="text-lg font-bold ${applyPastNoMaterialsBehavior ? 'text-gray-600' : 'text-gray-800'} truncate-2-lines" ${titleAriaLabelSuffix ? `aria-label="${link.title}${titleAriaLabelSuffix}"` : ''}>
                             ${link.title}
                         </h3>
                     </div>
@@ -290,7 +302,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </a>
                 `;
             } else {
-                // If no URL, provide the content directly within the article, and use a 'group' class
+                // If no URL, provide the content directly within the article
                 // Only add 'group' class to the card if past and no materials, to enable group-hover CSS
                 if (applyPastNoMaterialsBehavior) {
                     card.classList.add('group');
@@ -317,6 +329,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 else pastLinks.push(link);
             }
 
+            // Sort current and upcoming workshops by start date
+            currentAndUpcomingLinks.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+            // Sort past workshops by start date (most recent first)
+            pastLinks.sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+
+
             if (currentAndUpcomingLinks.length > 0) {
                 const currentSection = document.createElement('section');
                 currentSection.className = 'year-section';
@@ -328,7 +346,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 gridContainer.className = 'carousel-on-mobile sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-8';
                 gridContainer.setAttribute('role', 'region');
                 gridContainer.setAttribute('aria-label', 'List of Upcoming and Happening Now Workshops');
-                currentAndUpcomingLinks.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
                 currentAndUpcomingLinks.forEach(link => gridContainer.appendChild(createCardElement(link)));
                 currentSection.appendChild(currentTitle);
                 currentSection.appendChild(gridContainer);
@@ -336,7 +353,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             const pastLinksByYear = pastLinks.reduce((acc, link) => { (acc[link.year] = acc[link.year] || []).push(link); return acc; }, {});
-            const sortedYears = Object.keys(pastLinksByYear).sort((a, b) => b - a);
+            const sortedYears = Object.keys(pastLinksByYear).sort((a, b) => b - a); // Sort years descending
             let firstPastSectionAssigned = false;
             sortedYears.forEach(year => {
                 const yearSection = document.createElement('section');
