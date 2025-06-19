@@ -137,6 +137,8 @@
             font-size: 1.25rem; /* Roughly match the size of the previous Font Awesome icons */
             margin-right: 0.5rem;
             flex-shrink: 0;
+            display: inline-block; /* Treat icon as inline-block */
+            vertical-align: middle; /* Align icon vertically in the middle */
             line-height: 1; /* Ensures icon is properly aligned vertically */
         }
         /* Custom colors for icons - using Tailwind's default palette */
@@ -206,7 +208,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             title: { container: null, active: new Set(), label: "Workshop" },
             tags: { container: null, active: new Set(), label: "Topics" },
             format: { container: null, active: new Set(), label: "Format" },
-            status: { container: null, active: new Set(), label: "Status" }
+            status: ["Upcoming", "Happening Now", "Past"]
         };
 
         function formatDateRange(startDateStr, endDateStr) {
@@ -266,7 +268,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             } else if (workshopStartDate > today) {
                 statusInfoHTML = `
                     <div class="status-icon-text icon-orange mb-2">
-                        <span class="icon-symbol">&#x1F551;</span> <!-- Clock Face One Oclock Unicode -->
+                        <span class="icon-symbol">&#x23F1;</span> <!-- Stopwatch Unicode -->
                         <span>Upcoming</span>
                     </div>`;
                 statusTags = ["Upcoming"];
