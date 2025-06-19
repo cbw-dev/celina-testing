@@ -174,7 +174,7 @@
             <div id="no-results-message" class="hidden" role="status" aria-live="polite">
                 <div class="text-center py-12 px-6 bg-slate-50 rounded-lg">
                     <h3 class="mt-2 text-xl font-semibold text-gray-900">No workshops found</h3>
-                    <p class="mt-1 text-base text-gray-500">Try adjusting your search or filter criteria.</p>
+                    <p class="mt-1 text-base text-gray-500">Could not load or render workshops. Please check the browser console for details.</p>
                 </div>
             </div>
         </main>
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             title: { container: null, active: new Set(), label: "Workshop" },
             tags: { container: null, active: new Set(), label: "Topics" },
             format: { container: null, active: new Set(), label: "Format" },
-            status: ["Upcoming", "Happening Now", "Past"]
+            status: { container: null, active: new Set(), label: "Status" }
         };
 
         function formatDateRange(startDateStr, endDateStr) {
@@ -442,19 +442,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         function updateFilterCounts() {
             for (const type in allFilters) {
-                const count = allFilters[type].active.size;
-                const countEl = document.getElementById(`${type}-filter-count`);
-                if(countEl) {
-                    countEl.textContent = count;
-                    countEl.classList.toggle('hidden', count === 0);
-                    const button = countEl.closest('.filter-button');
-                    if (button) {
-                        if (count > 0) {
-                            button.setAttribute('aria-label', `${allFilters[type].label} filter active, ${count} selected`);
-                        } else {
-                            button.setAttribute('aria-label', `${allFilters[type].label} filter`);
+                // Defensive check to ensure allFilters[type] and allFilters[type].active exist and is a Set
+                if (allFilters[type] && allFilters[type].active instanceof Set) {
+                    const count = allFilters[type].active.size;
+                    const countEl = document.getElementById(`${type}-filter-count`);
+                    if(countEl) {
+                        countEl.textContent = count;
+                        countEl.classList.toggle('hidden', count === 0);
+                        const button = countEl.closest('.filter-button');
+                        if (button) {
+                            if (count > 0) {
+                                button.setAttribute('aria-label', `${allFilters[type].label} filter active, ${count} selected`);
+                            } else {
+                                button.setAttribute('aria-label', `${allFilters[type].label} filter`);
+                            }
                         }
                     }
+                } else {
+                    // Log a detailed error to help diagnose which filter type is problematic
+                    console.error(`Error: Filter type '${type}' or its 'active' property is not a Set. Current state for this filter:`, allFilters[type]);
                 }
             }
         }
