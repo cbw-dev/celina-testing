@@ -238,12 +238,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Determine primary workshop status (Happening Now, Upcoming, Past)
             if (workshopStartDate <= today && today <= workshopEndDate) {
-                // Happening Now: Original green
-                statusFlagHTML = `<div class="flex items-center justify-center bg-green-700 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Happening Now</div>`;
+                // Happening Now: White background with black border and text
+                statusFlagHTML = `<div class="flex items-center justify-center border border-gray-900 bg-white text-gray-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Happening Now</div>`;
                 statusTags = ["Happening Now"];
             } else if (workshopStartDate > today) {
-                // Upcoming: White with black border
-                statusFlagHTML = `<div class="flex items-center justify-center border border-gray-900 bg-white text-gray-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Upcoming</div>`;
+                // Upcoming: Light yellow background with black border and text
+                statusFlagHTML = `<div class="flex items-center justify-center border border-gray-900 bg-yellow-100 text-gray-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Upcoming</div>`;
                 statusTags = ["Upcoming"];
             } else { // Workshop is in the past
                  statusTags = ["Past"];
