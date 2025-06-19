@@ -238,10 +238,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Determine primary workshop status (Happening Now, Upcoming, Past)
             if (workshopStartDate <= today && today <= workshopEndDate) {
+                // Happening Now: Original green
                 statusFlagHTML = `<div class="flex items-center justify-center bg-green-700 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Happening Now</div>`;
                 statusTags = ["Happening Now"];
             } else if (workshopStartDate > today) {
-                statusFlagHTML = `<div class="flex items-center justify-center bg-orange-400 text-gray-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Upcoming</div>`;
+                // Upcoming: White with black border
+                statusFlagHTML = `<div class="flex items-center justify-center border border-gray-900 bg-white text-gray-900 text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg" role="status">Upcoming</div>`;
                 statusTags = ["Upcoming"];
             } else { // Workshop is in the past
                  statusTags = ["Past"];
@@ -317,7 +319,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     <div class="absolute bottom-3 left-3 z-10 flex items-center">
                         ${statusFlagHTML}
-                        ${materialsStatusTagHTML}
+                        ${materialsStatusTagHTML} <!-- This will now be empty for past-no-materials -->
                     </div>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
@@ -348,8 +350,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 `;
             } else {
                 // If no URL, provide the content directly within the article
-                // Add 'group' class to the card to enable group-hover CSS for either 'past-no-materials' or 'coming-soon' overlays
-                card.classList.add('group');
+                card.classList.add('group'); // Crucial for the `group-hover` effect on the overlay
                 card.innerHTML = `
                     ${colorBarHTML}
                     <div class="flex flex-col flex-grow">
