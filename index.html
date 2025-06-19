@@ -174,7 +174,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         function createCardElement(link) {
+            // DECLARATION ADDED/CONFIRMED HERE
+            const workshopStartDate = new Date(link.startDate + 'T00:00:00');
             const workshopEndDate = new Date(link.endDate + 'T00:00:00');
+            // END DECLARATION FIX
+
             const isPastWorkshop = workshopEndDate < today;
             const hasNoUrl = (!link.url || link.url === "");
 
@@ -198,6 +202,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 (link.locations || []).join(' ') + ' ' +
                 (link.instructors || []).join(' ')
             ).toLowerCase();
+
 
             let statusFlagHTML = '';
             let statusTags = [];
