@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const regionTagsHTML = sortedRegions.map(region => {
                 const borderClass = `border-region-${region.toLowerCase().replace(' ', '-')}`;
                 const lightBgClass = `bg-region-${region.toLowerCase().replace(' ', '-')}-light`;
-                return `<span class="flex items-center justify-center ${lightBgClass} text-gray-900 border-2 ${borderClass} rounded-full px-3 py-1 text-xs font-bold shadow-sm" title="Region: ${region}">${region}</span>`;
+                return `<span class="flex items-center justify-center ${lightBgClass} text-gray-900 border-2 ${borderClass} rounded-full px-3 py-1 text-xs font-bold shadow-sm" title="Region: <span class="math-inline">\{region\}"\></span>{region}</span>`;
             }).join('');
 
             const regionColors = sortedRegions.map(region => tailwind.config.theme.extend.colors[`region-${region.toLowerCase()}`]).filter(Boolean);
@@ -228,19 +228,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Conditional class for image hover opacity
             // Apply hover:opacity-75 and transition directly to the img for non-linked cards
             const imageBaseClass = 'w-full h-48 object-cover';
-            const imageHoverClass = (!link.url || link.url === "") ? 'hover:opacity-75 transition-opacity duration-300' : '';
+            const imageHoverClass = (!link.url || link.url === "") ? 'hover:opacity-50 transition-opacity duration-300' : ''; // Reduced opacity for stronger effect
 
             const imageContent = link.url ?
-                `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block w-full h-48">
-                    <img loading="lazy" class="${imageBaseClass}" src="${link.image}" alt="Image for ${link.title} workshop" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
+                `<a href="<span class="math-inline">\{link\.url\}" target\="\_blank" rel\="noopener noreferrer" class\="block w\-full h\-48"\>
+<img loading\="lazy" class\="</span>{imageBaseClass}" src="${link.image}" alt="Image for ${link.title} workshop" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">
                 </a>` :
                 // For non-linked images, directly apply the hover effect
-                `<img loading="lazy" class="${imageBaseClass} ${imageHoverClass}" src="${link.image}" alt="Image for ${link.title} workshop (materials not available)" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">`;
+                `<img loading="lazy" class="${imageBaseClass} <span class="math-inline">\{imageHoverClass\}" src\="</span>{link.image}" alt="Image for ${link.title} workshop (materials not available)" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=800';">`;
 
 
             const titleContent = link.url ?
                 `<h3 class="text-lg font-bold text-gray-800 truncate-2-lines">
-                    <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="hover:text-brand-purple transition-colors">${link.title}<span class="sr-only"> (opens in new tab)</span></a>
+                    <a href="<span class="math-inline">\{link\.url\}" target\="\_blank" rel\="noopener noreferrer" class\="hover\:text\-brand\-purple transition\-colors"\></span>{link.title}<span class="sr-only"> (opens in new tab)</span></a>
                 </h3>` :
                 `<h3 class="text-lg font-bold text-gray-600 truncate-2-lines" aria-label="${link.title} - Materials not available">
                     ${link.title}
@@ -249,12 +249,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             let materialsStatusHTML = '';
             // Condition for "Materials Not Available" for both no URL field or empty URL string
             if (!link.url || link.url === "") {
-                materialsStatusHTML = `<div class="flex items-center justify-center bg-gray-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg ml-2" role="status" aria-label="Materials not available for this workshop">Materials Not Available</div>`;
+                // Made the button more prominent with a stronger background color and larger text
+                materialsStatusHTML = `<div class="flex items-center justify-center bg-gray-700 text-white text-sm font-bold uppercase px-4 py-2 rounded-full shadow-md ml-2" role="status" aria-label="Materials not available for this workshop">Materials Not Available</div>`;
             }
 
             card.innerHTML = `
-                ${colorBarHTML}
-                <div class="${interactiveWrapperClasses}">
+                <span class="math-inline">\{colorBarHTML\}
+<div class\="</span>{interactiveWrapperClasses}">
                     <div class="relative">
                         ${imageContent}
 
@@ -269,12 +270,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                     <div class="p-5 flex flex-col flex-grow">
                         <div class="min-h-16">
-                            ${titleContent}
-                        </div>
-                        <div class="space-y-2 mt-3">
-                            <div class="flex items-center text-sm text-gray-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                                <span class="font-medium">${formatDateRange(link.startDate, link.endDate)}</span>
+                            <span class="math-inline">\{titleContent\}
+</div\>
+<div class\="space\-y\-2 mt\-3"\>
+<div class\="flex items\-center text\-sm text\-gray\-500"\>
+<svg xmlns\="http\://www\.w3\.org/2000/svg" class\="h\-5 w\-5 mr\-2 text\-gray\-400 shrink\-0" <41\>fill\="none" viewBox\="0 0 24 24" stroke\="currentColor" stroke\-width\="2" aria\-hidden\="true"\><path stroke\-linecap\="round" stroke\-linejoin\="round" d\="M8</41\> 7V3m8 4V3m\-9 8h10M5 21h14a2 2 0 002\-2V7a2 0 00\-2\-2H5a2 2 0 00\-2 2v12a2 2 0 002 2z" /\></svg\>
+<span class\="font\-medium"\></span>{formatDateRange(link.startDate, link.endDate)}</span>
                             </div>
                             ${locationsHTML}
                         </div>
@@ -418,25 +419,25 @@ document.addEventListener('DOMContentLoaded', async () => {
                     checkboxContainer.className = 'p-2 space-y-1';
 
                     options[type].forEach(value => {
-                        const optionId = `filter-${type}-${String(value).replace(/\s+/g, '-')}`;
+                        const optionId = `filter-<span class="math-inline">\{type\}\-</span>{String(value).replace(/\s+/g, '-')}`;
                         const label = document.createElement('label');
                         label.className = 'flex items-center space-x-3 p-2 hover:bg-slate-100 rounded-md cursor-pointer';
                         label.setAttribute('for', optionId);
 
                         label.innerHTML = `
-                            <input type="checkbox" id="${optionId}" data-type="${type}" value="${value}"
-                                class="h-4 w-4 rounded border-gray-300 text-brand-purple focus:ring-brand-purple/50">
-                            <span class="text-sm text-gray-700 font-medium">${value}</span>
+                            <input type="checkbox" id="<span class="math-inline">\{optionId\}" data\-type\="</span>{type}" value="<span class="math-inline">\{value\}"
+class\="h\-4 w\-4 rounded border\-gray\-300 text\-brand\-purple focus\:ring\-brand\-purple/50"\>
+<span class\="text\-sm text\-gray\-700 font\-medium"\></span>{value}</span>
                         `;
                         checkboxContainer.appendChild(label);
                     });
 
                     dropdownPanel.appendChild(checkboxContainer);
                     dropdown.innerHTML = `
-                        <button id="${dropdownButtonId}" class="filter-button bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-5 border border-gray-300 rounded-lg shadow-sm flex items-center transition-all duration-200"
-                            aria-haspopup="listbox" aria-expanded="false" aria-controls="${dropdownPanelId}">
-                            <span>${allFilters[type].label}</span>
-                            <span id="${type}-filter-count" class="ml-2 bg-brand-purple text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                        <button id="<span class="math-inline">\{dropdownButtonId\}" class\="filter\-button bg\-white hover\:bg\-gray\-50 text\-gray\-700 font\-semibold py\-2\.5 px\-5 border border\-gray\-300 rounded\-lg shadow\-sm flex items\-center transition\-all duration\-200"
+aria\-haspopup\="listbox" aria\-expanded\="false" aria\-controls\="</span>{dropdownPanelId}">
+                            <span><span class="math-inline">\{allFilters\[type\]\.label\}</span\>
+<span id\="</span>{type}-filter-count" class="ml-2 bg-brand-purple text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
                             <svg class="dropdown-arrow w-4 h-4 ml-2 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>`;
                     dropdown.appendChild(dropdownPanel);
@@ -524,23 +525,3 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     } catch (error) {
         console.error("Could not initialize the app:", error);
-        document.body.innerHTML = `<div class="text-center p-8"><h2 class="text-xl font-bold text-red-700">A critical error occurred.</h2><p class="mt-2 text-red-500">Could not load or render workshops. Please check the browser console for details.</p></div>`;
-    }
-});
-</script>
-
-<style>
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-</style>
-</body>
-</html>
