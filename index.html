@@ -157,10 +157,10 @@
         </header>
 
         <nav aria-label="Main Navigation" class="text-center mb-12 flex justify-center items-center gap-4 md:gap-6 flex-wrap py-4">
-            <a href="#about-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">About</a>
             <a href="#current-workshops-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">Upcoming Workshops</a>
             <a href="#past-workshops-section" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">Past Workshops</a>
-            <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">Apply Now<span class="sr-only"> (opens in new tab)</span></a>
+            <a href="https://bioinformatics.ca/hub/about/" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">About<span class="ml-2">⧉</span><span class="sr-only"> (opens in new tab)</span></a>
+            <a href="https://bioinformatics.ca/workshops/workshop-application-form/" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-brand-purple font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg border-2 border-brand-purple hover:bg-purple-50">Apply Now<span class="ml-2">⧉</span><span class="sr-only"> (opens in new tab)</span></a>
         </nav>
 
         <div id="filter-bar" role="region" aria-label="Workshop Filters" class="mb-12 flex justify-center items-center flex-wrap gap-4 p-4 bg-slate-100/70 rounded-xl">
@@ -178,11 +178,6 @@
                 </div>
             </div>
         </main>
-
-        <section id="about-section" class="mt-20 pt-16 border-t border-gray-200">
-             <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 tracking-tight text-center">About The Canadian Bioinformatics Workshops</h2>
-             <div class="max-w-4xl mx-auto mt-8 text-lg text-gray-600 space-y-6 text-left"><p>Placeholder About text</p></div>
-        </section>
     </div>
 
 <script>
@@ -261,15 +256,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (workshopStartDate <= today && today <= workshopEndDate) {
                 statusInfoHTML = `
                     <div class="status-icon-text icon-green mb-2">
-                        <span class="icon-symbol">&#x25CF;</span> <!-- Black Circle Unicode -->
-                        <span>Happening Now</span>
+                        <span class="icon-symbol">&#x25CF;</span> <span>Happening Now</span>
                     </div>`;
                 statusTags = ["Happening Now"];
             } else if (workshopStartDate > today) {
                 statusInfoHTML = `
                     <div class="status-icon-text icon-orange mb-2">
-                        <span class="icon-symbol">&#x23F1;</span> <!-- Stopwatch Unicode -->
-                        <span>Upcoming</span>
+                        <span class="icon-symbol">&#x23F1;</span> <span>Upcoming</span>
                     </div>`;
                 statusTags = ["Upcoming"];
             } else { // Workshop is in the past
@@ -345,8 +338,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                 </div>
                 <div class="p-5 flex flex-col flex-grow">
-                    ${statusInfoHTML} <!-- Status info moved here, above the title -->
-                    <div class="min-h-16">
+                    ${statusInfoHTML} <div class="min-h-16">
                         <h3 class="text-lg font-bold ${applyPastNoMaterialsBehavior ? 'text-gray-600' : 'text-gray-800'} truncate-2-lines" ${titleAriaLabelSuffix ? `aria-label="${link.title}${titleAriaLabelSuffix}"` : ''}>
                             ${link.title}
                         </h3>
