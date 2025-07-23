@@ -95,5 +95,75 @@
         "image": "img/CBW_RNA_Icon.png",
         "locations": ["Toronto, ON"],
         "format": "In-person"
+    },
+
+    {
+        "url": "RNA_2024/",
+        "title": "RNA-seq Analysis",
+        "instructors": [""],
+        "tags": ["RNA-seq"],
+        "regions": ["Ontario"],
+        "year": 2024,
+        "startDate": "2024-06-17",
+        "endDate": "2024-06-19",
+        "image": "img/CBW_RNA_Icon.png",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "scRNA_2024/",
+        "title": "Single Cell RNA-seq Analysis",
+        "instructors": [""],
+        "tags": ["RNA-seq"],
+        "regions": ["Ontario"],
+        "year": 2024,
+        "startDate": "2024-06-20",
+        "endDate": "2024-06-21",
+        "image": "img/CBW_scRNA_Icon.png",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "PNA_2024/",
+        "title": "Pathway and Network Analysis",
+        "instructors": [""],
+        "tags": ["Pathway", "Network"],
+        "regions": ["Ontario"],
+        "year": 2024,
+        "startDate": "2024-06-26",
+        "endDate": "2024-06-28",
+        "image": "img/CBW_PNA_Icon.png",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "ISO_2024/",
+        "title": "Introduction to Spatial 'Omics Analysis",
+        "instructors": [""],
+        "tags": ["Spatial Omics"],
+        "regions": ["Ontario"],
+        "year": 2024,
+        "startDate": "2024-07-09",
+        "endDate": "2024-06-10",
+        "image": "img/CBW_ISO_Icon.png",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "STAT_2024/",
+        "title": "Help! What Statistical Model Should I Use?",
+        "instructors": [""],
+        "tags": ["Statistics"],
+        "regions": ["Online"],
+        "year": 2024,
+        "startDate": "2024-08-19",
+        "endDate": "2024-08-21",
+        "image": "img/CBW_STAT_Icon.png",
+        "locations": ["Online"],
+        "format": "Online"
     }
 ]
