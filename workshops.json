@@ -53,5 +53,33 @@
         "image": "img/CBW_AMB_Icon.png",
         "locations": ["St.John, NL"],
         "format": "In-person"
+    },
+
+    {
+        "url": "INR_2024/",
+        "title": "Introduction to R",
+        "instructors": ["Frances Wong", "Andrés Melani", "Amin Noorani", "Zoe Klein", "Michelle Brazas", "Nia Hughes"],
+        "tags": ["R"],
+        "regions": ["Ontario"],
+        "year": 2024,
+        "startDate": "2024-06-11",
+        "endDate": "2024-06-12",
+        "image": "img/CBW_INR_Icon.png",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "AUR_2024/",
+        "title": "Analysis Using R",
+        "instructors": ["Shraddha Pai", "Chaitra Sarathy", "Ian Cheong", "Zoe Klein", "Amin Nooranikhojasteh", "Nia Hughes"],
+        "tags": ["R"],
+        "regions": ["Ontario"],
+        "year": 2024,
+        "startDate": "2024-06-13",
+        "endDate": "2024-06-14",
+        "image": "img/CBW_AUR_Icon.png",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
     }
 ]
