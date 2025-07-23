@@ -30,13 +30,27 @@
     {
         "url": "BMB_2024/",
         "title": "Beginner Microbiome Analysis",
-        "instructors": ["Morgan Langille", "Robyn Wright", "Monica Alvaro Fuss", "Ben Fisher", "Michelle Brazas", "Nia Hughes"],
+        "instructors": ["Morgan Langille", "Robyn Wright", "Monica Alvaro Fuss", "Ben Fisher", "Michelle Brazas", "Nia Hughes", "Zhibin Lu"],
         "tags": ["Microbiome"],
         "regions": ["Prairies"],
         "year": 2024,
         "startDate": "2024-05-27",
         "endDate": "2024-05-28",
         "image": "img/CBW_BMB_Icon.png",
+        "locations": ["St.John, NL"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "AMB_2024/",
+        "title": "Advanced Microbiome Analysis",
+        "instructors": ["Morgan Langille", "Robyn Wright", "Monica Alvaro Fuss", "Ben Fisher", "Michelle Brazas", "Nia Hughes", "Zhibin Lu"],
+        "tags": ["Microbiome"],
+        "regions": ["Prairies"],
+        "year": 2024,
+        "startDate": "2024-05-29",
+        "endDate": "2024-05-30",
+        "image": "img/CBW_AMB_Icon.png",
         "locations": ["St.John, NL"],
         "format": "In-person"
     }
