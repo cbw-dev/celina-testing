@@ -22,7 +22,7 @@
         "year": 2024,
         "startDate": "2024-05-13",
         "endDate": "2024-05-17",
-        "image": "img/CBW_IDE_Icon.png",
+        "image": "img/CBW_IDE-legacy_Icon.png",
         "locations": ["Vancouver, BC", "Hamilton, ON"],
         "format": "Online"
     },
