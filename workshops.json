@@ -81,5 +81,19 @@
         "image": "img/CBW_AUR_Icon.png",
         "locations": ["Toronto, ON"],
         "format": "In-person"
+    },
+
+    {
+        "url": "RNA_2024/",
+        "title": "RNA-seq Analysis",
+        "instructors": [""],
+        "tags": ["RNA-seq"],
+        "regions": ["Ontario"],
+        "year": 2024,
+        "startDate": "2024-06-17",
+        "endDate": "2024-06-19",
+        "image": "img/CBW_RNA_Icon.png",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
     }
 ]
