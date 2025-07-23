@@ -1,6 +1,6 @@
 [
     {
-        "url": "bioinformaticsdoca.github.io/BMB_2025/",
+        "url": "BMB_2025/",
         "title": "Beginner Microbiome Analysis",
         "instructors": ["Morgan Langille"],
         "tags": ["Microbiome"],
@@ -11,5 +11,19 @@
         "image": "img/CBW_BMB_Icon.png",
         "locations": ["Vancouver, BC"],
         "format": "In-person"
+    },
+
+    {
+        "url": "IDE_2024/",
+        "title": "Infectious Disease Genomic Epidemiology",
+        "instructors": ["William Hsiao, Jared Simpson, Fiona Brinkman, Rob Beiko, Finlay Maguire, Gary Van Domselaar, Ed Taboada, Emma Griffiths, Andrew McArthur, Darian Hole, Karyn Mukiri, Miguel Prieto, Madeline McCarthy, Charlie Barclay, Michelle Brazas, Nia Hughes"],
+        "tags": ["Epidemiology"],
+        "regions": ["Online"],
+        "year": 2024,
+        "startDate": "2024-05-13",
+        "endDate": "2024-05-17",
+        "image": "img/CBW_IDE_Icon.png",
+        "locations": ["Online"],
+        "format": "Online"
     }
 ]
