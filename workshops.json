@@ -45,7 +45,7 @@
         "url": "AMB_2024/",
         "title": "Advanced Microbiome Analysis",
         "instructors": ["Morgan Langille", "Robyn Wright", "Monica Alvaro Fuss", "Ben Fisher", "Michelle Brazas", "Nia Hughes", "Zhibin Lu"],
-        "tags": ["Microbiome", "Analysis"],
+        "tags": ["Advanced", "Microbiome", "Analysis"],
         "regions": ["Atlantic"],
         "year": 2024,
         "startDate": "2024-05-29",
@@ -218,22 +218,50 @@
         "year": 2025,
         "startDate": "2025-02-20",
         "endDate": "2025-02-21",
-        "image": "img/CBW_ISO_Icon.png",
+        "image": "img/CBW_ISO_Icon.jpg",
         "locations": ["Toronto, ON", "Online"],
         "format": "Distributed"
     },
 
     {
-        "url": "ISO_2025/",
-        "title": "Introductory Spatial ’Omics Analysis: Visium HD",
-        "instructors": ["Shamini Ayyadhury", "Amina Abow", "Melanie Peralta", "Savannah Kipatrick", "Alyona Ivanova", "Trevor Pugh", "Gary Bader", "Nia Hughes", "Zhibin Lu"],
-        "tags": ["Introductory", "Analysis"],
-        "regions": ["Ontario", "Online"],
+        "url": "AMB_2025/",
+        "title": "Advanced Microbiome Analysis",
+        "instructors": ["Morgan Langille", "Robyn Wright", "John Parkinson", "Ryan J. McLaughlin", "Juan Santana", "Tony Liu", "Zhibin Lu"],
+        "tags": ["Advanced", "Microbiome", "Analysis"],
+        "regions": ["BC"],
         "year": 2025,
-        "startDate": "2025-02-20",
-        "endDate": "2025-02-21",
-        "image": "img/CBW_ISO_Icon.png",
-        "locations": ["Toronto, ON", "Online"],
-        "format": "Distributed"
+        "startDate": "2025-05-29",
+        "endDate": "2025-05-30",
+        "image": "img/CBW_AMB_Icon.png",
+        "locations": ["Vancouver, BC"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "INR_2025/",
+        "title": "Introduction to R",
+        "instructors": ["Frances Wong"],
+        "tags": ["Introductory", "R"],
+        "regions": ["Ontario"],
+        "year": 2025,
+        "startDate": "2025-06-23",
+        "endDate": "2025-06-24",
+        "image": "img/CBW_INR_Icon.png",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "AUR_2025/",
+        "title": "Analysis Using R",
+        "instructors": ["Shraddha Pai", "Delaram Pouyabahar", "Zoe Klein", "Nia Hughes"],
+        "tags": ["Analysis", "R"],
+        "regions": ["Ontario"],
+        "year": 2025,
+        "startDate": "2025-06-25",
+        "endDate": "2025-06-26",
+        "image": "img/CBW_AUR_Icon.png",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
     }
 ]
