@@ -23,7 +23,7 @@
         "startDate": "2024-05-13",
         "endDate": "2024-05-17",
         "image": "img/CBW_IDE-legacy_Icon.png",
-        "locations": ["Vancouver, BC", "Hamilton, ON"],
+        "locations": ["Online"],
         "format": "Online"
     },
 
@@ -32,7 +32,7 @@
         "title": "Beginner Microbiome Analysis",
         "instructors": ["Morgan Langille", "Robyn Wright", "Monica Alvaro Fuss", "Ben Fisher", "Michelle Brazas", "Nia Hughes", "Zhibin Lu"],
         "tags": ["Microbiome", "Analysis"],
-        "regions": ["Prairies"],
+        "regions": ["Atlantic"],
         "year": 2024,
         "startDate": "2024-05-27",
         "endDate": "2024-05-28",
@@ -46,7 +46,7 @@
         "title": "Advanced Microbiome Analysis",
         "instructors": ["Morgan Langille", "Robyn Wright", "Monica Alvaro Fuss", "Ben Fisher", "Michelle Brazas", "Nia Hughes", "Zhibin Lu"],
         "tags": ["Microbiome", "Analysis"],
-        "regions": ["Prairies"],
+        "regions": ["Atlantic"],
         "year": 2024,
         "startDate": "2024-05-29",
         "endDate": "2024-05-30",
@@ -59,7 +59,7 @@
         "url": "INR_2024/",
         "title": "Introduction to R",
         "instructors": ["Frances Wong", "Andrés Melani", "Amin Noorani", "Zoe Klein", "Michelle Brazas", "Nia Hughes"],
-        "tags": ["Introduction", "R"],
+        "tags": ["Introductory", "R"],
         "regions": ["Ontario"],
         "year": 2024,
         "startDate": "2024-06-11",
@@ -130,7 +130,7 @@
         "title": "Introduction to Spatial 'Omics Analysis",
         "instructors": [""],
         "tags": ["Spatial Omics", "Analysis"],
-        "regions": ["Ontario"],
+        "regions": ["Ontario", "Online"],
         "year": 2024,
         "startDate": "2024-07-09",
         "endDate": "2024-06-10",
@@ -207,5 +207,33 @@
         "image": "img/CBW_OMPRN_Icon.png",
         "locations": ["Toronto, ON"],
         "format": "In-person"
+    },
+
+    {
+        "url": "ISO_2025/",
+        "title": "Introductory Spatial ’Omics Analysis: Visium HD",
+        "instructors": ["Shamini Ayyadhury", "Amina Abow", "Melanie Peralta", "Savannah Kipatrick", "Alyona Ivanova", "Trevor Pugh", "Gary Bader", "Nia Hughes", "Zhibin Lu"],
+        "tags": ["Introductory", "Analysis"],
+        "regions": ["Ontario", "Online"],
+        "year": 2025,
+        "startDate": "2025-02-20",
+        "endDate": "2025-02-21",
+        "image": "img/CBW_ISO_Icon.png",
+        "locations": ["Toronto, ON", "Online"],
+        "format": "Distributed"
+    },
+
+    {
+        "url": "ISO_2025/",
+        "title": "Introductory Spatial ’Omics Analysis: Visium HD",
+        "instructors": ["Shamini Ayyadhury", "Amina Abow", "Melanie Peralta", "Savannah Kipatrick", "Alyona Ivanova", "Trevor Pugh", "Gary Bader", "Nia Hughes", "Zhibin Lu"],
+        "tags": ["Introductory", "Analysis"],
+        "regions": ["Ontario", "Online"],
+        "year": 2025,
+        "startDate": "2025-02-20",
+        "endDate": "2025-02-21",
+        "image": "img/CBW_ISO_Icon.png",
+        "locations": ["Toronto, ON", "Online"],
+        "format": "Distributed"
     }
 ]
