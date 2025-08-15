@@ -428,7 +428,147 @@
         "year": 2023,
         "startDate": "2023-10-11",
         "endDate": "2023-10-13",
-        "image": "img/CBW_EPI_Icon.jpg",
+        "image": "img/CBW_EPI_Icon.png",
+        "locations": ["Online"],
+        "format": "Online"
+    },
+
+    {
+        "url": "PNA_2021/",
+        "title": "Pathway and Network Analysis",
+        "instructors": ["Gary Bader", "Robin Haw", "Michael Hoffman", "Veronique Voisin", "Ruth Isserlin"],
+        "tags": ["Analysis"],
+        "regions": ["Online"],
+        "year": 2021,
+        "startDate": "2021-05-10",
+        "endDate": "2021-05-12",
+        "image": "img/CBW_PNA_Icon.png",
+        "locations": ["Online"],
+        "format": "Online"
+    },
+
+    {
+        "url": "MLE_2021/",
+        "title": "Machine Learning",
+        "instructors": ["David Wishart", "BF Francis Ouellette", "Rachade Hmamouchi", "Louisa Normington", "Leif Wilm"],
+        "tags": ["Machine Learning"],
+        "regions": ["Online"],
+        "year": 2021,
+        "startDate": "2021-05-25",
+        "endDate": "2021-05-26",
+        "image": "img/CBW_MLE_Icon.jpg",
+        "locations": ["Online"],
+        "format": "Online"
+    },
+
+    {
+        "url": "CAN_2021/",
+        "title": "Cancer Analysis",
+        "instructors": ["BF Francis Ouellette", "Rachade Hmamouchi", "Emma Bell", "Trevor Pugh", "Mathieu Bourgey", "Javier Diaz-Mejia", "Heather Gibling", "Andrew McPherson", "Richard de Borja", "Aaron Gillmor", "Sorana Morrissy", "Florence Cavalli", "Veronique Voisin"],
+        "tags": ["Analysis"],
+        "regions": ["Online"],
+        "year": 2021,
+        "startDate": "2021-06-07",
+        "endDate": "2021-06-11",
+        "image": "img/CBW_CAN_Icon.png",
+        "locations": ["Online"],
+        "format": "Online"
+    },
+
+    {
+        "url": "INR_2021/",
+        "title": "Introduction to R",
+        "instructors": ["Frances Wong"],
+        "tags": ["Introductory", "R"],
+        "regions": ["Online"],
+        "year": 2021,
+        "startDate": "2021-06-21",
+        "endDate": "2021-06-22",
+        "image": "img/CBW_INR_Icon.png",
+        "locations": ["Online"],
+        "format": "Online"
+    },
+
+    {
+        "url": "AUR_2021/",
+        "title": "Analysis Using R",
+        "instructors": ["BF Francis Ouellette", "Rachade Hmamouchi", "Lauren", "Gregory Downs", "Gabriela Morgenshtern"],
+        "tags": ["Analysis", "R"],
+        "regions": ["Online"],
+        "year": 2021,
+        "startDate": "2021-06-28",
+        "endDate": "2021-06-29",
+        "image": "img/CBW_AUR_Icon.png",
+        "locations": ["Online"],
+        "format": "Online"
+    },
+
+    {
+        "url": "MIC_2021/",
+        "title": "Microbiome Analysis",
+        "instructors": ["BF Francis Ouellette", "Rachade Hmamouchi", "Laura A. Hug", "Nikhil George", "Diana Haider", "William Hsiao", "Muhammad Zohaib Anwar", "Ana Popovic", "Jacob Nearing", "Justin Jia", "Morgan Langille", "Rob Beiko", "Fiona Brinkman"],
+        "tags": ["Microbiome", "Analysis"],
+        "regions": ["Online"],
+        "year": 2021,
+        "startDate": "2021-09-01",
+        "endDate": "2021-09-03",
+        "image": "img/CBW_MIC_Icon.png",
+        "locations": ["Online"],
+        "format": "Online"
+    },
+
+    {
+        "url": "RNA_2021/",
+        "title": "RNA-seq Analysis",
+        "instructors": ["Obi Griffith", "Malachi Griffith", "Felicia Gomez", "Huiming Xia", "Emma Bell", "BF Francis Ouellette", "Rachade Hmamouchi"],
+        "tags": ["RNA-seq", "Analysis"],
+        "regions": ["Online"],
+        "year": 2021,
+        "startDate": "2021-09-08",
+        "endDate": "2021-09-10",
+        "image": "img/CBW_RNA_Icon.png",
+        "locations": ["Online"],
+        "format": "Online"
+    },
+
+    {
+        "url": "EPI_2021/",
+        "title": "Epigenomics Analysis",
+        "instructors": ["Guillaume Bourque", "Martin Hirst", "David Bujold", "Jose Hector Galvez", "BF Francis Ouellette", "Rachade Hmamouchi"],
+        "tags": ["Analysis"],
+        "regions": ["Online"],
+        "year": 2021,
+        "startDate": "2021-09-13",
+        "endDate": "2021-09-15",
+        "image": "img/CBW_EPI_Icon.png",
+        "locations": ["Online"],
+        "format": "Online"
+    },
+
+    {
+        "url": "HTG_2021/",
+        "title": "High Throughput Genomics Analysis",
+        "instructors": ["Mathieu Bourgey", "Jared Simpson", "Robert Syme", "Daniel Poppleton", " BF Francis Ouellette", "Rachade Hmamouchi"],
+        "tags": ["Analysis"],
+        "regions": ["Online"],
+        "year": 2021,
+        "startDate": "2021-09-27",
+        "endDate": "2021-09-29",
+        "image": "img/CBW_HTG_Icon.png",
+        "locations": ["Online"],
+        "format": "Online"
+    },
+
+    {
+        "url": "IDE_2021/",
+        "title": "Infectious Disease Epidemiology Analysis",
+        "instructors": ["William Hsiao", "Rob Beiko", "Finlay Maguire", "Dillon Barker", "Aaron Petkau", "Gary Van Domselaar", "Ed Taboada", "Jalees Nasir", "Jimmy Liu", "Venus Lau", "BF Francis Ouellette", "Rachade Hmamouchi"],
+        "tags": ["Analysis"],
+        "regions": ["Online"],
+        "year": 2021,
+        "startDate": "2021-10-04",
+        "endDate": "2021-10-06",
+        "image": "img/CBW_IDE-legacy_Icon.png",
         "locations": ["Online"],
         "format": "Online"
     }
