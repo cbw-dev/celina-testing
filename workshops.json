@@ -279,7 +279,7 @@
         "format": "In-person"
     },
 
-        {
+    {
         "url": "scRNA_2025/",
         "title": "Single Cell RNA-seq Analysis",
         "instructors": ["Tallulah Andrews", "Trevor Pugh", "Nicolas Ho", "Kevin Joannou", "Mobin Khoramjoo"],
@@ -291,5 +291,146 @@
         "image": "img/CBW_scRNA_Icon.jpg",
         "locations": ["Ottawa, ON", "Edmonton, AB"],
         "format": "In-person"
+    },
+
+    {
+        "url": "IDE_2023/",
+        "title": "Infectious Disease Genomic Epidemiology",
+        "instructors": ["William Hsiao", "Fiona Brinkman", "Zhibin Lu", "Emma Griffiths", "Jared Simpson", "Ed Taboada", "Andrew McArthur", "Finlay Maguire", "Aaron Petkau", "Samira Mubareka", "Gary Van Domselaar"],
+        "tags": ["Epidemiology"],
+        "regions": ["Online"],
+        "year": 2023,
+        "startDate": "2023-04-18",
+        "endDate": "2023-04-21",
+        "image": "img/CBW_IDE-legacy_Icon.png",
+        "locations": ["Online"],
+        "format": "Online"
+    },
+
+    {
+        "url": "PNA_2023/",
+        "title": "Pathway and Network Analysis",
+        "instructors": ["Gary Bader", "Veronique Voisin", "Ruth Isserlin", "Lincoln Stein"],
+        "tags": ["Pathway", "Network", "Analysis"],
+        "regions": ["Ontario"],
+        "year": 2023,
+        "startDate": "2023-06-05",
+        "endDate": "2023-06-07",
+        "image": "img/CBW_PNA_Icon.png",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "INR_2023/",
+        "title": "Introduction to R",
+        "instructors": ["Frances Wong"],
+        "tags": ["Introductory", "R"],
+        "regions": ["Ontario"],
+        "year": 2023,
+        "startDate": "2023-06-26",
+        "endDate": "2023-06-27",
+        "image": "img/CBW_INR_Icon.png",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "AUR_2023/",
+        "title": "Analysis Using R",
+        "instructors": ["Shraddha Pai", "Delaram Pouyabahar", "Chaitra Sarathy"],
+        "tags": ["Analysis", "R"],
+        "regions": ["Ontario"],
+        "year": 2023,
+        "startDate": "2023-06-28",
+        "endDate": "2023-06-29",
+        "image": "img/CBW_AUR_Icon.png",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "MIC_2023/",
+        "title": "CBW-IMPACTT Microbiome Analysis",
+        "instructors": ["John Parkinson", "Morgan Langille", "Hena Ramay", "Laura Sycuro", "Anita Kozyrskyj"],
+        "tags": ["Microbiome", "Analysis"],
+        "regions": ["Alberta"],
+        "year": 2023,
+        "startDate": "2023-07-05",
+        "endDate": "2023-07-07",
+        "image": "img/CBW_MIC_Icon.png",
+        "locations": ["Calgary, AB"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "MET_2023/",
+        "title": "Metabolomics Analysis",
+        "instructors": ["David Wishart", "Jeff Xia"],
+        "tags": ["Metabolomics", "Analysis"],
+        "regions": ["Alberta", "Quebec"],
+        "year": 2023,
+        "startDate": "2023-07-06",
+        "endDate": "2023-07-07",
+        "image": "img/CBW_MET_Icon.png",
+        "locations": ["Edmonton, AB", "Montreal, QC"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "RNA_2023/",
+        "title": "RNA-seq Analysis",
+        "instructors": ["Obi Griffith", "Malachi Griffith", "Heather Gibling", "Vida Talebian", "Michelle Brazas", "Nia Hughes", "Zhibin Lu"],
+        "tags": ["RNA-seq", "Analysis"],
+        "regions": ["Ontario"],
+        "year": 2023,
+        "startDate": "2023-07-17",
+        "endDate": "2023-07-19",
+        "image": "img/CBW_RNA_Icon.png",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "scRNA_2023/",
+        "title": "Single Cell RNA-seq Analysis",
+        "instructors": ["Tallulah Andrews", "Trevor Pugh", "Gary Bader", "Rachel Edgar", "Ping Luo", "Delaram Pouyabahar", "Michelle Brazas", "Nia Hughes", "Zhibin Lu"],
+        "tags": ["RNA-seq", "Analysis"],
+        "regions": ["Ontario"],
+        "year": 2023,
+        "startDate": "2023-07-20",
+        "endDate": "2023-07-21",
+        "image": "img/CBW_scRNA_Icon.jpg",
+        "locations": ["Toronto, ON"],
+        "format": "In-person"
+    },
+
+    {
+        "url": "MLE_2023/",
+        "title": "Machine Learning",
+        "instructors": ["David Wishart", "Vasu Gautam", "Mark Berjanskii", "Sagan Girod", "Michelle Brazas", "Nia Hughes"],
+        "tags": ["Machine Learning"],
+        "regions": ["Online"],
+        "year": 2023,
+        "startDate": "2023-08-16",
+        "endDate": "2023-08-17",
+        "image": "img/CBW_MLE_Icon.jpg",
+        "locations": ["Online"],
+        "format": "Online"
+    },
+
+    {
+        "url": "EPI_2023/",
+        "title": "Epigenomics Analysis",
+        "instructors": ["Guillaume Bourque", "Martin Hirst", "David Bujold", "Jose Hector Galvez", "Edmund Su", "Mareike Janiak", "Michelle Brazas", "Nia Hughes", "Zhibin Lu"],
+        "tags": ["Analysis"],
+        "regions": ["Online"],
+        "year": 2023,
+        "startDate": "2023-10-11",
+        "endDate": "2023-10-13",
+        "image": "img/CBW_EPI_Icon.jpg",
+        "locations": ["Online"],
+        "format": "Online"
     }
+
 ]
