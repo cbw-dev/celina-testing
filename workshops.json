@@ -1,6 +1,6 @@
 [
     {
-        "url": "BMB_2025/",
+        "url": "BMB_2025",
         "title": "Beginner Microbiome Analysis",
         "instructors": ["Morgan Langille"],
         "tags": ["Microbiome"],
@@ -210,7 +210,7 @@
     },
 
     {
-        "url": "ISO_2025/",
+        "url": "ISO-V_2025/",
         "title": "Introductory Spatial ’Omics Analysis: Visium HD",
         "instructors": ["Shamini Ayyadhury", "Amina Abow", "Melanie Peralta", "Savannah Kipatrick", "Alyona Ivanova", "Trevor Pugh", "Gary Bader", "Nia Hughes", "Zhibin Lu"],
         "tags": ["Introductory", "Analysis"],
